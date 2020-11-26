@@ -1,0 +1,68 @@
+---
+layout: default
+title: "Jacob Heric"
+pagination:
+   data: collections.posts
+   size: 2
+   reverse: true
+   addAllPagesToCollections: true
+   alias: posts
+---
+
+<div class="toc">
+   <div class="post">
+      {% for item in posts %}
+      <div class="post-title">
+         <a href="{{ site.baseurl }}{{ item.url }}">
+            {% picture item.data.image, item.data.title %}
+         </a>
+         <h1>
+            <a href="{{ site.baseurl }}{{ item.url }}">
+               {{ item.data.title }}
+            </a>
+         </h1>
+         <div class="post-date">posted by Jacob Heric on {{ item.date | date: '%B %d, %Y' }}</div>
+         <div class="excerpt">
+            {% if item.data.page.excerpt %}
+               {{ item.data.page.excerpt | md }}
+            {% else %}
+               {{ item.templateContent | md }}
+            {% endif %}
+         </div>
+         <div> </div>
+         <div class="more">
+            {% if item.data.page.excerpt %}
+               <a href="{{ site.baseurl }}{{ item.url }}" class="next">MORE</a>
+            {% endif %}
+         </div>
+      </div>
+      <hr/>
+      {% endfor %}
+   </div>
+
+   <!-- Pagination links -->
+   <div class="more">
+      &laquo;
+      {% if page.url != pagination.href.first %}
+         <a href="/" class="next">first</a>
+      {% else %}first{% endif %}
+      &lsaquo;
+      {% if pagination.href.previous %}
+         <a href="{{ pagination.href.previous }}" class="previous"> back</a>
+      {% else %}back{% endif %}
+      |
+      {% if pagination.href.next %}
+         <a href="{{ pagination.href.next }}" class="next">next</a>
+      {% else %}next{% endif %}
+      &rsaquo;
+      {% if page.url != pagination.href.last %}
+         <a href="{{ pagination.href.last }}" class="next">last</a>
+      {% else %}last{% endif %}
+      &raquo;
+   </div>
+
+   <div class="more">
+      <a href="/search/" alt="Search Jacob Heric's Site" title="Search Jacob Heric's ">Search</a>
+   </div>
+
+</div>
