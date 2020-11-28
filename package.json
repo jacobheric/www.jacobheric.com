@@ -2,8 +2,14 @@
   "name": "new.jacobheric.com",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --ext .js src --fix"
+    "lint": "eslint --ext .js src --fix",
+    "build": "npm-run-all build:css build:html",
+    "build:css": "postcss src/assets/style/pre.css -o src/assets/style/style.css",
+    "build:html": "eleventy",
+    "watch": "npm-run-all --parallel watch:css watch:html",
+    "watch:css": "postcss src/assets/style/pre.css -o src/assets/style/style.css --watch",
+    "watch:html": "eleventy --serve --port=3000",
+    "start": "npm run watch"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1",
@@ -13,6 +19,10 @@
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "2.1.2",
-    "outdent": "^0.7.1"
+    "outdent": "^0.7.1",
+    "autoprefixer": "^10.0.2",
+    "postcss-cli": "^8.3.0",
+    "tailwindcss": "^2.0.1",
+    "npm-run-all": "^4.1.5"
   }
 }

@@ -117,7 +117,9 @@ module.exports = function (src, alt) {
     <picture>
       <source srcset="${webpTags}" sizes="90vw, (min-width: 1280px) 1152px" type="image/webp">
       <source srcset="${jpgTags}" sizes="90vw, (min-width: 1280px) 1152px" type="image/jpeg">
-      <img src="${getPath(src)}" alt="${alt}" title="${alt}" loading="lazy">
+      <img class="my-6 rounded-md" src="${getPath(
+        src
+      )}" alt="${alt}" title="${alt}">
     </picture>
   `;
 

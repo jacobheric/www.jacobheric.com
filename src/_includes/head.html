@@ -29,18 +29,7 @@
     {% endif %}
   </title>
 
-  <!-- CSS, it's small, inline it -->
-  <style type="text/css">
-  {% capture include_to_scssify %}
-    {% include jacob.scss %}
-  {% endcapture %}
-  {{ include_to_scssify | scssify }}
-
-  </style>
-
-  <!-- Icons -->
+  <link rel="stylesheet" href="/assets/style/style.css">
   <link rel="shortcut icon" href="{{ site.baseurl }}/assets/image/icons/favicon.png"/>
-
-  <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ site.baseurl }}/atom.xml"/>
 </head>

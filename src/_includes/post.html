@@ -1,18 +1,19 @@
 ---
 layout: default
 ---
-<div class="post-feature-image">
-   {% if image %}
-      {% picture image, title %}
-   {% endif %}
-</div>
-
-<div class="post">
-   <div class="post-title">
-      <h1>{{ title }}</h1>
-      <div class="post-date">{{ page.date | date: '%B %d, %Y' }}</div>
+<div class="w-11/12 mx-auto flex flex-col items-center">
+   <div>
+      {% if image %}
+         {% picture image, title %}
+      {% endif %}
    </div>
-   <div class="post-body">
+   <div class="title text-6xl italic py-2">
+      {{ title }}
+   </div>
+   <div class="italic text-lg py-4">{{ page.date | date: '%B %d, %Y' }}</div>
+   <div class="text-xl py-4">
       {{ content }}
    </div>
 </div>
+
+

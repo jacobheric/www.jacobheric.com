@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.fat {
+  font-family: 'Abril Fatface', serif;
+}
+
+.tagline {
+  font-family: 'Quicksand',sans-serif;
+}
+
+.title {
+  font-family: 'Sorts Mill Goudy',serif;
+}
+
