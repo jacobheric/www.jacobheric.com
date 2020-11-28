@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Jacob Heric"
+
 pagination:
    data: collections.posts
-   size: 2
+   size: 20
    reverse: true
    addAllPagesToCollections: true
    alias: posts
@@ -12,26 +12,28 @@ pagination:
 <div class="w-11/12 mx-auto flex flex-col items-center">
    {% for item in posts %}
       <div>
-         <a href="{{ site.baseurl }}{{ item.url }}">
-            {% picture item.data.image, item.data.title %}
-         </a>
+         {% if item.data.image %}
+            <a href="{{ site.baseurl }}{{ item.url }}">
+               {% picture item.data.image, item.data.title %}
+            </a>
+         {% endif %}
       </div>
       <div class="title text-6xl italic py-2">
-         <a class="hover:underline" href="{{ site.baseurl }}{{ item.url }}">
+         <a href="{{ site.baseurl }}{{ item.url }}">
             {{ item.data.title }}
          </a>
       </div>
       <div class="italic text-lg py-4">{{ item.date | date: '%B %d, %Y' }}</div>
-      <div class="text-xl py-4">
+      <div class="text-xl py-4 space-y-7">
          {% if item.data.page.excerpt %}
             {{ item.data.page.excerpt | md }}
          {% else %}
             {{ item.templateContent | md }}
          {% endif %}
       </div>
-      <div class="tagline font-bold py-2 tracking-wider">
+      <div class="tagline font-bold py-2 space-y-7">
          {% if item.data.page.excerpt %}
-            <a class="hover:underline" href="{{ site.baseurl }}{{ item.url }}" class="next">MORE</a>
+            <a href="{{ site.baseurl }}{{ item.url }}" class="next">MORE</a>
          {% endif %}
       </div>
       <hr class="w-full border-gray-200 m-2"/>
@@ -41,25 +43,25 @@ pagination:
    <div class="tagline font-bold my-10 uppercase tracking-wider">
       &laquo;
       {% if page.url != pagination.href.first %}
-         <a class="hover:underline" href="/" class="next">first</a>
+         <a href="/" class="next">first</a>
       {% else %}first{% endif %}
       &lsaquo;
       {% if pagination.href.previous %}
-         <a class="hover:underline" href="{{ pagination.href.previous }}" class="previous"> back</a>
+         <a href="{{ pagination.href.previous }}" class="previous"> back</a>
       {% else %}back{% endif %}
       |
       {% if pagination.href.next %}
-         <a class="hover:underline" href="{{ pagination.href.next }}" class="next">next</a>
+         <a href="{{ pagination.href.next }}" class="next">next</a>
       {% else %}next{% endif %}
       &rsaquo;
       {% if page.url != pagination.href.last %}
-         <a class="hover:underline" href="{{ pagination.href.last }}" class="next">last</a>
+         <a href="{{ pagination.href.last }}" class="next">last</a>
       {% else %}last{% endif %}
       &raquo;
    </div>
 
    <div class="tagline font-bold py-2 tracking-wider">
-      <a class="hover:underline" href="/search/" alt="Search Jacob Heric's Site" title="Search Jacob Heric's ">SEARCH</a>
+      <a href="/search/" alt="Search Jacob Heric's Site" title="Search Jacob Heric's ">SEARCH</a>
    </div>
 
 </div>

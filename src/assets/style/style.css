@@ -31179,6 +31179,15 @@ video {
   font-family: 'Sorts Mill Goudy',serif;
 }
 
+a {
+  text-decoration: underline;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -183898,4 +183907,3 @@ video {
             animation: bounce 1s infinite;
   }
 }
-

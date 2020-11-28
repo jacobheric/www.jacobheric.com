@@ -1,0 +1,12 @@
+---
+layout: post
+title: JSF, an RIA retrofit
+excerpt: 'thoughts on JSF'
+---
+I've built three or four JSF applications over the last couple years.  I've used JSF with Seam and Spring.  I've used both RichFaces and ICEfaces JSF component libs.  After all that what do I have to say about the technology?  I'm not going to go so far as to say <a href="http://ptrthomas.wordpress.com/2009/05/15/jsf-sucks/">JSF sucks</a> (but if I were, I'd certainly try to do it with as fine a collection of resources on the topic as that fellow).  I'd say that JSF is powerful and flexible.  I'd also say that it's complex.  Ultimately, in the context of an AJAX laden rich client application, I'd say it's too complex.  
+
+I dabbled only a bit in JSF 2.  Not enough to know how well it has addressed the AJAX issues with JSF.  Take a look <a href="http://java.dzone.com/news/icefaces-20-and-jsf-20">here if you want a taste of how those rich component libraries synchronize view state with the server through all those AJAX requests</a>.  As an architect and developer, I shudder to consider the implications of managing "customized partial processing and partial rendering on the server."  It's no wonder that the complexity of JSF proved too difficult for some of the developers I've worked with, especially those who did a lot of Servlet development or Struts development and never managed to get their heads wrapped around the JSF lifecycle.
+
+In the end, it's not the complexity of JSF that turns me off of it.  From an architecture standpoint, if I'm building a rich client application, I don't really want to resort to a server managed view component/interface technology.  That's what JSF is and that's not the right approach to RIA.  It's been retrofitted to operate with rich clients.  Yes, RichFaces and ICEfaces do an admirable job implementing client components despite the complexity.  But, if I'm going to build a rich client, then the client should be managing view components.  Yes, the server still needs to do some view related processing (namely validation).  But view components should be managed by the client.  Flex does that.  So does EXT JS and other Javascript component libs (I'm going to refrain from mentioning GWT and save that for another post.  Preview:  I'm not super excited to write Javascript UI components in Java).
+
+I'm sure I'll work with JSF again and I'll try to keep an open mind to the changes in the 2.* specs.  But given the choice, I'm going to turn to technologies that are built right to fit RIA, not retrofitted to do so.  
