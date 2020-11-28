@@ -10,9 +10,7 @@ const getSrc = (name) => path.join(process.cwd(), "src/assets/image", name);
 const getFile = (name) => path.join(process.cwd(), "dist/assets/image", name);
 const getPath = (name) => path.posix.join("/", "assets/image", name);
 const exists = (file) => fs.existsSync(file);
-
 const getImage = async (src) => sharp(getSrc(src));
-const getWidth = (image) => image.metadata().width;
 
 const saveOriginal = (image, out) => {
   image
@@ -85,7 +83,7 @@ const resizeImage = async (src) => {
   for await (const width of SIZES) {
     //
     // don't upsize
-    if (meta.width > width) {
+    if (meta.width >= width - 50) {
       console.log(`resizing ${src} to ${width}`);
       await saveJpg(image, path.parse(src).name, width);
       await saveWebp(image, path.parse(src).name, width);
@@ -141,8 +139,8 @@ module.exports = async function (src, alt) {
     <picture>
       ${getWebpTag(webpTags)}
       ${getJpgTag(jpgTags)}
-      <img class="my-6 rounded-md" src="${getPath(
-        src
+      <img class="my-6 rounded-md max-h-screen max-w-screen" src="${getPath(
+        `${path.parse(src).name}.jpg`
       )}" alt="${alt}" title="${alt}">
     </picture>
   `;

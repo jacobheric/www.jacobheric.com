@@ -15,7 +15,7 @@ Having just rolled off a very long contract, I've finally found a little time to
 
 <strong><em>What it looks like</em></strong>:
 
-<img src="/assets/image/list_screenshot.png" alt="Jacob&#039;s List App Screenshot"  />
+{% picture "list_screenshot.png", "Jacob&#039;s List App Screenshot"  %} 
 
 <strong><em>What it does</em></strong>:  It's a simple, mobile first, realtime sharing list application.  I wrote it so my wife and I could have a shared list space for groceries, hardware store runs, etc.  No need to text last minute additions.  No apps to install.  Just add items to the list.  Everyone who's on your unique list url sees the new thing immediately.  Swipe left to delete.  Swipe right to strike out.  Touch to edit.  That's it.  We've been using it heavily and it's really handy.  In reality, the app is little more than a conglomeration of the features offered by their nice little suite of demos (with some special sauce thrown in).  So nothing ground breaking.
 

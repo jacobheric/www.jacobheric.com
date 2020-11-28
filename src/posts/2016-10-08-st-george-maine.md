@@ -11,8 +11,8 @@ Another visit to St. George, Maine. We spent A LOT of time on the swing. May mad
 <!--more-->
 
 <iframe src="https://drive.google.com/file/d/19M3_TQKcizKHN3oaHSSW8oWp6e4Qhg4nkQ/preview" width="640" height="480"></iframe>
-![May holds up the world](/assets/image/st-george-may-atlas.jpg "May holds up the world")
-![St. George Superman Swing](/assets/image/st-george-superman-swing.jpg "St George Supermand Swing")
-![Clark Island Road](/assets/image/clark-island-road.jpg "Clark Island Road")
-![Clark Cove](/assets/image/clark-cove.jpg "Clark Cove")
-![St. George Fog Burning Off](/assets/image/st-george-fog-burning-off.jpg "St George Fog Burning Off")
+{%picture "st-george-may-atlas.jpg", "May holds up the world"%}
+{%picture "st-george-superman-swing.jpg", "St George Supermand Swing"%}
+{%picture "clark-island-road.jpg", "Clark Island Road"%}
+{%picture "clark-cove.jpg", "Clark Cove"%}
+{%picture "st-george-fog-burning-off.jpg", "St George Fog Burning Off"%}

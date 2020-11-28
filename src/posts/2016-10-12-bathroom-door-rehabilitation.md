@@ -10,4 +10,4 @@ It started like these things always start. We found a hornet in the bathroom. So
 
 <!--more-->
 
-![Bathroom Door Rehabilitation](/assets/image/door-rehabibilitation.gif "Bathroom Door Rehabilitation")
+{% picture "door-rehabibilitation.gif", "Bathroom Door Rehabilitation" %}

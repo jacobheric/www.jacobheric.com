@@ -18,8 +18,8 @@ pagination:
             </a>
          {% endif %}
       </div>
-      <div class="title text-6xl italic py-2">
-         <a href="{{ site.baseurl }}{{ item.url }}">
+      <div class="title text-3xl sm:text-5xl italic py-2">
+         <a class="no-underline" href="{{ site.baseurl }}{{ item.url }}">
             {{ item.data.title }}
          </a>
       </div>
@@ -31,7 +31,7 @@ pagination:
             {{ item.templateContent | md }}
          {% endif %}
       </div>
-      <div class="tagline font-bold py-2 space-y-7">
+      <div class="title font-bold py-2 space-y-7 tracking-wider">
          {% if item.data.page.excerpt %}
             <a href="{{ site.baseurl }}{{ item.url }}" class="next">MORE</a>
          {% endif %}
@@ -40,15 +40,15 @@ pagination:
    {% endfor %}
 
    <!-- Pagination links -->
-   <div class="tagline font-bold my-10 uppercase tracking-wider">
+   <div class="title font-bold my-10 uppercase tracking-widest">
       &laquo;
       {% if page.url != pagination.href.first %}
          <a href="/" class="next">first</a>
       {% else %}first{% endif %}
       &lsaquo;
       {% if pagination.href.previous %}
-         <a href="{{ pagination.href.previous }}" class="previous"> back</a>
-      {% else %}back{% endif %}
+         <a href="{{ pagination.href.previous }}" class="previous"> prev</a>
+      {% else %}prev{% endif %}
       |
       {% if pagination.href.next %}
          <a href="{{ pagination.href.next }}" class="next">next</a>
@@ -59,9 +59,4 @@ pagination:
       {% else %}last{% endif %}
       &raquo;
    </div>
-
-   <div class="tagline font-bold py-2 tracking-wider">
-      <a href="/search/" alt="Search Jacob Heric's Site" title="Search Jacob Heric's ">SEARCH</a>
-   </div>
-
 </div>

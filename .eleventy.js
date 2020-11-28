@@ -9,10 +9,7 @@ module.exports = function (config) {
     return markdownIt({ html: true }).render(content);
   });
 
-  module.exports = function (eleventyConfig) {
-    config.setDataDeepMerge(true);
-  };
-
+  config.setDataDeepMerge(true);
   config.setFrontMatterParsingOptions({
     excerpt: true,
     excerpt_separator: "<!--more-->",
