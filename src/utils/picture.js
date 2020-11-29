@@ -10,7 +10,15 @@ const getSrc = (name) => path.join(process.cwd(), "src/assets/image", name);
 const getFile = (name) => path.join(process.cwd(), "dist/assets/image", name);
 const getPath = (name) => path.posix.join("/", "assets/image", name);
 const exists = (file) => fs.existsSync(file);
-const getImage = async (src) => sharp(getSrc(src));
+const getImage = async (src) => {
+  try {
+    image = sharp(getSrc(src));
+    return image;
+  } catch (e) {
+    console.log(`Error opening image ${src}`, e);
+    throw e;
+  }
+};
 
 const saveOriginal = (image, out) => {
   image
@@ -137,7 +145,7 @@ module.exports = async function (src, alt) {
     const webpTags = done ? getTags(src, "webp") : "";
     const jpgTags = done ? getTags(src, "jpg") : "";
 
-    const picture = outdent`
+    picture = outdent`
     <picture>
       ${getWebpTag(webpTags)}
       ${getJpgTag(jpgTags)}
