@@ -18,7 +18,7 @@ const getImage = async (src) => {
       console.log("stats for loaded image", stats);
     })
     .catch((e) => {
-      console.log("error getting loaded image stats");
+      console.log("error getting loaded image stats", e);
     });
 
   return image;
