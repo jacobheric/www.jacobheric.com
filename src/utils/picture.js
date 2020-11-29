@@ -91,7 +91,7 @@ const resizeImage = async (src) => {
   createDir();
 
   const image = await getImage(src);
-  await saveOriginal(image, out);
+  await saveOriginal(image.clone(), out);
   console.log("saved original", src);
   const meta = await image.metadata();
   console.log("meta", meta);
@@ -101,8 +101,8 @@ const resizeImage = async (src) => {
     // don't upsize
     if (meta.width >= width - 50) {
       console.log(`resizing ${src} to ${width}`);
-      await saveJpg(image, path.parse(src).name, width);
-      await saveWebp(image, path.parse(src).name, width);
+      await saveJpg(image.clone(), path.parse(src).name, width);
+      await saveWebp(image.clone(), path.parse(src).name, width);
     }
   }
 
