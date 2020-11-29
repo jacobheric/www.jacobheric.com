@@ -11,28 +11,34 @@ const getFile = (name) => path.join(process.cwd(), "dist/assets/image", name);
 const getPath = (name) => path.posix.join("/", "assets/image", name);
 const exists = (file) => fs.existsSync(file);
 const getImage = async (src) => {
-  try {
-    const image = sharp(getSrc(src));
-    console.log("opened image successfully", image);
-    return image;
-  } catch (e) {
-    console.log(`Error opening image ${src}`, e);
-    throw e;
-  }
+  image = sharp(getSrc(src));
+  image
+    .stats()
+    .then((stats) => {
+      console.log("stats for loaded image", stats);
+    })
+    .catch((e) => {
+      console.log("error getting loaded image stats");
+    });
+
+  return image;
 };
 
-const saveOriginal = (image, out) => {
-  try {
-    console.log("saving original:", out);
-    image
-      .resize({ width: image.metadata().width })
-      .toFormat("jpeg")
-      .jpeg({ quality: QUALITY })
-      .toFile(out);
-  } catch (e) {
-    console.log(`Error saving original ${out}`, e);
-    throw e;
-  }
+const saveOriginal = async (image, out) => {
+  image
+    .metadata()
+    .then((metadata) => {
+      console.log("got metatdata, saving image", metadata);
+      return image
+        .resize({ width: metadata.width })
+        .toFormat("jpeg")
+        .jpeg({ quality: QUALITY })
+        .toFile(out);
+    })
+    .then((image) => {
+      console.log("returning transformed original");
+      return image;
+    });
 };
 
 const saveJpg = async (image, name, width) => {
@@ -92,8 +98,8 @@ const resizeImage = async (src) => {
   createDir();
 
   const image = await getImage(src);
-  saveOriginal(image.clone(), out);
-  console.log("getting meta", image.clone());
+  await saveOriginal(image.clone(), out);
+  console.log("getting meta");
   const meta = await image
     .clone()
     .metadata()
