@@ -121,6 +121,8 @@ const passThrough = (src, alt) => {
 };
 
 module.exports = async function (src, alt) {
+  return "";
+
   if (alt === undefined) {
     throw new Error(`missing alt tag for src: ${src}`);
   }
