@@ -22,11 +22,16 @@ const getImage = async (src) => {
 };
 
 const saveOriginal = (image, out) => {
-  image
-    .resize({ width: image.metadata().width })
-    .toFormat("jpeg")
-    .jpeg({ quality: QUALITY })
-    .toFile(out);
+  try {
+    image
+      .resize({ width: image.metadata().width })
+      .toFormat("jpeg")
+      .jpeg({ quality: QUALITY })
+      .toFile(out);
+  } catch (e) {
+    console.log(`Error saving original ${out}`, e);
+    throw e;
+  }
 };
 
 const saveJpg = async (image, name, width) => {
@@ -86,7 +91,7 @@ const resizeImage = async (src) => {
   createDir();
 
   const image = await getImage(src);
-  saveOriginal(image, out);
+  await saveOriginal(image, out);
   console.log("saved original", src);
   const meta = await image.metadata();
   console.log("meta", meta);
