@@ -12,7 +12,7 @@ const getPath = (name) => path.posix.join("/", "assets/image", name);
 const exists = (file) => fs.existsSync(file);
 const getImage = async (src) => {
   try {
-    image = sharp(getSrc(src));
+    const image = sharp(getSrc(src));
     console.log("opened image successfully", src);
     return image;
   } catch (e) {
@@ -23,6 +23,7 @@ const getImage = async (src) => {
 
 const saveOriginal = (image, out) => {
   try {
+    console.log("saving original:", out);
     image
       .resize({ width: image.metadata().width })
       .toFormat("jpeg")
@@ -91,9 +92,9 @@ const resizeImage = async (src) => {
   createDir();
 
   const image = await getImage(src);
-  await saveOriginal(image.clone(), out);
+  saveOriginal(image.clone(), out);
   console.log("saved original", src);
-  const meta = await image.metadata();
+  const meta = await image.clone().metadata();
   console.log("meta", meta);
 
   for await (const width of SIZES) {
