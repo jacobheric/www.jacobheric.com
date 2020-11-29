@@ -94,7 +94,13 @@ const resizeImage = async (src) => {
   const image = await getImage(src);
   saveOriginal(image.clone(), out);
   console.log("getting meta", image.clone());
-  const meta = await image.clone().metadata();
+  const meta = await image
+    .clone()
+    .metadata()
+    .then((metadata) => {
+      console.log("Got META: ", metadata);
+      return metadata;
+    });
   console.log("meta", meta);
 
   for await (const width of SIZES) {

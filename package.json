@@ -3,6 +3,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ext .js src --fix",
+    "clean": "rimraf dist",
     "build": "npm-run-all build:css build:html",
     "build:css": "postcss src/assets/style/pre.css -o src/assets/style/style.css",
     "build:html": "eleventy",
@@ -23,6 +24,7 @@
     "autoprefixer": "^10.0.2",
     "postcss-cli": "^8.3.0",
     "tailwindcss": "^2.0.1",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
   }
 }
