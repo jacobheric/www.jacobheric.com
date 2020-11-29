@@ -130,12 +130,14 @@ module.exports = async function (src, alt) {
     return passThrough(src, alt);
   }
 
-  const done = await resizeImage(src);
+  let picture = "";
+  try {
+    const done = await resizeImage(src);
 
-  const webpTags = done ? getTags(src, "webp") : "";
-  const jpgTags = done ? getTags(src, "jpg") : "";
+    const webpTags = done ? getTags(src, "webp") : "";
+    const jpgTags = done ? getTags(src, "jpg") : "";
 
-  const picture = outdent`
+    const picture = outdent`
     <picture>
       ${getWebpTag(webpTags)}
       ${getJpgTag(jpgTags)}
@@ -144,6 +146,9 @@ module.exports = async function (src, alt) {
       )}" alt="${alt}" title="${alt}">
     </picture>
   `;
+  } catch (e) {
+    console.log(`Error transforming image ${src}`, e);
+  }
 
   return picture;
 };
