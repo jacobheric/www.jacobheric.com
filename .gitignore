@@ -1,4 +1,6 @@
 dist
 .idea
 node_modules
-src/assets/image
+
+# Local Netlify folder
+.netlify
