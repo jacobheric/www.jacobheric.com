@@ -13,6 +13,7 @@ const exists = (file) => fs.existsSync(file);
 const getImage = async (src) => {
   try {
     image = sharp(getSrc(src));
+    console.log("opened image successfully", src);
     return image;
   } catch (e) {
     console.log(`Error opening image ${src}`, e);
@@ -86,7 +87,9 @@ const resizeImage = async (src) => {
 
   const image = await getImage(src);
   saveOriginal(image, out);
+  console.log("saved original", src);
   const meta = await image.metadata();
+  console.log("meta", meta);
 
   for await (const width of SIZES) {
     //
