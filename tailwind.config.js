@@ -1,5 +1,10 @@
 module.exports = {
-  purge: ["./src/**/*.html", "./src/**/*.md"],
+  purge: {
+    content: ["./src/**/*.html", "./src/**/*.md"],
+    options: {
+      safelist: ["my-6", "rounded-md", "max-h-screen", "max-w-screen"],
+    },
+  },
   darkMode: false,
   theme: {
     extend: {

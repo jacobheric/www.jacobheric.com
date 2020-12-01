@@ -3,7 +3,7 @@ const path = require("path");
 const sharp = require("sharp");
 const outdent = require("outdent");
 
-const SIZES = [640, 1300, 1920];
+const SIZES = [640, 1300];
 const QUALITY = 85;
 
 const getSrc = (name) => path.join(process.cwd(), "src/assets/image", name);
@@ -107,12 +107,12 @@ const getTags = (src, format) => {
 
 const getWebpTag = (webpTags) =>
   webpTags.length > 0
-    ? `<source srcset="${webpTags}" sizes="90vw, (min-width: 1280px) 1152px" type="image/webp">`
+    ? `<source srcset="${webpTags}" sizes="(min-width: 1980px) 1408px, calc(71.27vw + 11px)" type="image/webp">`
     : "";
 
 const getJpgTag = (jpgTags) =>
   jpgTags.length > 0
-    ? `<source srcset="${jpgTags}" sizes="90vw, (min-width: 1280px) 1152px" type="image/jpeg">`
+    ? `<source srcset="${jpgTags}" sizes="(min-width: 1980px) 1408px, calc(71.27vw + 11px)" type="image/jpeg">`
     : "";
 
 const passThrough = (src, alt) => {
@@ -141,7 +141,7 @@ module.exports = async function (src, alt) {
       ${getJpgTag(jpgTags)}
       <img class="my-6 rounded-md max-h-screen max-w-screen" src="${getPath(
         `${path.parse(src).name}.jpg`
-      )}" alt="${alt}" title="${alt}">
+      )}" alt="${alt}" title="${alt}" loading="lazy">
     </picture>
   `;
 
