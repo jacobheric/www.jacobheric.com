@@ -107,12 +107,12 @@ const getTags = (src, format) => {
 
 const getWebpTag = (webpTags) =>
   webpTags.length > 0
-    ? `<source srcset="${webpTags}" sizes="(min-width: 1980px) 1408px, calc(71.27vw + 11px)" type="image/webp">`
+    ? `<source srcset="${webpTags}" sizes="90vw, (min-width: 1280px) 1152px" type="image/webp">`
     : "";
 
 const getJpgTag = (jpgTags) =>
   jpgTags.length > 0
-    ? `<source srcset="${jpgTags}" sizes="(min-width: 1980px) 1408px, calc(71.27vw + 11px)" type="image/jpeg">`
+    ? `<source srcset="${jpgTags}" sizes="90vw, (min-width: 1280px) 1152px" type="image/jpeg">`
     : "";
 
 const passThrough = (src, alt) => {
