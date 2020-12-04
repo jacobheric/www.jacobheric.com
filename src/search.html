@@ -2,9 +2,9 @@
 layout: page
 ---
 
-<div class="w-96">
+<div class="mx-4">
   <input class="w-96 p-2 border-solid border-2" type="search" placeholder="Search..." id="search" />
-  <ol class="w-96 p-2" id="searchResults" />
+  <ul class="w-96 p-2" id="searchResults" />
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/elasticlunr/0.9.6/elasticlunr.min.js"></script>
@@ -27,6 +27,7 @@ layout: page
         results.map((r) => {
           const { id, title, description } = r.doc;
           const li = document.createElement("li");
+          li.classList.add("mb-4");
           resEl.appendChild(li);
 
           const a = document.createElement("a");
