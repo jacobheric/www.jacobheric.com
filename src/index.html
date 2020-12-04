@@ -39,8 +39,7 @@ pagination:
       <hr class="w-full border-gray-200 m-2"/>
    {% endfor %}
 
-   <!-- Pagination links -->
-   <div class="title font-bold my-10 uppercase tracking-widest whitespace-nowrap">
+   <div class="font-bold mt-10 uppercase tracking-widest whitespace-nowrap">
       &laquo;
       {% if page.url != pagination.href.first %}
          <a href="/" class="next">first</a>
@@ -58,5 +57,8 @@ pagination:
          <a href="{{ pagination.href.last }}" class="next">last</a>
       {% else %}last{% endif %}
       &raquo;
+   </div>
+   <div class="font-bold mt-10 uppercase tracking-widest whitespace-nowrap">
+      <a href="/search" class="next">search</a>
    </div>
 </div>
