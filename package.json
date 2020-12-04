@@ -14,7 +14,6 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1",
     "sharp": "^0.26.3",
-    "deasync": "^0.1.21",
     "eslint": "^7.12.0",
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -24,6 +23,7 @@
     "postcss-cli": "^8.3.0",
     "tailwindcss": "^2.0.1",
     "npm-run-all": "^4.1.5",
-    "cssnano": "^4.1.10"
+    "cssnano": "^4.1.10",
+    "elasticlunr": "^0.9.5"
   }
 }

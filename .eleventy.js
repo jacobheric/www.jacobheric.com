@@ -1,5 +1,6 @@
 const markdownIt = require("markdown-it");
 const pictureShortcode = require("./src/utils/picture");
+const searchFilter = require("./src/utils/search");
 
 module.exports = function (config) {
   config.addPassthroughCopy("src/assets/image/icons");
@@ -12,6 +13,11 @@ module.exports = function (config) {
   config.setFrontMatterParsingOptions({
     excerpt: true,
     excerpt_separator: "<!--more-->",
+  });
+
+  config.addFilter("search", searchFilter);
+  config.addCollection("posts", (collection) => {
+    return [...collection.getFilteredByGlob("./src/posts/**/*.md")];
   });
 
   return {

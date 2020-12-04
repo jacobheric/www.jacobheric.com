@@ -1,0 +1,48 @@
+---
+layout: page
+---
+
+<div class="w-96">
+  <input class="w-96 p-2 border-solid border-2" type="search" placeholder="Search..." id="search" />
+  <ol class="w-96 p-2" id="searchResults" />
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/elasticlunr/0.9.6/elasticlunr.min.js"></script>
+
+<script>
+  (function (window, document) {
+    "use strict";
+
+    const search = (e) => {
+      const results = window.searchIndex.search(e.target.value, {
+        bool: "OR",
+        expand: true,
+      });
+
+      const resEl = document.getElementById("searchResults");
+      const noResultsEl = document.getElementById("noResultsFound");
+      resEl.innerHTML = "";
+
+      if (results) {
+        results.map((r) => {
+          const { id, title, description } = r.doc;
+          const li = document.createElement("li");
+          resEl.appendChild(li);
+
+          const a = document.createElement("a");
+          a.setAttribute("href", id);
+          a.textContent = title;
+          li.appendChild(a);
+        });
+      }
+    };
+
+    fetch("/search.json").then((response) =>
+      response.json().then((rawIndex) => {
+        window.searchIndex = elasticlunr.Index.load(rawIndex);
+        document.getElementById("search").addEventListener("input", search);
+      })
+    );
+  })(window, document);
+</script>
+
