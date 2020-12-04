@@ -17,7 +17,7 @@ module.exports = function (config) {
 
   config.addFilter("search", searchFilter);
   config.addCollection("posts", (collection) => {
-    return [...collection.getFilteredByGlob("./src/posts/**/*.md")];
+    return [...collection.getFilteredByTags("posts")];
   });
 
   return {
