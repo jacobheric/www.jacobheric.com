@@ -57,8 +57,6 @@ const createDir = () => {
 };
 
 const resizeImage = async (src) => {
-  console.log(`resizing image: ${src}`);
-
   const source = getSrc(src);
 
   if (!fs.existsSync(source)) {
@@ -66,11 +64,11 @@ const resizeImage = async (src) => {
   }
 
   //
-  // if the original is already in dest, that means we've already processed it
+  // if the original is already in dist, that means we've already processed it
   // this assumption keeps build times fast because we're only loading files the first time
   const out = `${getFile(`${path.parse(src).name}`)}.jpg`;
   if (exists(out)) {
-    console.log(`skipping resize, src image already in dist: ${src}`);
+    console.log(`Skipping resize, already exists: ${src}`);
     return true;
   }
 
@@ -83,14 +81,12 @@ const resizeImage = async (src) => {
   for await (const width of SIZES) {
     //
     // don't upsize
-    if (meta.width >= width - 50) {
-      console.log(`resizing ${src} to ${width}`);
+    if (meta.width >= width) {
+      console.log(`Resizing ${src} to ${width}`);
       await saveJpg(image, path.parse(src).name, width);
       await saveWebp(image, path.parse(src).name, width);
     }
   }
-
-  console.log(`src image resized: ${src}`);
   return true;
 };
 
@@ -137,7 +133,7 @@ module.exports = async function (src, alt) {
   }
 
   if (path.parse(src).ext === ".gif") {
-    console.log(`copying raw gif to dist: ${src}`);
+    console.log(`Writing raw gif to dist: ${src}`);
     return passThrough(src, alt);
   }
 

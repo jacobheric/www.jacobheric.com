@@ -10,10 +10,10 @@
     {% assign t = site.title %}
   {% endif %}
 
-  <meta property="og:title" content="{{t}}"/>
-  <meta property="og:description" content="{{t}}">
+  <meta property="og:title" content="{{t | escape}}"/>
+  <meta property="og:description" content="{{t | escape}}">
   <meta property="og:url" content="{{site.url}}{{page.url}}"/>
-  <meta name="description" content="{{t}}" />
+  <meta name="description" content="{{t | escape}}" />
 
   <title>{{ t }}</title>
 

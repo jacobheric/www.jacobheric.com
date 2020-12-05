@@ -4,7 +4,7 @@ title: soapmaking
 image: 2009-10-14-mad_scientist.jpg
 ---
 
-A hobby isn't a hobby...unless there is a little *danger* involved. So we made soap.
+A hobby isn't a hobby... unless there is a little *danger* involved. So we made soap.
 
 {%picture "2009-10-14-the_lab.jpg", "the lab"%}
 {%picture "2009-10-14-measure_water.jpg", "measure the water"%}

@@ -5,7 +5,10 @@ const searchFilter = require("./src/utils/search");
 module.exports = function (config) {
   config.addPassthroughCopy("src/assets/image/icons");
   config.addPassthroughCopy("src/assets/style/style.css");
+
   config.addShortcode("picture", pictureShortcode);
+
+  config.addFilter("search", searchFilter);
   config.addFilter("md", function (content = "") {
     return markdownIt({ html: true }).render(content);
   });
@@ -15,8 +18,6 @@ module.exports = function (config) {
     excerpt: true,
     excerpt_separator: "<!--more-->",
   });
-
-  config.addFilter("search", searchFilter);
 
   return {
     dir: {
