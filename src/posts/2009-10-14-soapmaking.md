@@ -7,6 +7,7 @@ image: 2009-10-14-mad_scientist.jpg
 A hobby isn't a hobby...unless there is a little *danger* involved. So we made soap.
 
 {%picture "2009-10-14-danger.jpg", "danger"%}
+{%picture "2009-10-14-danger.jpg", "danger"%}
 {%picture "2009-10-14-delicious_fat.jpg", "delicious fat"%}
 {%picture "2009-10-14-delicious_soap.jpg", "delicious soap"%}
 {%picture "2009-10-14-electric_crutch.jpg", "electric crutch"%}

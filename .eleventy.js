@@ -4,6 +4,7 @@ const searchFilter = require("./src/utils/search");
 
 module.exports = function (config) {
   config.addPassthroughCopy("src/assets/image/icons");
+  config.addPassthroughCopy("src/assets/style/style.css");
   config.addShortcode("picture", pictureShortcode);
   config.addFilter("md", function (content = "") {
     return markdownIt({ html: true }).render(content);

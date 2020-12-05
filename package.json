@@ -6,9 +6,9 @@
     "build": "NODE_ENV=production npm-run-all build:css build:html",
     "build:css": "postcss src/_includes/style/pre.css -o src/_includes/style/style.css",
     "build:html": "eleventy",
-    "watch": "npm-run-all --parallel watch:css watch:html",
+    "watch": "NODE_ENV=dev npm-run-all --parallel watch:css watch:html",
     "watch:css": "postcss src/_includes/style/pre.css -o src/_includes/style/style.css --watch",
-    "watch:html": "eleventy --serve --incremental --quiet --port=3000",
+    "watch:html": "eleventy --serve --incremental --port=3000",
     "start": "npm run watch"
   },
   "devDependencies": {

@@ -3,7 +3,7 @@ const path = require("path");
 const sharp = require("sharp");
 const outdent = require("outdent");
 
-const SIZES = [640, 1300];
+const SIZES = [1300, 640];
 const QUALITY = 85;
 
 const getSrc = (name) => path.join(process.cwd(), "src/assets/image", name);
@@ -94,26 +94,37 @@ const resizeImage = async (src) => {
   return true;
 };
 
-const getTags = (src, format) => {
-  name = path.parse(src).name;
+const imageName = (name, width, ext) => `${name}-${width}.${ext}`;
+
+const getTags = (src) => {
+  const name = path.parse(src).name;
+
   const paths = SIZES.map((width) => {
-    if (exists(getFile(`${name}-${width}.${format}`))) {
-      return `${getPath(`${name}-${width}.${format}`)} ${width}w`;
+    const jpg = imageName(name, width, "jpg");
+    const webp = imageName(name, width, "webp");
+    let sourceTags = [];
+
+    if (exists(getFile(jpg))) {
+      sourceTags.push(
+        `<source srcset="${getPath(jpg)} ${width}w" sizes="(min-width: ${
+          width - 50
+        }px) ${width}px" type="image/jpeg">`
+      );
     }
+
+    if (exists(getFile(webp))) {
+      sourceTags.push(
+        `<source srcset="${webp} ${width}w" sizes="(min-width: ${
+          width - 50
+        }px) ${width}px" type="image/webp">`
+      );
+    }
+
+    return sourceTags.join(" ");
   }).filter((tag) => tag);
 
-  return paths.join(",");
+  return paths.join(" ");
 };
-
-const getWebpTag = (webpTags) =>
-  webpTags.length > 0
-    ? `<source srcset="${webpTags}" sizes="90vw, (min-width: 1280px) 1152px" type="image/webp">`
-    : "";
-
-const getJpgTag = (jpgTags) =>
-  jpgTags.length > 0
-    ? `<source srcset="${jpgTags}" sizes="90vw, (min-width: 1280px) 1152px" type="image/jpeg">`
-    : "";
 
 const passThrough = (src, alt) => {
   fs.copyFileSync(getSrc(src), getFile(src));
@@ -132,13 +143,9 @@ module.exports = async function (src, alt) {
 
   const done = await resizeImage(src);
 
-  const webpTags = done ? getTags(src, "webp") : "";
-  const jpgTags = done ? getTags(src, "jpg") : "";
-
   const picture = outdent`
     <picture>
-      ${getWebpTag(webpTags)}
-      ${getJpgTag(jpgTags)}
+      ${getTags(src)}
       <img class="my-6 rounded-md max-h-screen max-w-screen" src="${getPath(
         `${path.parse(src).name}.jpg`
       )}" alt="${alt}" title="${alt}" loading="lazy">
