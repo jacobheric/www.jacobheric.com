@@ -16,9 +16,6 @@ module.exports = function (config) {
   });
 
   config.addFilter("search", searchFilter);
-  config.addCollection("posts", (collection) => {
-    return [...collection.getFilteredByTags("posts")];
-  });
 
   return {
     dir: {
