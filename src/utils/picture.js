@@ -146,7 +146,7 @@ module.exports = async function (src, alt) {
       ${getTags(src)}
       <img class="my-6 rounded-md max-h-screen max-w-screen" src="${getPath(
         `${path.parse(src).name}.jpg`
-      )}" alt="${alt}" title="${alt}" loading="lazy">
+      )}" alt="${alt}" title="${alt}">
     </picture>
   `;
 
