@@ -29,7 +29,6 @@ module.exports = function (config) {
       ? htmlmin.minify(content, {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,
-          preserveLineBreaks: true,
           conservativeCollapse: true,
           minifyCSS: true,
           minifyJS: true,
