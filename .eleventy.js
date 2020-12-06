@@ -1,8 +1,13 @@
 const markdownIt = require("markdown-it");
+const htmlmin = require("html-minifier");
 const pictureShortcode = require("./src/utils/picture");
 const searchFilter = require("./src/utils/search");
 
 module.exports = function (config) {
+  if (process.env.NODE_ENV === "production") {
+    config.addTransform("htmlmin", minifyHTML);
+  }
+
   config.addPassthroughCopy("src/assets/image/icons");
   config.addPassthroughCopy("src/assets/style/style.css");
 
@@ -18,6 +23,23 @@ module.exports = function (config) {
     excerpt: true,
     excerpt_separator: "<!--more-->",
   });
+
+  function minifyHTML(content, outputPath) {
+    return outputPath.endsWith(".html")
+      ? htmlmin.minify(content, {
+          collapseBooleanAttributes: true,
+          collapseWhitespace: true,
+          preserveLineBreaks: true,
+          conservativeCollapse: true,
+          minifyCSS: true,
+          minifyJS: true,
+          removeComments: true,
+          sortAttributes: true,
+          sortClassName: true,
+          useShortDoctype: true,
+        })
+      : content;
+  }
 
   return {
     dir: {

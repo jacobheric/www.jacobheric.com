@@ -132,6 +132,8 @@ module.exports = async function (src, alt) {
     throw new Error(`missing alt tag for src: ${src}`);
   }
 
+  alt = alt.replace(/"/g, "&quot;");
+
   if (path.parse(src).ext === ".gif") {
     console.log(`Writing raw gif to dist: ${src}`);
     return passThrough(src, alt);
