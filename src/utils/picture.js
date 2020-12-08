@@ -15,6 +15,7 @@ const getImage = async (src) => sharp(getSrc(src));
 const saveOriginal = (image, out) => {
   image
     .resize({ width: image.metadata().width })
+    .withMetadata()
     .toFormat("jpeg")
     .jpeg({ quality: QUALITY })
     .toFile(out);
@@ -29,6 +30,7 @@ const saveJpg = async (image, name, width) => {
 
   return image
     .resize({ width: width })
+    .withMetadata()
     .toFormat("jpeg")
     .jpeg({ quality: QUALITY })
     .toFile(o);
@@ -43,6 +45,7 @@ const saveWebp = async (image, name, width) => {
 
   return image
     .resize({ width: width })
+    .withMetadata()
     .toFormat("webp")
     .webp({ quality: QUALITY })
     .toFile(o);
