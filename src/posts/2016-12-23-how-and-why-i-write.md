@@ -1,6 +1,7 @@
 ---
 layout: post
 title: How and why I wrote and published my first novel
+image: auto-bio-cover-large.jpg
 ---
 
 > tl;dr: <strong>Autobiography of Joker so Far</strong> is out now get it [here](https://www.truejokercompany.com#books)
