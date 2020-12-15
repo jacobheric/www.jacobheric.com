@@ -2,7 +2,6 @@
 layout: post
 title: winter scenes
 image: 2017-02-16-winter-scene.jpg
-
 ---
 
 

@@ -2,7 +2,6 @@
 layout: post
 title: images from the bus stop
 image: bus-stop-blizzard.jpg
-
 ---
 
 <!--more-->

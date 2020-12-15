@@ -1,7 +1,6 @@
 ---
 layout: post
 title: What would you do with three months?
-
 ---
 What would you do if you were given three months off to do whatever it was you wanted to do?  What if you were allowed to hit the pause button on your career, take a break from work during your prime earning years, and just do whatever it was you wanted to do?  
 

@@ -2,7 +2,6 @@
 layout: post
 title: halloween 2016
 image: pumpkin-carving.jpg
-
 ---
 
 Halloween festivities.

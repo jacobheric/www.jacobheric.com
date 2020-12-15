@@ -1,7 +1,6 @@
 ---
 layout: post
 title: The Take-Away Shows
-
 ---
 
 <iframe src="https://player.vimeo.com/video/7212435" width="1300" height="600"

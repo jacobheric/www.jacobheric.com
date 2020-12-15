@@ -2,7 +2,6 @@
 layout: post
 title:  Tenants Harbor
 image: 2019-06-29-tenants-harbor.jpg
-
 ---
    
 Lounging on Long Cove at our usual summer rental in Tenant's Harbor Maine. 

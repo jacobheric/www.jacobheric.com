@@ -1,7 +1,6 @@
 ---
 layout: post
 title: People always mean well
-
 ---
 "People always mean well. They cluck their thick tongues, and shake their heads and suggest, oh, so very delicately."
 

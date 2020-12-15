@@ -2,7 +2,6 @@
 layout: post
 title: hobbits at fort preble, and at home
 image: 2017-06-18-spring-point-light.jpg
-
 ---
 
 Typical summer days. We spend a lot of time at Fort Preble in the summer, post bagels, walking the breakwater to the lighthouse and back, and playing on the earthworks and dilapidated ramparts. 

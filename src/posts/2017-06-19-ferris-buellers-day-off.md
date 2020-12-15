@@ -2,7 +2,6 @@
 layout: post
 title: Ferris Bueller's Day Off
 image: 2017-06-19-save-ferris.jpg
-
 ---
 
 We've started a new tradition with our oldest daughter. Every year we yank her from school for one day and do our best to recreate Ferris Bueller's Day Off in Portland. 

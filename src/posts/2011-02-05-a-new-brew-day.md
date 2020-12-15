@@ -2,7 +2,6 @@
 layout: post
 title: a new brew day
 image: new_brew_day_small.jpg
-
 ---
 
 Here's a picture/video diary of last week's brew day.  It's the first time I've brewed in about a year, owing to school.  It was relaxing and fun and I mean to do it a lot more this year.

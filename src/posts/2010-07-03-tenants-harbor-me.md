@@ -2,7 +2,6 @@
 layout: post
 title: Tenants Harbor, ME
 image: tenants-harbor-fire-pit.jpg
-
 ---
 
 

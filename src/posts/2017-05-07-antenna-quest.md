@@ -2,7 +2,6 @@
 layout: post
 title: antenna quest
 image: 2017-05-07-antenna-quest.jpg
-
 ---
 
 The latest in the quest to get all major broadcast channels over the air in HD...

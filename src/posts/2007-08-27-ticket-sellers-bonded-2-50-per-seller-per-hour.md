@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Ticket sellers, bonded, $2.50 per seller per hour.
-
 ---
 I went to church on Sunday with my wife and daughter.  It was a catholic church, <a href="http://www.shsdp.org/">Sacred Heart</a>, in Portland, Maine.  It's a great church, cavernous, lined with towering stained glass, some nice, big imposing steps and columns out front.  It's a little run down, but a decent spectacle, especially if you're two (like my daughter).  
 

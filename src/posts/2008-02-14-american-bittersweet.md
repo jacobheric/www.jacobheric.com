@@ -1,7 +1,6 @@
 ---
 layout: post
 title: American Bittersweet
-
 ---
 The air will be full of soft enveloping salt and fat.  Whole milk will work over hard flakes.  Heat will emanate in rough rectangles out of the toaster.  Invisible towers of condensation will obscure the window while I stand and wait.  Out there, I will see bittersweet branches brought low by precarious piles of snow.  Blue jays will bloat against the smoldering cold.  Birds yesterday flew wildly against the choke of vines and berries.  Birds today big and blue and still.  Birds tomorrow torn apart by three black cats.  Their transparent temperament tells the temperature.  There is a frozen city for no man.  Here is the heat of deceivers and the light of self-deception.  I peanut butter toast.  
 

@@ -2,7 +2,6 @@
 layout: post
 title: Portage Lake
 image: 2017-07-15-hedgehog-view.jpg
-
 ---
 
 At Portage Lake, Maine. Soaking up summer. The view from atop Hedgehog is awesome.

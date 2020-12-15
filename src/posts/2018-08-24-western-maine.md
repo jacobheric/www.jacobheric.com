@@ -2,7 +2,6 @@
 layout: post
 title:  A Western Maine Trip
 image: 2018-08-24-bissel.jpg
-
 ---
 
 We took a meandering trip through western Maine this summer. Stopped off at Bissel's Three Rivers Brewery in Milo. 

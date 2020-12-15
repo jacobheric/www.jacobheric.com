@@ -2,7 +2,6 @@
 layout: post
 title: family in full bloom
 image: 2017-05-20-family-bloom.jpg
-
 ---
 
 

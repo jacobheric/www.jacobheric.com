@@ -2,7 +2,6 @@
 layout: post
 title: 'pasta&#58; life reclaimed'
 image: IMG_20110126_151206.jpg
-
 ---
 
 A couple years ago, my new year's resolution was cheese, jeans and killing...a year in which I would learn to make my own cheese, make my own jeans and learn how to kill a man with my bare hands.  The resolution was as whimsical as it was unlikely of success, and none of it came to pass.

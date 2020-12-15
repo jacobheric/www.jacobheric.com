@@ -2,7 +2,6 @@
 layout: post
 title: boom town portland
 image: 2017-01-23-portland-building-crazy.jpg
-
 ---
 
 Portland is exploding. Development everywhere. This sculpture in Lincoln Park captures it nicely. Note the construction in the background, those are the "Two Towers" going up, detailed below. Also, Lincoln Park itself was torn up shortly after this photo and renovated.

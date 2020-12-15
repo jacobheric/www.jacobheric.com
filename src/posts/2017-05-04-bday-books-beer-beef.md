@@ -2,7 +2,6 @@
 layout: post
 title: bday, books, beer & beef
 image: 2017-05-04-beer.jpg
-
 ---
 
 A typical red-blooded american male birthday ritual...

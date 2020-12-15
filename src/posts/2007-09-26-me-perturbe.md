@@ -2,9 +2,8 @@
 layout: post
 title: Me Perturbe
 excerpt: "It's not Mogadishu here."
-
-
 ---
+
 It's been a while since I've posted.  I'm not one that can just sit down and bang out a couple paragraphs of thoughts. 
 I have a tendency to dither, edit, delete, rewrite and eventually abandon ship.  It doesn't help that I work on a computer 
 all day long (I don't want to talk about it), so cozying up in front of this is the last thing I want to do when I get home. 

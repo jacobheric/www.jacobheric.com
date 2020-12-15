@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Goodbye Netflix, Children, Hiroshima, Mon Amour, etc.
-
 ---
 We bought our biennial subscription to cable (hello Time Warner, fuck you I hate you) at the <a href="http://www.cumberlandfair.com/">Cumberland County Fair</a>.  Who doesn't buy their cable at the fair?  This year it was $39.95 for a year of digital cable.  Not as good as the $29.99 I got for basic cable two years ago, but better nonetheless than the $57.95 that they normally charge for garbage television.  It's a racket, we know it, paying anything for commercial television.  But it's better than ritualistic suicide or violent hard drinking, both things that come to mind on dark, raw February nights.  So, we indulge ourselves as winter comes.
 

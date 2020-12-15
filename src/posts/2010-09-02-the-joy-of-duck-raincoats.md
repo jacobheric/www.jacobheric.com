@@ -2,7 +2,6 @@
 layout: post
 title: the joy of duck raincoats
 image: duck-raincoats.jpg
-
 ---
 
 <!--more-->

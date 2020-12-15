@@ -6,8 +6,6 @@ excerpt: "These are the things I hope to teach my kids, mostly by example, over 
   should happen to me.  It's important to note that by articulating these I am not
   claiming to have accomplished them.  In fact, I have failed largely at each.  But,
   they remain goals nonetheless."
-
-
 ---
 These are the things I hope to teach my kids, mostly by example, over the course of their lives.  I'm recording them so that they can read them if something should happen to me.  It's important to note that by articulating these I am not claiming to have accomplished them.  In fact, I have failed largely at each.  But, they remain goals nonetheless.
 

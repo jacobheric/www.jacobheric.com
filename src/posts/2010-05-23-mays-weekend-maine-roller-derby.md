@@ -2,7 +2,6 @@
 layout: post
 title: May's weekend, Maine Roller Derby
 image: roller-derby.jpg
-
 ---
 
 <!--more-->

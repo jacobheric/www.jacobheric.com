@@ -2,7 +2,6 @@
 layout: post
 title: 'My Eye&#58; more dither, more natter, thanks nana, more winter, more pneumonia.'
 image: DSCN3230.jpg
-
 ---
 
 Though the spirits have been good all around of late (owing to my new job, which makes me less of an asshole), the bodies have not.
