@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'My Eye&#58; more dither, more natter, thanks nana, more winter, more pneumonia.'
+title: "My Eye: more dither, more natter, thanks nana, more winter, more pneumonia."
 image: DSCN3230.jpg
 ---
 

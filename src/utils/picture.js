@@ -131,9 +131,11 @@ const passThrough = (src, alt) => {
 };
 
 module.exports = async function (src, alt) {
-  if (alt === undefined) {
-    throw new Error(`missing alt tag for src: ${src}`);
+  if (src === undefined) {
+    throw new Error(`missing src tag for picture: ${src}`);
   }
+
+  alt = alt ? alt : src;
 
   alt = alt.replace(/"/g, "&quot;");
 
