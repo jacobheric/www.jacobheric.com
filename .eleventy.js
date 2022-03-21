@@ -2,6 +2,7 @@ const markdownIt = require("markdown-it");
 const htmlmin = require("html-minifier");
 const pictureShortcode = require("./src/utils/picture");
 const searchFilter = require("./src/utils/search");
+const util = require("util");
 
 module.exports = function (config) {
   if (process.env.NODE_ENV === "production") {
@@ -13,12 +14,28 @@ module.exports = function (config) {
 
   config.addShortcode("picture", pictureShortcode);
 
+  config.addFilter("dump", (obj) => {
+    const getCircularReplacer = () => {
+      const seen = new WeakSet();
+      return (key, value) => {
+        if (typeof value === "object" && value !== null) {
+          if (seen.has(value)) {
+            return;
+          }
+          seen.add(value);
+        }
+        return value;
+      };
+    };
+
+    return JSON.stringify(obj, getCircularReplacer(), 4);
+  });
+
   config.addFilter("search", searchFilter);
   config.addFilter("md", function (content = "") {
     return markdownIt({ html: true }).render(content);
   });
 
-  config.setDataDeepMerge(true);
   config.setFrontMatterParsingOptions({
     excerpt: true,
     excerpt_separator: "<!--more-->",
