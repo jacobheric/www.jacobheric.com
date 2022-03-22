@@ -144,7 +144,7 @@ module.exports = async function (src, alt) {
     return passThrough(src, alt);
   }
 
-  const done = await resizeImage(src);
+  await resizeImage(src);
 
   const picture = outdent`
     <picture>
