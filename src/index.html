@@ -39,26 +39,26 @@ pagination:
       <hr class="w-full border-gray-200 m-2"/>
    {% endfor %}
 
-   <div class="font-bold mt-10 uppercase tracking-widest whitespace-nowrap">
+   <div class="italic text-lg font-medium tracking-wide mt-10 whitespace-nowrap">
       &laquo;
       {% if page.url != pagination.href.first %}
-         <a href="/" class="next">first</a>
-      {% else %}first{% endif %}
+         <a href="/" class="next">First</a>
+      {% else %}First{% endif %}
       &lsaquo;
       {% if pagination.href.previous %}
-         <a href="{{ pagination.href.previous }}" class="previous"> prev</a>
-      {% else %}prev{% endif %}
+         <a href="{{ pagination.href.previous }}" class="previous">Prev</a>
+      {% else %}Prev{% endif %}
       |
       {% if pagination.href.next %}
-         <a href="{{ pagination.href.next }}" class="next">next</a>
-      {% else %}next{% endif %}
+         <a href="{{ pagination.href.next }}" class="next">Next</a>
+      {% else %}Next{% endif %}
       &rsaquo;
       {% if page.url != pagination.href.last %}
-         <a href="{{ pagination.href.last }}" class="next">last</a>
-      {% else %}last{% endif %}
+         <a href="{{ pagination.href.last }}" class="next">Last</a>
+      {% else %}Last{% endif %}
       &raquo;
    </div>
-   <div class="font-bold mt-10 uppercase tracking-widest whitespace-nowrap">
-      <a href="/search" class="next">search</a>
+   <div class="italic text-lg font-medium tracking-wide mt-10 whitespace-nowrap">
+      <a href="/search" class="next">Search</a>
    </div>
 </div>
