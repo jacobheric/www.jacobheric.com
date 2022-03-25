@@ -18,13 +18,13 @@ pagination:
             </a>
          {% endif %}
       </div>
-      <div class="title text-3xl sm:text-5xl italic py-2">
+      <div class="title text-3xl italic py-2">
          <a href="{{ site.baseurl }}{{ item.url }}">
             {{ item.data.title }}
          </a>
       </div>
-      <div class="italic text-lg py-4">{{ item.date | date: '%B %d, %Y' }}</div>
-      <div class="text-xl py-4 space-y-7">
+      <div class="italic text-base py-4">{{ item.date | date: '%B %d, %Y' }}</div>
+      <div class="text-base text-justify py-4 space-y-7">
          {% if item.data.page.excerpt %}
             {{ item.data.page.excerpt | md }}
          {% else %}

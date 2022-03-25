@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Palatino Linotype", "Book Antiqua", "Palatino"],
+        sans: ["Graphik", "sans-serif"],
+        serif: ["Palatino Linotype", "Book Antiqua", "Palatino", "serif"],
       },
     },
   },
