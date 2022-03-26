@@ -18,28 +18,28 @@ pagination:
             </a>
          {% endif %}
       </div>
-      <div class="title text-3xl italic py-2">
+      <div class="title underline-offset-2 text-3xl italic py-2">
          <a href="{{ site.baseurl }}{{ item.url }}">
             {{ item.data.title }}
          </a>
       </div>
       <div class="italic text-base py-4">{{ item.date | date: '%B %d, %Y' }}</div>
-      <div class="text-base text-justify py-4 space-y-7">
+      <div class="text-base text-justify py-2 space-y-7">
          {% if item.data.page.excerpt %}
             {{ item.data.page.excerpt | md }}
          {% else %}
             {{ item.templateContent | md }}
          {% endif %}
       </div>
-      <div class="title font-bold py-2 space-y-7 tracking-wider">
+      <div class="italic text-lg font-medium tracking-wide underline-offset-2">
          {% if item.data.page.excerpt %}
-            <a href="{{ site.baseurl }}{{ item.url }}" class="next">MORE</a>
+            <a href="{{ site.baseurl }}{{ item.url }}" class="next">More</a>
          {% endif %}
       </div>
-      <hr class="w-full border-gray-200 m-2"/>
+      <hr class="w-10/12 border-gray-300 my-4"/>
    {% endfor %}
 
-   <div class="italic text-lg font-medium tracking-wide mt-10 whitespace-nowrap">
+   <div class="italic text-lg font-medium tracking-wide mt-6 whitespace-nowrap underline-offset-2">
       &laquo;
       {% if page.url != pagination.href.first %}
          <a href="/" class="next">First</a>
@@ -58,7 +58,7 @@ pagination:
       {% else %}Last{% endif %}
       &raquo;
    </div>
-   <div class="italic text-lg font-medium tracking-wide mt-10 whitespace-nowrap">
+   <div class="italic text-lg font-medium tracking-wide mt-6 whitespace-nowrap">
       <a href="/search" class="next">Search</a>
    </div>
 </div>
