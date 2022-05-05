@@ -3,24 +3,26 @@
 
 {% include "head.html" %}
 
-<body>
+<body class="flex flex-col min-h-screen">
 
-<div class="bg-gray-50 border-b text-center pt-7 pb-3">
-   <div>
-      <h3 class="fat uppercase font-bold text-7xl tracking-widest pb-4">
-         <a class="no-underline" id="site-title" href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
-      </h3>
-      <hr class="w-14 border-black mx-auto"/>
-      <div class="p-4 tagline uppercase text-yellow-700 font-thin text-base tracking-wide">{{ site.tagline }}</div>
+<div class="flex-1">
+   <div class="bg-gray-50 border-b text-center pt-7 pb-3">
+      <div>
+         <h3 class="fat uppercase font-bold text-7xl tracking-widest pb-4">
+            <a class="no-underline" id="site-title" href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
+         </h3>
+         <hr class="w-14 border-black mx-auto"/>
+         <div class="p-4 tagline uppercase text-yellow-700 font-thin text-base tracking-wide">{{ site.tagline }}</div>
+      </div>
+      <div class="italic text-lg font-medium tracking-wide underline-offset-2">
+         <a href="/about/" alt="About Jacob Heric" title="About Jacob Heric">About</a> |
+         <a href="/books/" alt="Jacob Heric's Books" title="Jacob Heric's Books">Books</a>
+      </div>
    </div>
-   <div class="italic text-lg font-medium tracking-wide underline-offset-2">
-      <a href="/about/" alt="About Jacob Heric" title="About Jacob Heric">About</a> |
-      <a href="/books/" alt="Jacob Heric's Books" title="Jacob Heric's Books">Books</a>
-   </div>
-</div>
 
-<div class="my-6 max-w-screen-2xl mx-auto">
-   {{ content }}
+   <div class="my-6 max-w-screen-2xl mx-auto">
+      {{ content }}
+   </div>
 </div>
 
 <footer class="bg-gray-50 border-t fat text-center text-lg py-10">
