@@ -12,4 +12,6 @@ most essential characteristics: death.
 
 {% picture "2021-05-24-memorial-spire.jpg", "Memorial Spire" %}
 
+{% picture "2021-05-24-worn-angel.jpg", "Worn Angel" %}
+
 
