@@ -5,7 +5,7 @@ image: 2021-05-24-evergreen.jpg
 ---
 
 I post lots of pictures of Evergreen cemetery near our house. It may seem on the surface a strange place to 
-spend one's leisure time. But what better way to revel in life than to spend time amongst one of it's 
+spend one's leisure time. But what better way to revel in life than to spend time amongst one of its 
 most essential characteristics: death.   
 
 <!--more-->
