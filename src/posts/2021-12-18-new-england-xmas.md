@@ -1,10 +1,9 @@
 ---
 layout: post
-title: Merry Xmas
-image: 2021-12-23-xmas-troll.jpg
+title: A New England Xmas
+image: 2021-12-18-new-england-xmas.jpg
 ---
 
-We had a message from an Xmas troll.
 
 
 
