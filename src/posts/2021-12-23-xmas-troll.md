@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Visit from an Xmas Troll
+title: Merry Xmas
 image: 2021-12-23-xmas-troll.jpg
 ---
 
