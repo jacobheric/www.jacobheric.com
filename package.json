@@ -6,6 +6,7 @@
     "build": "NODE_ENV=production npm-run-all build:css build:html",
     "build:css": "postcss src/assets/style/pre.css -o src/_includes/style/style.css",
     "build:html": "eleventy",
+    "deploy": "npm run build && netlify deploy --prod --dir dist",
     "watch": "NODE_ENV=dev npm-run-all --parallel watch:css watch:html",
     "watch:css": "postcss src/assets/style/pre.css -o src/assets/style/style.css --watch",
     "watch:html": "eleventy --serve --port=3000",
