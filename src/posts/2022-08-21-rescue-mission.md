@@ -4,4 +4,4 @@ title: Rescue Mission
 image: 2022-08-21-rescue.jpg
 ---
 
-Spotted my usual weekend reconnaissance bike ride. 
+Spotted on my usual weekend reconnaissance bike ride. 
