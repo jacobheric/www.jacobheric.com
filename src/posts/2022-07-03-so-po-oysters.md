@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Burgers and Corn
+title: SoPo Oysters
 image: 2022-07-03-so-po-oysters.jpg
 ---
 
