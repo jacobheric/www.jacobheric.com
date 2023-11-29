@@ -11,6 +11,7 @@ module.exports = function (config) {
 
   config.addPassthroughCopy("src/assets/image/icons");
   config.addPassthroughCopy("src/assets/style/style.css");
+  config.addPassthroughCopy("src/assets/fonts");
 
   config.addShortcode("picture", pictureShortcode);
 
