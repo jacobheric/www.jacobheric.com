@@ -1,7 +1,15 @@
-dist
-.idea
-node_modules
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
-# Local Netlify folder
-.netlify
-style.css
+# Fresh build directory
+_fresh/
+
+node_modules/
+
+#
+# too many post images for git, even for git lfs
+static/images/posts
