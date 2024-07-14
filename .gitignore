@@ -12,4 +12,4 @@ node_modules/
 
 #
 # too many post images for git, even for git lfs
-static/images/posts
+static/images/posts/
