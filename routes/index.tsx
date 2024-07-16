@@ -1,4 +1,4 @@
-import { Post, Posts, recentPostsParsed } from "@/lib/posts.ts";
+import { Post, Posts, recentPostsParsed } from "../lib/posts/posts.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { PageLink } from "@/components/Link.tsx";
 
@@ -20,11 +20,15 @@ export default function Home(
   { data: { posts, total, start, limit } }: PageProps<Posts>,
 ) {
   return (
-    <div class="w-11/12 mx-auto flex flex-col items-center justify-center">
+    <div class="w-11/12 mx-auto flex flex-col items-center justify-center mt-12">
       {posts.map((p: Post) => (
-        <div className="mt-12">
+        <div>
           <a href={`/posts/${p.slug}`}>
-            <img src={`/image/posts/raw/${p.image}`} alt={p.title} />
+            <img
+              src={`/image/posts/raw/${p.image}`}
+              alt={p.title}
+              className="mx-auto"
+            />
           </a>
           <div class="text-3xl italic my-6 text-center">
             <a href={`/posts/${p.slug}`}>
@@ -38,11 +42,11 @@ export default function Home(
             {p.excerpt}
           </div>
           {p.excerpt && (
-            <div class="italic text-lg font-medium tracking-wide mb-4 text-center">
+            <div class="italic text-lg font-medium tracking-wide text-center">
               <a href={`/posts/${p.slug}`} class="next">More</a>
             </div>
           )}
-          <hr class="w-10/12 border-gray-300 mt-6 mx-auto" />
+          <hr class="w-10/12 border-gray-300 my-12 mx-auto" />
         </div>
       ))}
 

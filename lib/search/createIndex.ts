@@ -1,6 +1,6 @@
 // @deno-types="https://deno.land/x/fuse@v6.4.1/dist/fuse.d.ts"
 import Fuse from "https://deno.land/x/fuse@v6.4.1/dist/fuse.esm.min.js";
-import { parsePosts, posts } from "@/lib/posts.ts";
+import { parsePosts, posts } from "../posts/posts.ts";
 
 export const searchOptions = {
   threshold: .4,

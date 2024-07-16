@@ -1,6 +1,6 @@
 // @deno-types="https://deno.land/x/fuse@v6.4.1/dist/fuse.d.ts"
 import Fuse from "https://deno.land/x/fuse@v6.4.1/dist/fuse.esm.min.js";
-import { parsePosts, posts } from "@/lib/posts.ts";
+import { parsePosts, posts } from "../posts/posts.ts";
 import { searchOptions } from "@/lib/search/createIndex.ts";
 
 // import indexJson from "./searchIndex.json" with { type: "json" };

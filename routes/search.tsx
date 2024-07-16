@@ -1,6 +1,6 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { PageLink } from "@/components/Link.tsx";
-import { Posts } from "@/lib/posts.ts";
+import { Posts } from "../lib/posts/posts.ts";
 import { search } from "@/lib/search/search.ts";
 import { humanDate } from "@/routes/index.tsx";
 

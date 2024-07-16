@@ -1,6 +1,6 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 
-import { getPost, Post, random } from "@/lib/posts.ts";
+import { getPost, Post, random } from "../../lib/posts/posts.ts";
 import { humanDate } from "@/routes/index.tsx";
 
 export const handler: Handlers<Post> = {

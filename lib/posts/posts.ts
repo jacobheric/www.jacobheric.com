@@ -1,6 +1,6 @@
 import { extractYaml } from "@std/front-matter";
-import { render } from "jsr:@deno/gfm@0.6";
 import { join } from "jsr:@std/path@0.213/join";
+import { renderMarkdown } from "@/lib/posts/render.ts";
 
 const POSTS_DIR = "./posts";
 const RECENT = 10;
@@ -62,7 +62,7 @@ export const parsePost = async (name: string): Promise<Post> => {
   const { date, slug, ext } = parseFilename(name);
   const contents = await Deno.readTextFile(join(POSTS_DIR, name));
   const { attrs, body } = extractYaml(contents);
-  const content = ext === "md" ? render(body) : body;
+  const content = ext === "md" ? renderMarkdown(body) : body;
 
   return {
     slug,
