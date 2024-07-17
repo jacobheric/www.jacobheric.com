@@ -1,16 +1,44 @@
-import * as Marked from "https://esm.sh/marked@7.0.2";
+import {
+  marked,
+  TokenizerAndRendererExtension,
+} from "https://esm.sh/marked@7.0.2";
+import { renderToString } from "preact-render-to-string";
+import { h } from "preact";
+import { Picture } from "@/components/Picture.tsx";
 
-class Renderer extends Marked.Renderer {
-}
+const pictureExtension: TokenizerAndRendererExtension = {
+  name: "picture",
+  level: "block",
+  start(src) {
+    return src.match(/^{%/)?.index;
+  },
+  tokenizer(src: string) {
+    const rule = /^{%\s*picture\s*"([^"]+)"\s*,\s*"([^"]+)"\s*%}/;
+    const match = rule.exec(src);
+
+    if (match) {
+      return {
+        type: "picture",
+        raw: match[0],
+        imageSrc: match[1].trim(),
+        imageAlt: match[2].trim(),
+      };
+    }
+  },
+  renderer(token) {
+    return renderToString(
+      h(Picture, { src: token.imageSrc, alt: token.imageAlt }),
+    );
+  },
+};
+
+marked.use({
+  gfm: true,
+  extensions: [
+    pictureExtension,
+  ],
+});
 
 export const renderMarkdown = (
   input: string,
-): string => {
-  const renderer = new Renderer();
-  const markedOpts: Marked.MarkedOptions = {
-    gfm: true,
-    renderer,
-  };
-
-  return Marked.parseInline(input, markedOpts) as string;
-};
+): string => marked.parse(input) as string;

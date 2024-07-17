@@ -47,7 +47,7 @@ export const getPost = async (slug: string) => {
   try {
     return await parsePost(`${slug}.md`);
   } catch (e: unknown) {
-    console.error("error loading markdown file", e);
+    console.info("error loading markdown file", e);
   }
 
   return await parsePost(`${slug}.html`);
@@ -59,10 +59,10 @@ export const parsePosts = async (posts: Deno.DirEntry[]) =>
   );
 
 export const parsePost = async (name: string): Promise<Post> => {
-  const { date, slug, ext } = parseFilename(name);
+  const { date, slug } = parseFilename(name);
   const contents = await Deno.readTextFile(join(POSTS_DIR, name));
   const { attrs, body } = extractYaml(contents);
-  const content = ext === "md" ? renderMarkdown(body) : body;
+  const content = renderMarkdown(body);
 
   return {
     slug,

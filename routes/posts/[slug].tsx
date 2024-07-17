@@ -1,4 +1,5 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Picture } from "@/components/Picture.tsx";
 
 import { getPost, Post } from "../../lib/posts/posts.ts";
 import { humanDate } from "@/routes/index.tsx";
@@ -19,9 +20,8 @@ export default function PostPage(props: PageProps<Post>) {
 
   return (
     <div class="w-11/12 mx-auto flex flex-col items-center mt-12">
-      <div>
-        <img src={`/image/posts/raw/${post.image}`} alt={post.title} />
-      </div>
+      <Picture src={post.image} alt={post.title} />
+
       <div class="title text-3xl italic my-6">
         {post.title}
       </div>

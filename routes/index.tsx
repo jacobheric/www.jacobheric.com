@@ -1,6 +1,7 @@
 import { Post, Posts, recentPostsParsed } from "../lib/posts/posts.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { PageLink } from "@/components/Link.tsx";
+import { Picture } from "@/components/Picture.tsx";
 
 export const humanDate = {
   year: "numeric" as const,
@@ -17,18 +18,14 @@ export const handler: Handlers<Posts> = {
 };
 
 export default function Home(
-  { data: { posts, total, start, limit } }: PageProps<Posts>,
+  { data: { posts, total, start } }: PageProps<Posts>,
 ) {
   return (
     <div class="w-11/12 mx-auto flex flex-col items-center justify-center mt-12">
       {posts.map((p: Post) => (
         <div>
           <a href={`/posts/${p.slug}`}>
-            <img
-              src={`/image/posts/raw/${p.image}`}
-              alt={p.title}
-              className="mx-auto"
-            />
+            <Picture src={p.image} alt={p.title} />
           </a>
           <div class="text-3xl italic my-6 text-center">
             <a href={`/posts/${p.slug}`}>

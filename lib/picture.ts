@@ -6,21 +6,23 @@ import { join } from "jsr:@std/path@0.213/join";
 const RAW_POST_PICS_DIR = "./static/image/posts/raw";
 const OUT_POST_PICS_DIR = "./static/image/posts/";
 
-const SMALL = 600;
-const LARGE = 1300;
+export const IMG_SMALL = 640;
+export const IMG_LARGE = 1300;
 const QUALITY = 85;
 
 export const postPics = () => Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
 
-const original = (name: string) =>
+export const originalName = (name: string, dir?: string) =>
   join(
-    OUT_POST_PICS_DIR,
+    dir || OUT_POST_PICS_DIR,
     name.replace(".jpg", `-original.jpg`),
   );
-const large = (name: string) =>
-  join(OUT_POST_PICS_DIR, name.replace(".jpg", `-large.jpg`));
-const small = (name: string) =>
-  join(OUT_POST_PICS_DIR, name.replace(".jpg", `-small.jpg`));
+
+export const largeName = (name: string, dir?: string) =>
+  join(dir || OUT_POST_PICS_DIR, name.replace(".jpg", `-large.jpg`));
+
+export const smallName = (name: string, dir?: string) =>
+  join(dir || OUT_POST_PICS_DIR, name.replace(".jpg", `-small.jpg`));
 
 const resize = async (
   img: sharp.Sharp,
@@ -31,21 +33,21 @@ const resize = async (
     .withMetadata()
     .toFormat("jpeg")
     .jpeg({ quality: QUALITY })
-    .toFile(original(name));
+    .toFile(originalName(name));
 
   const w = (await img.metadata()).width;
 
-  w && w > LARGE && img.resize({ width: LARGE })
+  w && w > IMG_LARGE && img.resize({ width: IMG_LARGE })
     .withMetadata()
     .toFormat("jpeg")
     .jpeg({ quality: QUALITY })
-    .toFile(large(name));
+    .toFile(largeName(name));
 
-  w && w > SMALL && img.resize({ width: SMALL })
+  w && w > IMG_SMALL && img.resize({ width: IMG_SMALL })
     .withMetadata()
     .toFormat("jpeg")
     .jpeg({ quality: QUALITY })
-    .toFile(small(name));
+    .toFile(smallName(name));
 };
 
 export const resizeAll = async () => {
@@ -61,10 +63,9 @@ export const resizeAll = async () => {
     }
 
     if (
-      existsSync(original(p.name)) && existsSync(large(p.name)) &&
-      existsSync(small(p.name))
+      existsSync(originalName(p.name)) && existsSync(largeName(p.name)) &&
+      existsSync(smallName(p.name))
     ) {
-      console.log("shit returning file already exists");
       return;
     }
 
@@ -77,6 +78,6 @@ export const resizeAll = async () => {
   }));
 };
 
-console.log("resizing...");
-await resizeAll();
-console.log("done");
+// console.log("resizing...");
+// await resizeAll();
+// console.log("done");
