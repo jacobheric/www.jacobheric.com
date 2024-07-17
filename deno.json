@@ -8,7 +8,9 @@
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update .",
-    "picture": "deno run -A ./lib/picture.ts"
+    "picture": "deno run -A ./lib/picture.ts",
+    "searchIndex": "deno run -A ./lib/search/createIndex.ts",
+    "resizePictures": "deno run -A ./lib/pictures/resize.ts"
   },
   "lint": {
     "rules": {

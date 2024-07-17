@@ -10,8 +10,22 @@ export const searchOptions = {
 export const createIndex = async () => {
   const p = await parsePosts(posts());
   const index = Fuse.createIndex(searchOptions.keys, p);
-  Deno.writeFileSync(
+
+  Deno.writeTextFileSync(
     "./lib/search/searchIndex.json",
-    new TextEncoder().encode(JSON.stringify(index.toJSON())),
+    JSON.stringify(index.toJSON()),
   );
 };
+
+export const readIndex = async () => {
+  const raw = Deno.readTextFileSync(
+    "./lib/search/searchIndex.json",
+  );
+  const index = Fuse.parseIndex(raw);
+  const p = await parsePosts(posts());
+  return new Fuse(p, searchOptions, index);
+};
+
+// console.info("creating search Index...");
+// await createIndex();
+// console.info("done");

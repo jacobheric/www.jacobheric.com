@@ -4,12 +4,16 @@ import {
   largeName,
   originalName,
   smallName,
-} from "@/lib/picture.ts";
+} from "../lib/pictures/picture.ts";
 import { existsSync } from "@std/fs";
 
 const IMAGE_DIR = "/image/posts";
 
-export const Picture = ({ src, alt }: { src: string; alt: string }) => {
+export const Picture = ({ src, alt }: { src?: string; alt: string }) => {
+  if (!src) {
+    console.info("image src not provided for the following post", alt);
+    return null;
+  }
   return (
     <picture>
       {existsSync(largeName(src)) && (

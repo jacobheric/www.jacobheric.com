@@ -77,7 +77,3 @@ export const resizeAll = async () => {
     void resize(img, p.name);
   }));
 };
-
-// console.log("resizing...");
-// await resizeAll();
-// console.log("done");
