@@ -1,4 +1,4 @@
-import { Post, Posts, recentPostsParsed } from "../lib/posts/posts.ts";
+import { Posts, PostType, recentPostsParsed } from "../lib/posts/posts.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { PageLink } from "@/components/Link.tsx";
 import { Picture } from "@/components/Picture.tsx";
@@ -21,9 +21,9 @@ export default function Home(
   { data: { posts, total, start } }: PageProps<Posts>,
 ) {
   return (
-    <div class="w-11/12 mx-auto flex flex-col items-center justify-center mt-12">
-      {posts.map((p: Post) => (
-        <div>
+    <div class="w-11/12 mx-auto flex flex-col items-center justify-center ">
+      {posts.map((p: PostType) => (
+        <div className="mt-10">
           <a href={`/posts/${p.slug}`}>
             <Picture src={p.image} alt={p.title} />
           </a>
@@ -43,7 +43,7 @@ export default function Home(
               <a href={`/posts/${p.slug}`} class="next">More</a>
             </div>
           )}
-          <hr class="w-10/12 border-gray-300 my-12 mx-auto" />
+          <hr class="w-10/12 border-gray-300 mt-12 mx-auto" />
         </div>
       ))}
 

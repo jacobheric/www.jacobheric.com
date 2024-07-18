@@ -8,7 +8,9 @@ import * as $_layout from "./routes/_layout.tsx";
 import * as $about from "./routes/about.tsx";
 import * as $books from "./routes/books.tsx";
 import * as $index from "./routes/index.tsx";
-import * as $posts_slug_ from "./routes/posts/[slug].tsx";
+import * as $posts_slug_index from "./routes/posts/[slug]/index.tsx";
+import * as $posts_slug_next from "./routes/posts/[slug]/next.tsx";
+import * as $posts_slug_prev from "./routes/posts/[slug]/prev.tsx";
 import * as $posts_random from "./routes/posts/random.tsx";
 import * as $search from "./routes/search.tsx";
 
@@ -22,7 +24,9 @@ const manifest = {
     "./routes/about.tsx": $about,
     "./routes/books.tsx": $books,
     "./routes/index.tsx": $index,
-    "./routes/posts/[slug].tsx": $posts_slug_,
+    "./routes/posts/[slug]/index.tsx": $posts_slug_index,
+    "./routes/posts/[slug]/next.tsx": $posts_slug_next,
+    "./routes/posts/[slug]/prev.tsx": $posts_slug_prev,
     "./routes/posts/random.tsx": $posts_random,
     "./routes/search.tsx": $search,
   },

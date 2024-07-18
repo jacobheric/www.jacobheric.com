@@ -5,7 +5,9 @@ import { renderMarkdown } from "@/lib/posts/render.ts";
 const POSTS_DIR = "./posts";
 const RECENT = 10;
 
-export interface Post {
+const POSTS = JSON.parse(Deno.readTextFileSync("./lib/posts/postIndex.json"));
+
+export interface PostType {
   slug: string;
   title: string;
   image: string;
@@ -15,11 +17,16 @@ export interface Post {
 }
 
 export interface Posts {
-  posts: Post[];
+  posts: PostType[];
   total: number;
   start: number;
   limit: number;
 }
+
+type PostIndex = {
+  name: string;
+  slug: string;
+};
 
 export const parseFilename = (
   fileName: string,
@@ -35,12 +42,22 @@ export const parseFilename = (
 };
 
 export const sort = (
-  { name: a }: Deno.DirEntry,
-  { name: b }: Deno.DirEntry,
+  { name: a }: PostIndex | Deno.DirEntry,
+  { name: b }: PostIndex | Deno.DirEntry,
 ) => {
   const { date: dateA } = parseFilename(a);
   const { date: dateB } = parseFilename(b);
   return dateB.getTime() - dateA.getTime();
+};
+
+export const getPrev = (slug: string) => {
+  const index = POSTS.findIndex((p: PostIndex) => p.slug === slug);
+  return getPost(POSTS[index - 1].slug);
+};
+export const getNext = (slug: string) => {
+  const index = POSTS.findIndex((p: PostIndex) => p.slug === slug);
+
+  return getPost(POSTS[index + 1].slug);
 };
 
 export const getPost = async (slug: string) => {
@@ -58,7 +75,7 @@ export const parsePosts = async (posts: Deno.DirEntry[]) =>
     posts.map(async (post: Deno.DirEntry) => await parsePost(post.name)),
   );
 
-export const parsePost = async (name: string): Promise<Post> => {
+export const parsePost = async (name: string): Promise<PostType> => {
   const { date, slug } = parseFilename(name);
   const contents = await Deno.readTextFile(join(POSTS_DIR, name));
   const { attrs, body } = extractYaml(contents);
@@ -88,11 +105,10 @@ export const recentPostsParsed = async (
   };
 };
 
-const sortedPosts = () => posts().sort(sort);
+export const sortedPosts = () => POSTS.sort(sort);
 
-export const posts = () => Array.from(Deno.readDirSync(POSTS_DIR));
+export const sortedRawPosts = () => rawPosts().sort(sort);
+export const rawPosts = () => Array.from(Deno.readDirSync(POSTS_DIR));
 
-export const random = () => {
-  const p = posts();
-  return parsePost(p[Math.floor(Math.random() * p.length)].name);
-};
+export const random = () =>
+  parsePost(POSTS[Math.floor(Math.random() * POSTS.length)].name);
