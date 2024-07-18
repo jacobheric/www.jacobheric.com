@@ -46,5 +46,15 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
-  "nodeModulesDir": true
+  "nodeModulesDir": true,
+  "deploy": {
+    "project": "70d7d543-7da6-418b-a3bf-58f9c49c669b",
+    "exclude": [
+      "./static/image/posts",
+      "./lib/pictures/resize.ts",
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "main.ts"
+  }
 }
