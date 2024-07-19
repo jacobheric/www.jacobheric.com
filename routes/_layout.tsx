@@ -36,7 +36,7 @@ export default function Layout(ctx: FreshContext) {
             </a>
           </div>
         </div>
-        <div class="max-w-screen-2xl mx-auto">
+        <div class="flex justify-center">
           <Partial name="overlay-content">
             <ctx.Component />
           </Partial>

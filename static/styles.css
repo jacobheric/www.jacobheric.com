@@ -4,6 +4,12 @@
   a {
     @apply hover:no-underline underline underline-offset-4 decoration-1;
   }
+  p {
+    @apply mb-4
+  }
+  iframe {
+    @apply block mb-4
+  }
 }
 @tailwind components;
 @tailwind utilities;

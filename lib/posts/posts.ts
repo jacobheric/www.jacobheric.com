@@ -79,15 +79,14 @@ export const parsePost = async (name: string): Promise<PostType> => {
   const { date, slug } = parseFilename(name);
   const contents = await Deno.readTextFile(join(POSTS_DIR, name));
   const { attrs, body } = extractYaml(contents);
-  const content = renderMarkdown(body);
 
   return {
     slug,
     title: attrs.title as string,
     image: attrs.image as string,
     date,
-    content,
-    excerpt: body.slice(0, body.indexOf("<!--more-->")),
+    content: renderMarkdown(body),
+    excerpt: renderMarkdown(body.slice(0, body.indexOf("<!--more-->"))),
   };
 };
 

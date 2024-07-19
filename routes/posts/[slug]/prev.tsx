@@ -9,7 +9,7 @@ export const handler: Handlers<PostType> = {
       const post = await getPrev(ctx.params.slug);
       return ctx.render(post);
     } catch (e: unknown) {
-      console.log("previous post not found", e);
+      console.error("previous post not found", e);
       return ctx.renderNotFound();
     }
   },

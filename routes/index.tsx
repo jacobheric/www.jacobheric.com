@@ -21,11 +21,15 @@ export default function Home(
   { data: { posts, total, start } }: PageProps<Posts>,
 ) {
   return (
-    <div class="w-11/12 mx-auto flex flex-col items-center justify-center ">
+    <div class="w-11/12 mx-auto flex flex-col items-center justify-center">
       {posts.map((p: PostType) => (
-        <div className="mt-10">
+        <div className="mt-6">
           <a href={`/posts/${p.slug}`}>
-            <Picture src={p.image} alt={p.title} />
+            <Picture
+              src={p.image}
+              alt={p.title}
+              className="mx-auto"
+            />
           </a>
           <div class="text-3xl italic my-6 text-center">
             <a href={`/posts/${p.slug}`}>
@@ -35,9 +39,11 @@ export default function Home(
           <div class="italic text-base mb-4 text-center w-full">
             {p.date.toLocaleDateString("en-us", humanDate)}
           </div>
-          <div class="text-base mb-4 text-center">
-            {p.excerpt}
-          </div>
+          <div
+            class="text-base mb-4 text-center"
+            dangerouslySetInnerHTML={{ __html: p.excerpt }}
+          />
+
           {p.excerpt && (
             <div class="italic text-lg font-medium tracking-wide text-center">
               <a href={`/posts/${p.slug}`} class="next">More</a>

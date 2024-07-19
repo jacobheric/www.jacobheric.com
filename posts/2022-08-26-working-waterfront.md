@@ -10,4 +10,4 @@ Port Clyde Maine.
 
 And coastal colors.
 
-{% picture "2022-08-26-coastal-colors.jpg", "Coastal Colors"%}
+{% picture "2022-08-26-coastal-colors.jpg", "Coastal Colors" %}

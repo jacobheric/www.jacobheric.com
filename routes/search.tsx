@@ -31,8 +31,8 @@ export default function Search(
   { data: { term, posts } }: PageProps<SearchPosts>,
 ) {
   return (
-    <div class="w-full text-lg mt-12">
-      <form className="flex flex-row items center w-full">
+    <div class="w-full text-lg mt-12 max-w-prose mx-auto">
+      <form className="flex flex-row items center">
         <input
           name="term"
           class="w-72 mr-4 p-2 border rounded-md"
