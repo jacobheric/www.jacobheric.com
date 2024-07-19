@@ -11,5 +11,5 @@ _fresh/
 node_modules/
 
 #
-# too many post images for git, even for git lfs
-static/image/posts/raw
+# ignore raw images, I resize and shard them to different repos
+static/image/raw

@@ -1,0 +1,9 @@
+[submodule "./static/image/resized/oak"]
+	path = static/image/resized/oak
+	url = git@github.com:jacobheric/oak.git
+[submodule "./static/image/resized/birch"]
+	path = static/image/resized/birch
+	url = git@github.com:jacobheric/birch.git
+[submodule "./static/image/resized/pine"]
+	path = static/image/resized/pine
+	url = git@github.com:jacobheric/pine.git

@@ -1,7 +1,7 @@
 import { join } from "jsr:@std/path@0.213/join";
 
-export const RAW_POST_PICS_DIR = "./static/image/posts/raw";
-export const OUT_POST_PICS_DIR = "./static/image/posts/out";
+export const RAW_POST_PICS_DIR = "./static/image/raw";
+export const OUT_POST_PICS_DIR = "./static/image/out";
 
 export const IMG_SMALL = 640;
 export const IMG_LARGE = 1300;

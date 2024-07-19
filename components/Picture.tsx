@@ -8,7 +8,7 @@ import {
 } from "../lib/pictures/picture.ts";
 import { existsSync } from "@std/fs";
 
-const IMAGE_DIR = "/image/posts/out";
+const IMAGE_DIR = "/image/out";
 
 export const Picture = (
   { src, alt, className }: { src?: string; alt: string; className?: string },
