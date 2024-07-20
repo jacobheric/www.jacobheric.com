@@ -12,14 +12,14 @@ export const createIndex = async () => {
   const index = Fuse.createIndex(searchOptions.keys, p);
 
   Deno.writeTextFileSync(
-    "./lib/search/searchIndex.json",
+    "./lib/search/search.json",
     JSON.stringify(index.toJSON()),
   );
 };
 
 export const readIndex = async () => {
   const raw = Deno.readTextFileSync(
-    "./lib/search/searchIndex.json",
+    "./lib/search/search.json",
   );
   const index = Fuse.parseIndex(raw);
   const p = await parsePosts(sortedPosts());

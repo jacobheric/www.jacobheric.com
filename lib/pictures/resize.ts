@@ -1,72 +1,94 @@
-import { existsSync } from "@std/fs";
-
-import sharp from "npm:/sharp";
-import { join } from "https://deno.land/std@0.216.0/path/join.ts";
 import {
   IMG_LARGE,
   IMG_SMALL,
-  largeName,
-  originalName,
-  OUT_POST_PICS_DIR,
+  INDEX_FILE,
   postPics,
   RAW_POST_PICS_DIR,
-  smallName,
+  readIndex,
+  setShardName,
+  ShardName,
 } from "@/lib/pictures/picture.ts";
+import { join } from "https://deno.land/std@0.216.0/path/join.ts";
+import sharp from "npm:/sharp";
 
+const SHARDS: ShardName[] = ["birch", "maple", "pine", "oak"];
 const QUALITY = 85;
+
+const writeIndex = (index: Record<string, string>) =>
+  Deno.writeTextFileSync(
+    INDEX_FILE,
+    JSON.stringify(index),
+  );
 
 const resize = async (
   img: sharp.Sharp,
   name: string,
+  width?: number,
+) =>
+  width
+    ? await img
+      .resize({ width })
+      .withMetadata()
+      .toFormat("jpeg")
+      .jpeg({ quality: QUALITY })
+      .toFile(name)
+    : await img
+      .withMetadata()
+      .toFormat("jpeg")
+      .jpeg({ quality: QUALITY })
+      .toFile(name);
+
+const resizeRaw = async (
+  raw: Uint8Array,
+  name: string,
+  shard: ShardName,
 ) => {
-  console.log("resizing image", name);
-  img
-    .withMetadata()
-    .toFormat("jpeg")
-    .jpeg({ quality: QUALITY })
-    .toFile(originalName(name));
+  const original = sharp(raw);
+  await resize(original, setShardName(name, shard));
 
-  const w = (await img.metadata()).width;
+  const { width: w = 0 } = await original.metadata();
 
-  w && w > IMG_LARGE && img.resize({ width: IMG_LARGE })
-    .withMetadata()
-    .toFormat("jpeg")
-    .jpeg({ quality: QUALITY })
-    .toFile(largeName(name));
+  if (w && w > IMG_LARGE) {
+    await resize(sharp(raw), setShardName(name, shard, "large"), IMG_LARGE);
+  }
 
-  w && w > IMG_SMALL && img.resize({ width: IMG_SMALL })
-    .withMetadata()
-    .toFormat("jpeg")
-    .jpeg({ quality: QUALITY })
-    .toFile(smallName(name));
+  if (w && w > IMG_SMALL) {
+    await resize(sharp(raw), setShardName(name, shard, "small"), IMG_SMALL);
+  }
+
+  return;
 };
 
 export const resizeAll = async () => {
   const pics = postPics();
+  const index = readIndex();
 
   await Promise.all(pics.map(async (p: Deno.DirEntry) => {
+    const shard = SHARDS[Math.floor(Math.random() * SHARDS.length)];
+    const name = p.name.toLowerCase();
+
+    if (index[name]) {
+      return;
+    }
+    console.log("resizing image", name);
+
     if (p.name.endsWith(".gif")) {
       await Deno.copyFile(
         join(RAW_POST_PICS_DIR, p.name),
-        join(OUT_POST_PICS_DIR, p.name),
+        setShardName(name, shard),
       );
+      index[name] = shard;
       return;
     }
 
-    if (
-      existsSync(originalName(p.name)) && existsSync(largeName(p.name)) &&
-      existsSync(smallName(p.name))
-    ) {
-      return;
-    }
-
-    const raw: Uint8Array = await Deno.readFile(
+    const raw: Uint8Array = Deno.readFileSync(
       join(RAW_POST_PICS_DIR, p.name),
     );
 
-    const img = sharp(raw);
-    void resize(img, p.name);
+    await resizeRaw(raw, name, shard);
+    index[name] = shard;
   }));
+  writeIndex(index);
 };
 
 console.log("resizing...");

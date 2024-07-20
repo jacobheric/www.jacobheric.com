@@ -7,8 +7,10 @@ export const handler: Handlers<PostType> = {
   async GET(_req, ctx) {
     try {
       const post = await getPost(ctx.params.slug);
+
       return ctx.render(post);
     } catch (e: unknown) {
+      console.error("post not found", e);
       return ctx.renderNotFound();
     }
   },

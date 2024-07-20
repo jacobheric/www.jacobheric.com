@@ -10,4 +10,6 @@ import { start } from "$fresh/server.ts";
 import manifest from "./fresh.gen.ts";
 import config from "./fresh.config.ts";
 
+Deno.env.set("PRODUCTION", "true");
+
 await start(manifest, config);

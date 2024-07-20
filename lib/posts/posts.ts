@@ -1,11 +1,12 @@
 import { extractYaml } from "@std/front-matter";
 import { join } from "jsr:@std/path@0.213/join";
 import { renderMarkdown } from "@/lib/posts/render.ts";
+import { existsSync } from "@std/fs";
 
-const POSTS_DIR = "./posts";
 const RECENT = 10;
 
-const POSTS = JSON.parse(Deno.readTextFileSync("./lib/posts/postIndex.json"));
+const POSTS_DIR = "./posts";
+const POSTS_INDEX_FILE = "./lib/posts/posts.json";
 
 export interface PostType {
   slug: string;
@@ -27,6 +28,10 @@ type PostIndex = {
   name: string;
   slug: string;
 };
+
+export const POSTS = existsSync(POSTS_INDEX_FILE)
+  ? JSON.parse(Deno.readTextFileSync(POSTS_INDEX_FILE))
+  : {};
 
 export const parseFilename = (
   fileName: string,
@@ -109,5 +114,7 @@ export const sortedPosts = () => POSTS.sort(sort);
 export const sortedRawPosts = () => rawPosts().sort(sort);
 export const rawPosts = () => Array.from(Deno.readDirSync(POSTS_DIR));
 
-export const random = () =>
-  parsePost(POSTS[Math.floor(Math.random() * POSTS.length)].name);
+export const random = () => {
+  const { slug } = POSTS[Math.floor(Math.random() * POSTS.length)];
+  return slug;
+};

@@ -1,7 +1,7 @@
 // @deno-types="https://deno.land/x/fuse@v6.4.1/dist/fuse.d.ts"
 import Fuse from "https://deno.land/x/fuse@v6.4.1/dist/fuse.esm.min.js";
 import { parsePosts, sortedPosts } from "../posts/posts.ts";
-import { searchOptions } from "@/lib/search/createIndex.ts";
+import { searchOptions } from "./index.ts";
 
 // import indexJson from "./searchIndex.json" with { type: "json" };
 // import { searchOptions } from "@/lib/search/createIndex.ts";
@@ -11,6 +11,7 @@ import { searchOptions } from "@/lib/search/createIndex.ts";
 // const fuse = new Fuse(books, searchOptions, index);
 
 const p = await parsePosts(sortedPosts());
+
 const fuse = new Fuse(p, searchOptions);
 
 export const search = (term: string) => {

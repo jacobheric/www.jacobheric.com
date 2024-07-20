@@ -13,7 +13,7 @@ const pictureExtension: TokenizerAndRendererExtension = {
     return src.match(/^{%/)?.index;
   },
   tokenizer(src: string) {
-    const rule = /^{%\s*picture\s*"([^"]+)"\s*,\s*"([^"]+)"\s*%}/;
+    const rule = /^\s*{%\s*picture\s*"([^"]+)"\s*,\s*"([^"]+)"\s*%}/;
     const match = rule.exec(src);
 
     if (match) {
