@@ -23,11 +23,11 @@ export const SHARD_INDEX = readIndex();
 export const postPics = () => Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
 
 export const getShardIndex = (name: string) => {
-  const shard = SHARD_INDEX[name.toLowerCase()];
-  if (!shard) {
+  const result = SHARD_INDEX[name.toLowerCase()];
+  if (!result) {
     throw new Error(`Image not found in shard index: ${name}`);
   }
-  return shard;
+  return result;
 };
 
 export const setShardName = (
@@ -47,7 +47,7 @@ export const getShardName = (
 ) =>
   join(
     OUT_POST_PICS_DIR,
-    getShardIndex(name),
+    getShardIndex(name).shard,
     size ? name.toLowerCase().replace(".jpg", `-${size}.jpg`) : name,
   );
 
@@ -55,14 +55,18 @@ export const getShardURL = (
   name: string,
   size?: SizeName,
 ) => {
-  const shard = getShardIndex(name);
+  const { shard, sizes } = getShardIndex(name);
   const lower = name.toLowerCase();
 
+  if (size && (!sizes || !sizes[size])) {
+    return undefined;
+  }
+
   return PROD
-    ? join(
-      `https://${shard}.jacobheric.com`,
+    ? new URL(
       size ? lower.replace(".jpg", `-${size}.jpg`) : lower,
-    )
+      `https://${shard}.jacobheric.com`,
+    ).toString()
     : join(
       ASSET_PATH,
       shard,
@@ -75,7 +79,7 @@ export const getShardURLs = (name: string) => {
   const small = getShardURL(name, "small");
   return {
     original: getShardURL(name),
-    ...existsSync(large) ? { large } : {},
-    ...existsSync(small) ? { small } : {},
+    ...large ? { large } : {},
+    ...small ? { small } : {},
   };
 };

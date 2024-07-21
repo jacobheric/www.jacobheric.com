@@ -45,18 +45,21 @@ const resizeRaw = async (
 ) => {
   const original = sharp(raw);
   await resize(original, setShardName(name, shard));
+  const result = { large: false, small: true };
 
   const { width: w = 0 } = await original.metadata();
 
   if (w && w > IMG_LARGE) {
     await resize(sharp(raw), setShardName(name, shard, "large"), IMG_LARGE);
+    result.large = true;
   }
 
   if (w && w > IMG_SMALL) {
     await resize(sharp(raw), setShardName(name, shard, "small"), IMG_SMALL);
+    result.small = true;
   }
 
-  return;
+  return result;
 };
 
 export const resizeAll = async () => {
@@ -67,9 +70,10 @@ export const resizeAll = async () => {
     const shard = SHARDS[Math.floor(Math.random() * SHARDS.length)];
     const name = p.name.toLowerCase();
 
-    if (index[name]) {
+    if (!index[name]) {
       return;
     }
+
     console.log("resizing image", name);
 
     if (p.name.endsWith(".gif")) {
@@ -77,7 +81,7 @@ export const resizeAll = async () => {
         join(RAW_POST_PICS_DIR, p.name),
         setShardName(name, shard),
       );
-      index[name] = shard;
+      index[name] = { shard };
       return;
     }
 
@@ -85,8 +89,8 @@ export const resizeAll = async () => {
       join(RAW_POST_PICS_DIR, p.name),
     );
 
-    await resizeRaw(raw, name, shard);
-    index[name] = shard;
+    const sizes = await resizeRaw(raw, name, shard);
+    index[name] = { shard, sizes };
   }));
   writeIndex(index);
 };
