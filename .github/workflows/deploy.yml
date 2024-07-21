@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy www.jacobheric.com
 on:
   push:
     branches: main
