@@ -9,10 +9,10 @@ export default function POST({ post }: { post: PostType }) {
     <div class="2xl:max-w-[80%] max-w-[90%] flex flex-col mt-12 ">
       <Picture src={post.image} alt={post.title} className="mx-auto" />
 
-      <div class="title text-3xl italic my-6 w-full ">
+      <div class="title text-3xl italic my-6 mx-auto ">
         {post.title}
       </div>
-      <div class="italic text-base mb-4">
+      <div class="italic text-base mb-4 mx-auto">
         {post.date.toLocaleDateString("en-us", humanDate)}
       </div>
       <div
