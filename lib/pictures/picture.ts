@@ -61,7 +61,7 @@ export const getShardURL = (
   return PROD
     ? join(
       `https://${shard}.jacobheric.com`,
-      lower.replace(".jpg", `-${size}.jpg`),
+      size ? lower.replace(".jpg", `-${size}.jpg`) : lower,
     )
     : join(
       ASSET_PATH,
@@ -70,12 +70,12 @@ export const getShardURL = (
     );
 };
 
-export const getShardURLs = (name: string) => ({
-  original: getShardURL(name),
-  ...existsSync(getShardName(name, "large"))
-    ? { large: getShardURL(name, "large") }
-    : {},
-  ...existsSync(getShardName(name, "small"))
-    ? { small: getShardURL(name, "small") }
-    : {},
-});
+export const getShardURLs = (name: string) => {
+  const large = getShardURL(name, "large");
+  const small = getShardURL(name, "small");
+  return {
+    original: getShardURL(name),
+    ...existsSync(large) ? { large } : {},
+    ...existsSync(small) ? { small } : {},
+  };
+};
