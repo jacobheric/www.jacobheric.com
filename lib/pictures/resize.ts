@@ -9,6 +9,7 @@ import {
   ShardName,
 } from "@/lib/pictures/picture.ts";
 import { join } from "https://deno.land/std@0.216.0/path/join.ts";
+import { existsSync } from "@std/fs";
 import sharp from "npm:/sharp";
 
 const SHARDS: ShardName[] = ["birch", "maple", "pine", "oak"];
@@ -25,7 +26,8 @@ const resize = async (
   name: string,
   width?: number,
 ) =>
-  width
+  !existsSync(name) &&
+    width
     ? await img
       .resize({ width })
       .withMetadata()
@@ -45,7 +47,7 @@ const resizeRaw = async (
 ) => {
   const original = sharp(raw);
   await resize(original, setShardName(name, shard));
-  const result = { large: false, small: true };
+  const result = { large: false, small: false };
 
   const { width: w = 0 } = await original.metadata();
 
@@ -62,25 +64,28 @@ const resizeRaw = async (
   return result;
 };
 
+const copy = async (name: string) => {
+  !existsSync(name) &&
+    await Deno.copyFile(
+      join(RAW_POST_PICS_DIR, p.name),
+      name,
+    );
+};
+
 export const resizeAll = async () => {
   const pics = postPics();
   const index = readIndex();
 
   await Promise.all(pics.map(async (p: Deno.DirEntry) => {
-    const shard = SHARDS[Math.floor(Math.random() * SHARDS.length)];
     const name = p.name.toLowerCase();
 
-    if (!index[name]) {
-      return;
-    }
+    const shard = index[name]?.shard ||
+      SHARDS[Math.floor(Math.random() * SHARDS.length)];
 
     console.log("resizing image", name);
 
     if (p.name.endsWith(".gif")) {
-      await Deno.copyFile(
-        join(RAW_POST_PICS_DIR, p.name),
-        setShardName(name, shard),
-      );
+      await copy(setShardName(name, shard));
       index[name] = { shard };
       return;
     }
