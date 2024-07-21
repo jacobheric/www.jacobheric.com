@@ -2,6 +2,7 @@ import { Posts, PostType, recentPostsParsed } from "../lib/posts/posts.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { PageLink } from "@/components/Link.tsx";
 import { Picture } from "@/components/Picture.tsx";
+import { Nav } from "@/components/Nav.tsx";
 
 export const humanDate = {
   year: "numeric" as const,
@@ -53,35 +54,42 @@ export default function Home(
         </div>
       ))}
 
-      <div class="mx-auto w-64 flex flex-row italic text-lg font-medium tracking-wide mt-8 mb-2 space-x-4">
-        <PageLink href={start > 0 ? `/?start=0` : undefined}>
-          <span>&laquo;</span>First
-        </PageLink>
+      <Nav
+        leftChildren={
+          <>
+            <PageLink href={start > 0 ? `/?start=0` : undefined}>
+              <span>&laquo;</span>First
+            </PageLink>
 
-        <PageLink href={start > 0 ? `/?start=${start - 10 || 0}` : undefined}>
-          <span>&lsaquo;</span>Prev
-        </PageLink>
+            <PageLink
+              href={start > 0 ? `/?start=${start - 10 || 0}` : undefined}
+            >
+              <span>&lsaquo;</span>Prev
+            </PageLink>
+          </>
+        }
+        rightChildren={
+          <>
+            <PageLink
+              href={start + 10 < total ? `/?start=${start + 10}` : undefined}
+            >
+              Next<span>&rsaquo;</span>
+            </PageLink>
 
-        <span className="font-sans not-italic">|</span>
-
-        <PageLink
-          href={start + 10 < total ? `/?start=${start + 10}` : undefined}
-        >
-          Next<span>&rsaquo;</span>
-        </PageLink>
-
-        <PageLink
-          href={start + 10 < total ? `/?start=${total - 10}` : undefined}
-        >
-          Last<span>&raquo;</span>
-        </PageLink>
-      </div>
-
-      <div class="mx-auto flex flex-row italic text-lg font-medium tracking-wide mt-2 mb-8 justify-center space-x-4">
-        <PageLink href="/search">Search</PageLink>
-        <span className="font-sans not-italic">|</span>
-        <PageLink href="/posts/random">Random</PageLink>
-      </div>
+            <PageLink
+              href={start + 10 < total ? `/?start=${total - 10}` : undefined}
+            >
+              Last<span>&raquo;</span>
+            </PageLink>
+          </>
+        }
+        className="mt-8 mb-4"
+      />
+      <Nav
+        leftChildren={<PageLink href="/search">Search</PageLink>}
+        rightChildren={<PageLink href="/posts/random">Random</PageLink>}
+        className="mb-8"
+      />
     </div>
   );
 }

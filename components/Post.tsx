@@ -2,6 +2,7 @@ import { PostType } from "@/lib/posts/posts.ts";
 import { humanDate } from "@/routes/index.tsx";
 import { PageLink } from "@/components/Link.tsx";
 import { Picture } from "@/components/Picture.tsx";
+import { Nav } from "@/components/Nav.tsx";
 
 export default function POST({ post }: { post: PostType }) {
   return (
@@ -21,20 +22,29 @@ export default function POST({ post }: { post: PostType }) {
       </div>
       <hr class="w-10/12 border-gray-300 mx-auto" />
 
-      <div class="mx-auto w-64 flex flex-row italic text-lg font-medium tracking-wide my-10 justify-center space-x-4">
-        <PageLink href={`/posts/${post.slug}/prev`}>
-          <span>&lsaquo;</span>Prev
-        </PageLink>
-        <span className="font-sans not-italic">|</span>
-        <PageLink href="/search">Search</PageLink>
-        <span className="font-sans not-italic">|</span>
-
-        <PageLink href="/posts/random">Random</PageLink>
-        <span className="font-sans not-italic">|</span>
-        <PageLink href={`/posts/${post.slug}/next`}>
-          Next<span>&rsaquo;</span>
-        </PageLink>
-      </div>
+      <Nav
+        leftChildren={
+          <>
+            <PageLink href={`/posts/${post.slug}/prev`}>
+              <span>&lsaquo;</span>Prev
+            </PageLink>
+            <PageLink href="/search">
+              Search
+            </PageLink>
+          </>
+        }
+        rightChildren={
+          <>
+            <PageLink href="/posts/random">
+              Random
+            </PageLink>
+            <PageLink href={`/posts/${post.slug}/next`}>
+              Next<span>&rsaquo;</span>
+            </PageLink>
+          </>
+        }
+        className="my-8"
+      />
     </div>
   );
 }

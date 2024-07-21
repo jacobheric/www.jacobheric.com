@@ -40,7 +40,7 @@ export default function Books() {
             alt="Autobiograph of Joker so Far Cover Image"
           />
         </div>
-        <div class="flex-col w-full flex items-center items-end">
+        <div class="flex-col w-full flex items-center">
           <div class="font-bold pb-3 max-w-prose">
             Out of the ordinary folds of middle America, comes a teenage obscura
             with a penchant for pain. Joseph Kare, aka{" "}
