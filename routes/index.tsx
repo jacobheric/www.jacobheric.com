@@ -25,6 +25,7 @@ export default function Home(
     <div class="w-11/12 mx-auto flex flex-col items-center justify-center">
       {posts.map((p: PostType) => (
         <div className="mt-6">
+          <link rel="prefetch" href={`/posts/${p.slug}`} />
           <a href={`/posts/${p.slug}`}>
             <Picture
               src={p.image}
@@ -85,6 +86,7 @@ export default function Home(
         }
         className="mt-8 mb-4"
       />
+
       <Nav
         leftChildren={<PageLink href="/search">Search</PageLink>}
         rightChildren={<PageLink href="/posts/random">Random</PageLink>}
