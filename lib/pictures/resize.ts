@@ -26,8 +26,7 @@ const resize = async (
   name: string,
   width?: number,
 ) =>
-  !existsSync(name) &&
-    width
+  width
     ? await img
       .resize({ width })
       .withMetadata()
@@ -64,13 +63,11 @@ const resizeRaw = async (
   return result;
 };
 
-const copy = async (name: string) => {
-  !existsSync(name) &&
-    await Deno.copyFile(
-      join(RAW_POST_PICS_DIR, p.name),
-      name,
-    );
-};
+const copy = async (src: string, dest: string) =>
+  await Deno.copyFile(
+    join(RAW_POST_PICS_DIR, src),
+    dest,
+  );
 
 export const resizeAll = async () => {
   const pics = postPics();
@@ -89,7 +86,7 @@ export const resizeAll = async () => {
     console.log("resizing image", name);
 
     if (p.name.endsWith(".gif")) {
-      await copy(setShardName(name, shard));
+      await copy(p.name, setShardName(name, shard));
       index[name] = { shard };
       return;
     }
