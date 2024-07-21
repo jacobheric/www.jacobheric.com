@@ -78,9 +78,13 @@ export const resizeAll = async () => {
 
   await Promise.all(pics.map(async (p: Deno.DirEntry) => {
     const name = p.name.toLowerCase();
+    const { shard: existing } = index[name];
 
-    const shard = index[name]?.shard ||
-      SHARDS[Math.floor(Math.random() * SHARDS.length)];
+    if (existing) {
+      return;
+    }
+
+    const shard = SHARDS[Math.floor(Math.random() * SHARDS.length)];
 
     console.log("resizing image", name);
 
