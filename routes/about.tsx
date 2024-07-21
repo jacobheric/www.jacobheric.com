@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <div className="text-lg">
+    <div className="text-lg mx-4">
       <div class="title text-6xl my-12 text-center">About</div>
       <p class="my-6 ">
         I'm{" "}

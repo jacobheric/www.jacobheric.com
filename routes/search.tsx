@@ -31,8 +31,8 @@ export default function Search(
   { data: { term, posts } }: PageProps<SearchPosts>,
 ) {
   return (
-    <div class="w-full text-lg mt-12 max-w-prose mx-auto">
-      <form className="flex flex-row items center">
+    <div class="w-full text-lg mt-12 max-w-prose">
+      <form className="flex flex-row justify-center mx-4">
         <input
           name="term"
           class="w-72 mr-4 p-2 border rounded-md"
@@ -44,7 +44,7 @@ export default function Search(
           search
         </button>
       </form>
-      <ul class="w-full my-6">
+      <ul class="w-full my-6 mx-4">
         {posts.map((p) => (
           <div className="mb-2 flex flex-row items-center">
             <PageLink href={`/posts/${p.slug}`}>
