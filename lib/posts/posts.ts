@@ -4,6 +4,7 @@ import { renderMarkdown } from "@/lib/posts/render.ts";
 import { existsSync } from "@std/fs";
 
 const RECENT = 10;
+const EXCERPT_MARK = "<!--more-->";
 
 const POSTS_DIR = "./posts";
 const POSTS_INDEX_FILE = "./lib/posts/posts.json";
@@ -85,7 +86,9 @@ export const parsePost = async (name: string): Promise<PostType> => {
   const { date, slug } = parseFilename(name);
   const contents = await Deno.readTextFile(join(POSTS_DIR, name));
   const { attrs, body } = extractYaml(contents);
-  const excerptIndex = body.indexOf("<!--more-->");
+  const excerptIndex = body.indexOf(EXCERPT_MARK);
+  const afterExcerpt =
+    body.substring(excerptIndex + EXCERPT_MARK.length).trim().length;
 
   return {
     slug,
@@ -93,7 +96,7 @@ export const parsePost = async (name: string): Promise<PostType> => {
     image: attrs.image as string,
     date,
     content: renderMarkdown(body),
-    showMore: excerptIndex >= 0,
+    showMore: afterExcerpt > 0,
     excerpt: excerptIndex >= 0
       ? renderMarkdown(body.slice(0, excerptIndex))
       : "",
