@@ -23,37 +23,39 @@ export default function Home(
 ) {
   return (
     <div class="w-11/12 mx-auto flex flex-col items-center justify-center">
-      {posts.map((p: PostType) => (
-        <div className="mt-6">
-          <link rel="prefetch" href={`/posts/${p.slug}`} />
-          <a href={`/posts/${p.slug}`}>
-            <Picture
-              src={p.image}
-              alt={p.title}
-              className="mx-auto"
-            />
-          </a>
-          <div class="text-3xl italic my-6 text-center">
+      {posts.map((p: PostType) => {
+        return (
+          <div className="mt-6">
+            <link rel="prefetch" href={`/posts/${p.slug}`} />
             <a href={`/posts/${p.slug}`}>
-              {p.title}
+              <Picture
+                src={p.image}
+                alt={p.title}
+                className="mx-auto"
+              />
             </a>
-          </div>
-          <div class="italic text-base mb-4 text-center w-full">
-            {p.date.toLocaleDateString("en-us", humanDate)}
-          </div>
-          <div
-            class="text-base mb-4 text-center"
-            dangerouslySetInnerHTML={{ __html: p.excerpt }}
-          />
-
-          {p.excerpt && (
-            <div class="italic text-lg font-medium tracking-wide text-center">
-              <a href={`/posts/${p.slug}`} class="next">More</a>
+            <div class="text-3xl italic my-6 text-center">
+              <a href={`/posts/${p.slug}`}>
+                {p.title}
+              </a>
             </div>
-          )}
-          <hr class="w-10/12 border-gray-300 mt-12 mx-auto" />
-        </div>
-      ))}
+            <div class="italic text-base mb-4 text-center w-full">
+              {p.date.toLocaleDateString("en-us", humanDate)}
+            </div>
+            <div
+              class="text-base mb-4 text-center"
+              dangerouslySetInnerHTML={{ __html: p.excerpt }}
+            />
+
+            {p.showMore && (
+              <div class="italic text-lg font-medium tracking-wide text-center">
+                <a href={`/posts/${p.slug}`} class="next">More</a>
+              </div>
+            )}
+            <hr class="w-10/12 border-gray-300 mt-12 mx-auto" />
+          </div>
+        );
+      })}
 
       <Nav
         leftChildren={

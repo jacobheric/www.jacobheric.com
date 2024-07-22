@@ -9,7 +9,7 @@ import {
   ShardName,
 } from "@/lib/pictures/picture.ts";
 import { join } from "https://deno.land/std@0.216.0/path/join.ts";
-import { existsSync } from "@std/fs";
+
 import sharp from "npm:/sharp";
 
 const SHARDS: ShardName[] = ["birch", "maple", "pine", "oak"];
@@ -75,7 +75,7 @@ export const resizeAll = async () => {
 
   await Promise.all(pics.map(async (p: Deno.DirEntry) => {
     const name = p.name.toLowerCase();
-    const { shard: existing } = index[name];
+    const existing = index[name]?.shard;
 
     if (existing) {
       return;

@@ -14,6 +14,7 @@ export interface PostType {
   image: string;
   date: Date;
   excerpt: string;
+  showMore: boolean;
   content: string;
 }
 
@@ -84,6 +85,7 @@ export const parsePost = async (name: string): Promise<PostType> => {
   const { date, slug } = parseFilename(name);
   const contents = await Deno.readTextFile(join(POSTS_DIR, name));
   const { attrs, body } = extractYaml(contents);
+  const excerptIndex = body.indexOf("<!--more-->");
 
   return {
     slug,
@@ -91,7 +93,10 @@ export const parsePost = async (name: string): Promise<PostType> => {
     image: attrs.image as string,
     date,
     content: renderMarkdown(body),
-    excerpt: renderMarkdown(body.slice(0, body.indexOf("<!--more-->"))),
+    showMore: excerptIndex >= 0,
+    excerpt: excerptIndex >= 0
+      ? renderMarkdown(body.slice(0, excerptIndex))
+      : "",
   };
 };
 

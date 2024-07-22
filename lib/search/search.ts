@@ -1,20 +1,14 @@
-// @deno-types="https://deno.land/x/fuse@v6.4.1/dist/fuse.d.ts"
-import Fuse from "https://deno.land/x/fuse@v6.4.1/dist/fuse.esm.min.js";
 import { parsePosts, sortedPosts } from "../posts/posts.ts";
-import { searchOptions } from "./index.ts";
+import fuzzysort from "npm:fuzzysort";
 
-// import indexJson from "./searchIndex.json" with { type: "json" };
-// import { searchOptions } from "@/lib/search/createIndex.ts";
-// import { parsePosts, posts } from "@/lib/posts.ts";
-// const index = Fuse.parseIndex(indexJson);
-// // initialize Fuse with the index
-// const fuse = new Fuse(books, searchOptions, index);
+export const o = {
+  threshold: .3,
+  keys: ["title", "content"],
+};
 
 const p = await parsePosts(sortedPosts());
 
-const fuse = new Fuse(p, searchOptions);
-
 export const search = (term: string) => {
-  const result = fuse.search(term);
-  return result.map((r) => r.item);
+  const results = fuzzysort.go(term, p, o);
+  return results.map(({ obj }) => obj);
 };
