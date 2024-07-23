@@ -1,5 +1,5 @@
 import { extractYaml } from "@std/front-matter";
-import { join } from "jsr:@std/path@0.213/join";
+import { join } from "@std/path";
 import { renderMarkdown } from "@/lib/posts/render.ts";
 import { existsSync } from "@std/fs";
 

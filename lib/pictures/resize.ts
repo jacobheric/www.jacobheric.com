@@ -8,7 +8,8 @@ import {
   setShardName,
   ShardName,
 } from "@/lib/pictures/picture.ts";
-import { join } from "https://deno.land/std@0.216.0/path/join.ts";
+import { join } from "@std/path";
+import { parseArgs } from "@std/cli";
 
 import sharp from "npm:/sharp";
 
@@ -19,6 +20,12 @@ const writeIndex = (index: Record<string, string>) =>
   Deno.writeTextFileSync(
     INDEX_FILE,
     JSON.stringify(index),
+  );
+
+const copy = async (src: string, dest: string) =>
+  await Deno.copyFile(
+    src,
+    dest,
   );
 
 const resize = async (
@@ -44,32 +51,35 @@ const resizeRaw = async (
   name: string,
   shard: ShardName,
 ) => {
+  const originalName = setShardName(name, shard);
   const original = sharp(raw);
-  await resize(original, setShardName(name, shard));
   const result = { large: false, small: false };
-
   const { width: w = 0 } = await original.metadata();
 
   if (w && w > IMG_LARGE) {
-    await resize(sharp(raw), setShardName(name, shard, "large"), IMG_LARGE);
+    const largeName = setShardName(name, shard, "large");
+    await resize(sharp(raw), largeName, IMG_LARGE);
+    copy(largeName, originalName);
     result.large = true;
   }
 
   if (w && w > IMG_SMALL) {
-    await resize(sharp(raw), setShardName(name, shard, "small"), IMG_SMALL);
+    const smallName = setShardName(name, shard, "small");
+    await resize(sharp(raw), smallName, IMG_SMALL);
+    !result.large && copy(smallName, originalName);
     result.small = true;
+  }
+
+  //
+  // image was too small, just compress the original
+  if (!result.large && !result.small) {
+    await resize(original, originalName);
   }
 
   return result;
 };
 
-const copy = async (src: string, dest: string) =>
-  await Deno.copyFile(
-    join(RAW_POST_PICS_DIR, src),
-    dest,
-  );
-
-export const resizeAll = async () => {
+export const resizeAll = async (overwrite: boolean = false) => {
   const pics = postPics();
   const index = readIndex();
 
@@ -77,16 +87,18 @@ export const resizeAll = async () => {
     const name = p.name.toLowerCase();
     const existing = index[name]?.shard;
 
-    if (existing) {
+    if (!overwrite && existing) {
       return;
     }
 
-    const shard = SHARDS[Math.floor(Math.random() * SHARDS.length)];
+    const shard = overwrite && existing
+      ? existing
+      : SHARDS[Math.floor(Math.random() * SHARDS.length)];
 
     console.log("resizing image", name);
 
     if (p.name.endsWith(".gif")) {
-      await copy(p.name, setShardName(name, shard));
+      await copy(join(RAW_POST_PICS_DIR, p.name), setShardName(name, shard));
       index[name] = { shard };
       return;
     }
@@ -101,6 +113,12 @@ export const resizeAll = async () => {
   writeIndex(index);
 };
 
+const flags = parseArgs(Deno.args, {
+  boolean: ["overwrite"],
+  default: { overwrite: false },
+});
+
+console.log("shit overwrite", flags.overwrite);
 console.log("resizing...");
-await resizeAll();
+await resizeAll(flags.overwrite);
 console.log("done");

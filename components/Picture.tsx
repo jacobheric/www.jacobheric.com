@@ -16,7 +16,7 @@ export const Picture = (
         <picture>
           {large && (
             <source
-              sizes={`(min-width: ${IMG_LARGE - 50}px) ${IMG_LARGE}px`}
+              sizes={`(min-width: 769px) ${IMG_LARGE}px`}
               srcset={`${large} ${IMG_LARGE}w`}
               type="image/jpeg"
             />
@@ -25,8 +25,8 @@ export const Picture = (
           {small &&
             (
               <source
-                sizes={`(min-width: ${IMG_SMALL - 50}px) ${IMG_SMALL}px`}
-                srcset={`${small} ${IMG_SMALL}w`}
+                sizes={`(max-width: 768px) ${IMG_SMALL}px`}
+                srcset={`${small}`}
                 type="image/jpeg"
               />
             )}

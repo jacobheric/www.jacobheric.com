@@ -1,5 +1,5 @@
 import { existsSync } from "@std/fs";
-import { join } from "jsr:@std/path@0.213/join";
+import { join } from "@std/path";
 
 const PROD = Deno.env.get("PRODUCTION") === "true";
 
