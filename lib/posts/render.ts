@@ -1,5 +1,6 @@
 import {
   marked,
+  Token,
   TokenizerAndRendererExtension,
 } from "https://esm.sh/marked@7.0.2";
 import { renderToString } from "preact-render-to-string";
@@ -8,7 +9,7 @@ import { Picture } from "@/components/Picture.tsx";
 
 const pictureExtension: TokenizerAndRendererExtension = {
   name: "picture",
-  level: "block",
+  level: "inline",
   start(src) {
     return src.match(/^{%/)?.index;
   },
@@ -20,16 +21,23 @@ const pictureExtension: TokenizerAndRendererExtension = {
       return {
         type: "picture",
         raw: match[0],
-        imageSrc: match[1].trim(),
-        imageAlt: match[2].trim(),
+        imageSrc: match[1]?.trim(),
+        imageAlt: match[2]?.trim(),
+        html: "",
       };
     }
   },
   renderer(token) {
-    return renderToString(
+    return token.html;
+  },
+};
+
+const walkTokens = (token: Token) => {
+  if (token.type === "picture") {
+    token.html = renderToString(
       h(Picture, { src: token.imageSrc, alt: token.imageAlt }),
     );
-  },
+  }
 };
 
 marked.use({
@@ -37,6 +45,7 @@ marked.use({
   extensions: [
     pictureExtension,
   ],
+  walkTokens,
 });
 
 export const renderMarkdown = (

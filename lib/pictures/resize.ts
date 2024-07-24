@@ -97,7 +97,7 @@ export const resizeAll = async (overwrite: boolean = false) => {
 
     console.log("resizing image", name);
 
-    if (p.name.endsWith(".gif")) {
+    if (p.name.endsWith(".gif") || p.name.endsWith("png")) {
       await copy(join(RAW_POST_PICS_DIR, p.name), setShardName(name, shard));
       index[name] = { shard };
       return;
@@ -118,7 +118,6 @@ const flags = parseArgs(Deno.args, {
   default: { overwrite: false },
 });
 
-console.log("shit overwrite", flags.overwrite);
 console.log("resizing...");
 await resizeAll(flags.overwrite);
 console.log("done");

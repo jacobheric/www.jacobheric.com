@@ -9,13 +9,7 @@ image: auto-bio-cover-large.jpg
 
 <!--more-->
 
-<div class="max-w-xs float-right p-6">
-
-{% picture "joker-cover-thumb.jpg", "Autobiography of Joker Book Cover" %}
-
-</div>
-
-**The Day Job _becomes_ Night Work**
+The Day Job _becomes_ Night Work**
 
 Regular readers here, of which Google Analytics assures me there are near-zero,
 know that by day I am an independent software developer. By night however, I
@@ -31,6 +25,9 @@ modern software development, where check writing is like wish granting in the
 Emerald City of Oz, working this way long enough has gotten me to the point
 where I have enough stretches of free time to permit myself being all-consumed
 by writing fiction.
+
+<span class="block max-w-xs float-right p-6"> {% picture
+"joker-cover-thumb.jpg", "Autobiography of Joker Book Cover" %}</span>
 
 Careful readers may here smell a rat, and they would not be entirely in the
 wrong. But to that I'll say this: I'm not independently wealthy, I'm not set for
