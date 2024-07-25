@@ -10,7 +10,8 @@
     "update": "deno run -A -r https://fresh.deno.dev/update .",
     "picture": "deno run -A ./lib/picture.ts",
     "resizePictures": "deno run -A ./lib/pictures/resize.ts",
-    "postIndex": "deno run -A ./lib/posts/index.ts"
+    "postIndex": "deno run -A ./lib/posts/index.ts",
+    "makePosts": "deno run -A ./lib/posts/make.ts"
   },
   "lint": {
     "rules": {

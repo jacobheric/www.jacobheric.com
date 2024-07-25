@@ -6,7 +6,7 @@ import { existsSync } from "@std/fs";
 const RECENT = 10;
 const EXCERPT_MARK = "<!--more-->";
 
-const POSTS_DIR = "./posts";
+export const POSTS_DIR = "./posts";
 const POSTS_INDEX_FILE = "./lib/posts/posts.json";
 
 export interface PostType {
@@ -37,7 +37,7 @@ export const POSTS = existsSync(POSTS_INDEX_FILE)
 
 export const parseFilename = (
   fileName: string,
-): { date: Date; slug: string; ext: string } => {
+): { date: Date; slug: string; ext: string; desc: string } => {
   const [slug, ext] = fileName.split(".");
   const parts = slug.split("-");
   const date = new Date(
@@ -45,7 +45,8 @@ export const parseFilename = (
     Number(parts[1]) - 1,
     Number(parts[2]),
   );
-  return { date, slug, ext };
+  const desc = parts.slice(3).join(" ");
+  return { date, slug, ext, desc };
 };
 
 export const sort = (
@@ -59,7 +60,7 @@ export const sort = (
 
 export const getPrev = (slug: string) => {
   const index = POSTS.findIndex((p: PostIndex) => p.slug === slug);
-  return getPost(POSTS[index - 1].slug);
+  return getPost(POSTS[index - 1]?.slug);
 };
 export const getNext = (slug: string) => {
   const index = POSTS.findIndex((p: PostIndex) => p.slug === slug);
