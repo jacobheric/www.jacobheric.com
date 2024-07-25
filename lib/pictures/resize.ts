@@ -84,6 +84,9 @@ export const resizeAll = async (overwrite: boolean = false) => {
   const index = readIndex();
 
   await Promise.all(pics.map(async (p: Deno.DirEntry) => {
+    if (p.name.startsWith(".")) {
+      return;
+    }
     const name = p.name.toLowerCase();
     const existing = index[name]?.shard;
 

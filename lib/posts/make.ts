@@ -21,7 +21,7 @@ const writePost = (file: string, pic: string, desc: string) =>
 const appendPost = (file: string, pic: string, desc: string) =>
   Deno.writeTextFileSync(
     join(POSTS_DIR, file),
-    `\n{% picture "${pic}", "${titleCase(desc)}" %}`,
+    `\nn{% picture "${pic}", "${titleCase(desc)}" %}`,
     {
       append: true,
     },
