@@ -12,7 +12,7 @@ Also instructive:
 
 {% picture "2023-03-16-bathroom-warning.jpg", "Bathroom Warning" %}
 
-The bathroom was actuall quite picturesque!
+The bathroom was actually quite picturesque!
 
 {% picture "2023-03-16-stately-bathroom.jpg", "Stately Bathroom" %}
 
