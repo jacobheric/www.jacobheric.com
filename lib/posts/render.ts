@@ -11,7 +11,7 @@ const pictureExtension: TokenizerAndRendererExtension = {
   name: "picture",
   level: "inline",
   start(src) {
-    return src.match(/^{%/)?.index;
+    return src.match(/{%/)?.index;
   },
   tokenizer(src: string) {
     const rule = /^\s*{%\s*picture\s*"([^"]+)"\s*,\s*"([^"]+)"\s*%}/;
