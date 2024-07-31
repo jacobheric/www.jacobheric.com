@@ -1,5 +1,5 @@
 ---
-title: Presqu Isle Golf
+title: Presque Isle Golf
 image: 2023-07-14-presqu-isle-golf.jpg
 ---
 
