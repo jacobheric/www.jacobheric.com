@@ -1,6 +1,6 @@
 ---
 title: Arboretum Walk
-image: 20239-08-05-arboretum-walk.jpg
+image: 2023-08-05-arboretum-walk.jpg
 ---
 
 We're **big** fans of arboretums and regular visitors of the
