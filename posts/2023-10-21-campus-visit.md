@@ -3,7 +3,7 @@ title: Double Vision
 image: 2023-10-21-double-vision.jpg
 ---
 
-A lovely campus visit. It **always** rains when we're there'.
+A lovely campus visit. It **always** rains when we're there.
 
 <!--more-->
 

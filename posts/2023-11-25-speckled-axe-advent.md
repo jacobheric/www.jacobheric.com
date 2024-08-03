@@ -3,7 +3,7 @@ title: Speckled Axe Advent
 image: 2023-11-25-speckled-axe-advent.jpg
 ---
 
-Kicking the holiday season of right with the Speckled Axe advent calendar. A
+Kicking the holiday season off right with the Speckled Axe advent calendar. A
 lovely way to pass the month of a coffee lover.
 
 <!--more-->
