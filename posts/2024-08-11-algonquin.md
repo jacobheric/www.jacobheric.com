@@ -60,7 +60,7 @@ We did some shopping and bought some records.
 {% picture "2024-08-11-john-cougar.jpg", "John Cougar" %}
 
 I did a bit of sleuthing to try to determine what birds where crying incessantly
-outside out hotel window. The
+outside our hotel window. The
 [Merlin Bird ID](https://merlin.allaboutbirds.org/) app told me it was a
 sharp-shinned hawk. The bellhops told me the cry was artificial and piped in to
 keep the pigeons off the balconies. Sure enough, I found the speakers.
