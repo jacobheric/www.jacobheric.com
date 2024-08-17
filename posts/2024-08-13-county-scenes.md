@@ -1,5 +1,5 @@
 ---
-title: Count Scenes
+title: County Scenes
 image: 2024-08-13-haystack-view.jpg
 ---
 
@@ -17,6 +17,6 @@ Moose poop.
 
 {% picture "2024-08-13-tractor.jpg", "Tractor" %}
 
-Girl with the Pearl Earings
+Girl with the Pearl Earrings.
 
 {% picture "2024-08-13-girl-with-pearl.jpg", "Girl With Pearl" %}
