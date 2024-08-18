@@ -2,7 +2,7 @@ import { type Config } from "tailwindcss";
 
 export default {
   content: [
-    "{routes,islands,components}/**/*.{ts,tsx}",
+    "{routes,islands,components,posts}/**/*.{ts,tsx,md,html}",
   ],
   theme: {
     fontFamily: {
