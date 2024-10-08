@@ -14,7 +14,7 @@ import * as $posts_slug_prev from "./routes/posts/[slug]/prev.tsx";
 import * as $posts_random from "./routes/posts/random.tsx";
 import * as $search from "./routes/search.tsx";
 
-import { type Manifest } from "$fresh/server.ts";
+import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {

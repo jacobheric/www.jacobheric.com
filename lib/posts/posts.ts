@@ -1,13 +1,13 @@
+import { renderMarkdown } from "@/lib/posts/render.ts";
 import { extractYaml } from "@std/front-matter";
 import { join } from "@std/path";
-import { renderMarkdown } from "@/lib/posts/render.ts";
-import { existsSync } from "@std/fs";
+
+export const db = await Deno.openKv();
 
 const RECENT = 10;
 const EXCERPT_MARK = "<!--more-->";
 
 export const POSTS_DIR = "./posts";
-const POSTS_INDEX_FILE = "./lib/posts/posts.json";
 
 export interface PostType {
   slug: string;
@@ -21,19 +21,15 @@ export interface PostType {
 
 export interface Posts {
   posts: PostType[];
-  total: number;
-  start: number;
   limit: number;
+  start?: string;
+  last?: boolean;
 }
 
 type PostIndex = {
   name: string;
   slug: string;
 };
-
-export const POSTS = existsSync(POSTS_INDEX_FILE)
-  ? JSON.parse(Deno.readTextFileSync(POSTS_INDEX_FILE))
-  : {};
 
 export const parseFilename = (
   fileName: string,
@@ -58,24 +54,46 @@ export const sort = (
   return dateB.getTime() - dateA.getTime();
 };
 
-export const getPrev = (slug: string) => {
-  const index = POSTS.findIndex((p: PostIndex) => p.slug === slug);
-  return getPost(POSTS[index - 1]?.slug);
-};
-export const getNext = (slug: string) => {
-  const index = POSTS.findIndex((p: PostIndex) => p.slug === slug);
+//
+// a bit tortured, start is inclusive so get 2
+export const getPrev = async (slug: string) => {
+  console.log("shit slug", slug);
+  const iter = db.list<PostType>({
+    prefix: ["posts"],
+    start: [
+      "posts",
+      slug,
+    ],
+  }, { limit: 2, reverse: false });
 
-  return getPost(POSTS[index + 1].slug);
+  const posts = [];
+  for await (const p of iter) {
+    posts.push(p.value);
+  }
+
+  return posts.at(-1);
+};
+
+export const getNext = async (slug: string) => {
+  const iter = db.list<PostType>({
+    prefix: ["posts"],
+    end: [
+      "posts",
+      slug,
+    ],
+  }, { limit: 1, reverse: true });
+
+  for await (const p of iter) {
+    return p.value;
+  }
 };
 
 export const getPost = async (slug: string) => {
-  try {
-    return await parsePost(`${slug}.md`);
-  } catch (e: unknown) {
-    console.info("error loading markdown file", e);
+  const post = await db.get<PostType>(["posts", slug]);
+  if (!post.value) {
+    throw new Error("Post not found");
   }
-
-  return await parsePost(`${slug}.html`);
+  return post.value;
 };
 
 export const parsePosts = async (posts: Deno.DirEntry[]) =>
@@ -104,26 +122,63 @@ export const parsePost = async (name: string): Promise<PostType> => {
   };
 };
 
+//
+// posts are stored in chronological order from oldest to newest
+// but displayed newest to oldest so "forward" from the UI's perspective
+// is actually moving from a non-inclusive "end" towards the beginning
+// from a deno kv perspective
 export const recentPostsParsed = async (
-  start: number = 0,
-  limit: number = RECENT,
+  { start, limit = RECENT, last = false, direction = "forward" }: {
+    start?: string;
+    limit: number;
+    last?: boolean;
+    direction?: "forward" | "backward";
+  },
 ): Promise<Posts> => {
-  const sorted = sortedPosts();
+  const forward = direction === "forward";
+
+  const iter = db.list<PostType>({
+    prefix: ["posts"],
+    ...start &&
+      {
+        [forward ? "end" : "start"]: [
+          "posts",
+          start,
+        ],
+      },
+  }, {
+    //
+    // start is inclusive in deno kv so don't show that one when
+    // moving backwards in the UI
+    limit: forward ? 10 : 11,
+    reverse: !last && forward ? true : false,
+  });
+
+  const posts = [];
+
+  for await (const p of iter) {
+    console.log("value", p.value);
+    posts.push(p.value);
+  }
 
   return {
-    total: sorted.length,
-    start,
     limit,
-    posts: await parsePosts(sortedPosts().slice(start, start + limit)),
+    start,
+    last,
+    posts: last
+      ? posts.toReversed()
+      : forward
+      ? posts
+      : posts.slice(1).toReversed(),
   };
 };
 
-export const sortedPosts = () => POSTS.sort(sort);
-
-export const sortedRawPosts = () => rawPosts().sort(sort);
-export const rawPosts = () => Array.from(Deno.readDirSync(POSTS_DIR));
-
-export const random = () => {
-  const { slug } = POSTS[Math.floor(Math.random() * POSTS.length)];
+export const random = async () => {
+  const slugs = (await db.get<string[]>(["slugs"])).value;
+  console.log("slugs", slugs);
+  const slug = slugs?.length && slugs[Math.floor(Math.random() * slugs.length)];
+  if (!slug) {
+    throw new Error("post not found");
+  }
   return slug;
 };
