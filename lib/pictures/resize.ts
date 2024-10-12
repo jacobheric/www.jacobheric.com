@@ -2,25 +2,20 @@ import {
   IMG_LARGE,
   IMG_SMALL,
   INDEX_FILE,
-  postPics,
+  type PictureType,
+  QUALITY,
   RAW_POST_PICS_DIR,
-  readIndex,
-  setShardName,
+  setShardedName,
   ShardName,
+  SHARDS,
 } from "@/lib/pictures/picture.ts";
-import { join } from "@std/path";
 import { parseArgs } from "@std/cli";
+import { join } from "@std/path";
 
+import { db } from "@/lib/db.ts";
 import sharp from "npm:/sharp";
 
-const SHARDS: ShardName[] = ["birch", "maple", "pine", "oak"];
-const QUALITY = 85;
-
-const writeIndex = (index: Record<string, string>) =>
-  Deno.writeTextFileSync(
-    INDEX_FILE,
-    JSON.stringify(index),
-  );
+export const postPics = () => Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
 
 const copy = async (src: string, dest: string) =>
   await Deno.copyFile(
@@ -51,20 +46,20 @@ const resizeRaw = async (
   name: string,
   shard: ShardName,
 ) => {
-  const originalName = setShardName(name, shard);
+  const originalName = setShardedName(name, shard);
   const original = sharp(raw);
   const result = { large: false, small: false };
   const { width: w = 0 } = await original.metadata();
 
   if (w && w > IMG_LARGE) {
-    const largeName = setShardName(name, shard, "large");
+    const largeName = setShardedName(name, shard, "large");
     await resize(sharp(raw), largeName, IMG_LARGE);
     copy(largeName, originalName);
     result.large = true;
   }
 
   if (w && w > IMG_SMALL) {
-    const smallName = setShardName(name, shard, "small");
+    const smallName = setShardedName(name, shard, "small");
     await resize(sharp(raw), smallName, IMG_SMALL);
     !result.large && copy(smallName, originalName);
     result.small = true;
@@ -81,28 +76,31 @@ const resizeRaw = async (
 
 export const resizeAll = async (overwrite: boolean = false) => {
   const pics = postPics();
-  const index = readIndex();
 
   await Promise.all(pics.map(async (p: Deno.DirEntry) => {
     if (p.name.startsWith(".")) {
       return;
     }
-    const name = p.name.toLowerCase();
-    const existing = index[name]?.shard;
 
-    if (!overwrite && existing) {
+    const name = p.name.toLowerCase();
+    const { value } = await db.get<PictureType>(["pictures", name], {
+      consistency: "eventual",
+    });
+    const existingShard = value?.shard;
+
+    if (!overwrite && existingShard) {
       return;
     }
 
-    const shard = overwrite && existing
-      ? existing
+    const shard = overwrite && existingShard
+      ? existingShard
       : SHARDS[Math.floor(Math.random() * SHARDS.length)];
 
     console.log("resizing image", name);
 
     if (p.name.endsWith(".gif") || p.name.endsWith("png")) {
-      await copy(join(RAW_POST_PICS_DIR, p.name), setShardName(name, shard));
-      index[name] = { shard };
+      await copy(join(RAW_POST_PICS_DIR, p.name), setShardedName(name, shard));
+      db.set(["pictures", name], { shard });
       return;
     }
 
@@ -111,9 +109,27 @@ export const resizeAll = async (overwrite: boolean = false) => {
     );
 
     const sizes = await resizeRaw(raw, name, shard);
-    index[name] = { shard, sizes };
+    db.set(["pictures", name], { shard, sizes });
   }));
-  writeIndex(index);
+
+  void writeIndex();
+};
+
+const writeIndex = async () => {
+  const iter = db.list<PictureType>({ prefix: ["pictures"] }, {
+    limit: 2000,
+    consistency: "eventual",
+  });
+  const pictures: { [key: string]: PictureType } = {};
+
+  for await (const { key, value } of iter) {
+    pictures[String(key.at(-1))] = value;
+  }
+
+  Deno.writeTextFileSync(
+    INDEX_FILE,
+    JSON.stringify(pictures),
+  );
 };
 
 const flags = parseArgs(Deno.args, {
@@ -121,6 +137,6 @@ const flags = parseArgs(Deno.args, {
   default: { overwrite: false },
 });
 
-console.log("resizing...");
+console.log("resizing pictures...");
 await resizeAll(flags.overwrite);
 console.log("done");

@@ -4,7 +4,7 @@ import { PageLink } from "@/components/Link.tsx";
 import { Picture } from "@/components/Picture.tsx";
 import { Nav } from "@/components/Nav.tsx";
 
-export default function POST({ post }: { post: PostType }) {
+export default function Post({ post }: { post: PostType }) {
   return (
     <div class="2xl:max-w-[80%] max-w-[90%] flex flex-col mt-12 ">
       <Picture src={post.image} alt={post.title} className="mx-auto" />

@@ -35,7 +35,7 @@ export default function Books() {
       <div class="flex flex-row flex-wrap md:flex-nowrap justify-center align-top space-x-2">
         <div className="w-full flex justify-center lg:justify-end">
           <Picture
-            className="max-w-xl  mr-4  mt-0"
+            className="max-w-xl mr-4  mt-0"
             src="auto-bio-cover.jpg"
             alt="Autobiograph of Joker so Far Cover Image"
           />

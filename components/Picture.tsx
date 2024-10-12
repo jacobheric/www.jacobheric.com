@@ -1,5 +1,3 @@
-import { getShardURLs, IMG_LARGE, IMG_SMALL } from "../lib/pictures/picture.ts";
-
 export const Picture = (
   { src, alt, className }: { src?: string; alt: string; className?: string },
 ) => {
@@ -8,44 +6,26 @@ export const Picture = (
     return null;
   }
 
-  const { original, large, small } = getShardURLs(src);
-
   return (
-    src.endsWith(".jpg")
-      ? (
-        <picture>
-          {large && (
-            <source
-              sizes={`(min-width: 769px) ${IMG_LARGE}px`}
-              srcset={`${large} ${IMG_LARGE}w`}
-              type="image/jpeg"
-            />
-          )}
+    <picture>
+      <source
+        srcset={`/pictures/${src}?size=large`}
+        media={`(min-width: 769px)`}
+        type="image/jpeg"
+      />
 
-          {small &&
-            (
-              <source
-                sizes={`(max-width: 768px) ${IMG_SMALL}px`}
-                srcset={`${small}`}
-                type="image/jpeg"
-              />
-            )}
+      <source
+        srcset={`/pictures/${src}?size=small`}
+        media={`(max-width: 768px)`}
+        type="image/jpeg"
+      />
 
-          <img
-            alt={alt}
-            src={`${original}`}
-            title={alt}
-            className={`max-h-screen max-w-screen rounded-md my-6 ${className}`}
-          />
-        </picture>
-      )
-      : (
-        <img
-          alt={alt}
-          src={`${original}`}
-          title={alt}
-          className={`max-h-screen max-w-screen rounded-md my-6 ${className}`}
-        />
-      )
+      <img
+        alt={alt}
+        src={`/pictures/${src}`}
+        title={alt}
+        className={`max-h-screen max-w-screen rounded-md my-6 ${className}`}
+      />
+    </picture>
   );
 };

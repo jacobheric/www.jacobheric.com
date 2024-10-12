@@ -7,21 +7,18 @@ import { humanDate } from "@/routes/index.tsx";
 export type SearchPosts = Posts & { term?: string };
 
 export const handler: Handlers<SearchPosts> = {
-  GET(_req, ctx) {
+  async GET(_req, ctx) {
     const term = ctx.url.searchParams.get("term") || "";
-    const start = 0;
     const limit = 50;
 
     if (!term) {
-      return ctx.render({ posts: [], start: 0, limit: 50, total: 0, term });
+      return ctx.render({ posts: [], limit, term });
     }
 
-    const results = search(term);
+    const results = await search(term);
     return ctx.render({
-      posts: results.slice(start, start + limit),
-      start,
+      posts: results.slice(0, limit),
       limit,
-      total: results.length,
       term,
     });
   },

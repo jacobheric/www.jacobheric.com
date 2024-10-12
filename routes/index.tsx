@@ -1,7 +1,7 @@
 import { Posts, PostType, recentPostsParsed } from "../lib/posts/posts.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { PageLink } from "@/components/Link.tsx";
-import { Picture } from "@/components/Picture.tsx";
+import { Picture } from "../components/Picture.tsx";
 import { Nav } from "@/components/Nav.tsx";
 
 export const humanDate = {
@@ -12,14 +12,24 @@ export const humanDate = {
 
 export const handler: Handlers<Posts> = {
   async GET(_req, ctx) {
-    const start = Number(ctx.url.searchParams.get("start") || 0);
+    const last = ctx.url.searchParams.get("last") ?? undefined;
+    const start = ctx.url.searchParams.get("start") ?? undefined;
+    const direction: any = ctx.url.searchParams.get("direction") ?? undefined;
     const limit = Number(ctx.url.searchParams.get("limit") || 10);
-    return ctx.render(await recentPostsParsed(start, limit));
+
+    return ctx.render(
+      await recentPostsParsed({
+        start,
+        direction,
+        limit,
+        last: last === "true",
+      }),
+    );
   },
 };
 
 export default function Home(
-  { data: { posts, total, start } }: PageProps<Posts>,
+  { data: { posts, start, last } }: PageProps<Posts>,
 ) {
   return (
     <div class="w-11/12 mx-auto flex flex-col items-center justify-center">
@@ -60,12 +70,14 @@ export default function Home(
       <Nav
         leftChildren={
           <>
-            <PageLink href={start > 0 ? `/?start=0` : undefined}>
+            <PageLink href={last || start ? `/` : undefined}>
               <span>&laquo;</span>First
             </PageLink>
 
             <PageLink
-              href={start > 0 ? `/?start=${start - 10 || 0}` : undefined}
+              href={last || start
+                ? `/?start=${posts[0].slug}&direction=backward`
+                : undefined}
             >
               <span>&lsaquo;</span>Prev
             </PageLink>
@@ -74,14 +86,14 @@ export default function Home(
         rightChildren={
           <>
             <PageLink
-              href={start + 10 < total ? `/?start=${start + 10}` : undefined}
+              href={!last
+                ? `/?start=${posts.at(-1)!.slug}&direction=forward`
+                : undefined}
             >
               Next<span>&rsaquo;</span>
             </PageLink>
 
-            <PageLink
-              href={start + 10 < total ? `/?start=${total - 10}` : undefined}
-            >
+            <PageLink href={!last ? `/?last=true` : undefined}>
               Last<span>&raquo;</span>
             </PageLink>
           </>

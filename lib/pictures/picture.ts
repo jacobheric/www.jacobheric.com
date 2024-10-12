@@ -1,36 +1,44 @@
-import { existsSync } from "@std/fs";
+import { db } from "@/lib/db.ts";
+
 import { join } from "@std/path";
 
-const PROD = Deno.env.get("PRODUCTION") === "true";
+export interface PictureType {
+  shard: ShardName;
+  sizes: {
+    large: boolean;
+    small: boolean;
+  };
+}
+
+export const PROD = Deno.env.get("PRODUCTION") === "true";
+
+export const INDEX_FILE = "./lib/pictures/pictures.json";
+export const SHARDS: ShardName[] = ["birch", "maple", "pine", "oak"];
+export const QUALITY = 85;
+
+export const RAW_POST_PICS_DIR = "./static/image/raw";
 
 export type SizeName = "small" | "large";
 export type ShardName = "birch" | "maple" | "oak" | "pine";
 
-export const RAW_POST_PICS_DIR = "./static/image/raw";
 export const OUT_POST_PICS_DIR = "./static/image/resized";
 const ASSET_PATH = "/image/resized";
 
 export const IMG_SMALL = 640;
 export const IMG_LARGE = 1300;
 
-export const INDEX_FILE = "./lib/pictures/pictures.json";
+export const getShardIndex = async (name: string) => {
+  const { value } = await db.get<PictureType>(["pictures", name], {
+    consistency: "eventual",
+  });
 
-export const readIndex = () =>
-  existsSync(INDEX_FILE) ? JSON.parse(Deno.readTextFileSync(INDEX_FILE)) : {};
-
-export const SHARD_INDEX = readIndex();
-
-export const postPics = () => Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
-
-export const getShardIndex = (name: string) => {
-  const result = SHARD_INDEX[name.toLowerCase()];
-  if (!result) {
-    throw new Error(`Image not found in shard index: ${name}`);
+  if (!value) {
+    throw new Error(`Image not found in shard kv: ${name}`);
   }
-  return result;
+  return value;
 };
 
-export const setShardName = (
+export const setShardedName = (
   name: string,
   shard: ShardName,
   size?: SizeName,
@@ -41,45 +49,30 @@ export const setShardName = (
     size ? name.toLowerCase().replace(".jpg", `-${size}.jpg`) : name,
   );
 
-export const getShardName = (
-  name: string,
-  size?: SizeName,
-) =>
-  join(
-    OUT_POST_PICS_DIR,
-    getShardIndex(name).shard,
-    size ? name.toLowerCase().replace(".jpg", `-${size}.jpg`) : name,
-  );
-
-export const getShardURL = (
-  name: string,
-  size?: SizeName,
-) => {
-  const { shard, sizes } = getShardIndex(name);
-  const lower = name.toLowerCase();
-
-  if (size && (!sizes || !sizes[size])) {
-    return undefined;
-  }
-
-  return PROD
-    ? new URL(
-      size ? lower.replace(".jpg", `-${size}.jpg`) : lower,
-      `https://${shard}.jacobheric.com`,
-    ).toString()
-    : join(
-      ASSET_PATH,
-      shard,
-      size ? lower.replace(".jpg", `-${size}.jpg`) : lower,
-    );
+const getPath = (src: string, size?: SizeName) => {
+  const lower = src.toLowerCase();
+  return size ? lower.replace(".jpg", `-${size}.jpg`) : lower;
 };
 
-export const getShardURLs = (name: string) => {
-  const large = getShardURL(name, "large");
-  const small = getShardURL(name, "small");
-  return {
-    original: getShardURL(name),
-    ...large ? { large } : {},
-    ...small ? { small } : {},
-  };
+export const getImageUrl = (
+  src: string,
+  { shard, sizes }: PictureType,
+  requestedSize?: SizeName,
+) => {
+  //
+  // resizer doesn't upsize and there are lots of old/small
+  // images...so we need to check it small and large versions exist
+  const size = !requestedSize || src.endsWith(".jpg")
+    ? undefined
+    : requestedSize === "large" && sizes.large
+    ? "large"
+    : requestedSize === "small" && sizes.small
+    ? "small"
+    : undefined;
+
+  const path = getPath(src, size);
+
+  return PROD
+    ? new URL(path, `https://${shard}.jacobheric.com`).toString()
+    : join(ASSET_PATH, shard, path);
 };
