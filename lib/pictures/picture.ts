@@ -4,7 +4,7 @@ import { join } from "@std/path";
 
 export interface PictureType {
   shard: ShardName;
-  sizes: {
+  sizes?: {
     large: boolean;
     small: boolean;
   };
@@ -64,9 +64,9 @@ export const getImageUrl = (
   // images...so we need to check it small and large versions exist
   const size = !requestedSize || src.endsWith(".jpg")
     ? undefined
-    : requestedSize === "large" && sizes.large
+    : requestedSize === "large" && sizes?.large
     ? "large"
-    : requestedSize === "small" && sizes.small
+    : requestedSize === "small" && sizes?.small
     ? "small"
     : undefined;
 
