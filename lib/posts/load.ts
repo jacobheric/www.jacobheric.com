@@ -5,7 +5,7 @@ const POSTS_DIR = "./posts";
 
 export const rawPosts = () => Array.from(Deno.readDirSync(POSTS_DIR));
 
-const load = async () => {
+export const loadPosts = async () => {
   const posts = rawPosts();
   const slugs: string[] = [];
 
@@ -20,4 +20,4 @@ const load = async () => {
 };
 
 console.log("loading posts to kv...");
-load();
+loadPosts();

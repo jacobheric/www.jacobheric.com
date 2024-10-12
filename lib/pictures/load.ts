@@ -5,7 +5,7 @@ import { INDEX_FILE } from "@/lib/pictures/picture.ts";
 export const readIndex = () =>
   existsSync(INDEX_FILE) ? JSON.parse(Deno.readTextFileSync(INDEX_FILE)) : {};
 
-const load = () => {
+export const loadPictures = () => {
   const pictures = readIndex();
 
   Object.entries(pictures).map((
@@ -14,4 +14,4 @@ const load = () => {
 };
 
 console.log("loading picture info to kv...");
-load();
+loadPictures();
