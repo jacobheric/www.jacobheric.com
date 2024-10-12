@@ -1,7 +1,8 @@
 import { RAW_POST_PICS_DIR } from "@/lib/pictures/picture.ts";
-import { db, parseFilename, POSTS_DIR, PostType } from "@/lib/posts/posts.ts";
+import { parseFilename, POSTS_DIR, PostType } from "@/lib/posts/posts.ts";
 import { titleCase } from "@/lib/utils.ts";
 import { join } from "@std/path";
+import { db } from "@/lib/db.ts";
 
 const unposted = (name: string, latestDate: Date) => {
   const { date } = parseFilename(name);
@@ -55,7 +56,6 @@ export const make = async () => {
   const pics = Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
   const date = (await getLastPost())?.date;
 
-  console.log("shit date, date");
   if (!date) {
     throw new Error("Last post not found");
   }

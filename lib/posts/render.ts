@@ -10,7 +10,7 @@ import { Picture } from "@/components/Picture.tsx";
 const pictureExtension: TokenizerAndRendererExtension = {
   name: "picture",
   level: "inline",
-  start(src) {
+  start(src: string) {
     return src.match(/{%/)?.index;
   },
   tokenizer(src: string) {
@@ -27,7 +27,7 @@ const pictureExtension: TokenizerAndRendererExtension = {
       };
     }
   },
-  renderer(token) {
+  renderer(token: any) {
     return token.html;
   },
 };

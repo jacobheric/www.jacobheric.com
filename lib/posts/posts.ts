@@ -1,8 +1,7 @@
 import { renderMarkdown } from "@/lib/posts/render.ts";
 import { extractYaml } from "@std/front-matter";
 import { join } from "@std/path";
-
-export const db = await Deno.openKv();
+import { db } from "@/lib/db.ts";
 
 const RECENT = 10;
 const EXCERPT_MARK = "<!--more-->";
@@ -57,7 +56,6 @@ export const sort = (
 //
 // a bit tortured, start is inclusive so get 2
 export const getPrev = async (slug: string) => {
-  console.log("shit slug", slug);
   const iter = db.list<PostType>({
     prefix: ["posts"],
     start: [
@@ -89,11 +87,11 @@ export const getNext = async (slug: string) => {
 };
 
 export const getPost = async (slug: string) => {
-  const post = await db.get<PostType>(["posts", slug]);
-  if (!post.value) {
+  const { value } = await db.get<PostType>(["posts", slug]);
+  if (!value) {
     throw new Error("Post not found");
   }
-  return post.value;
+  return value;
 };
 
 export const parsePosts = async (posts: Deno.DirEntry[]) =>
@@ -104,7 +102,9 @@ export const parsePosts = async (posts: Deno.DirEntry[]) =>
 export const parsePost = async (name: string): Promise<PostType> => {
   const { date, slug } = parseFilename(name);
   const contents = await Deno.readTextFile(join(POSTS_DIR, name));
-  const { attrs, body } = extractYaml(contents);
+  const { attrs, body } = extractYaml<{ title: string; image: string }>(
+    contents,
+  );
   const excerptIndex = body.indexOf(EXCERPT_MARK);
   const afterExcerpt =
     body.substring(excerptIndex + EXCERPT_MARK.length).trim().length;
@@ -157,7 +157,6 @@ export const recentPostsParsed = async (
   const posts = [];
 
   for await (const p of iter) {
-    console.log("value", p.value);
     posts.push(p.value);
   }
 
@@ -175,7 +174,6 @@ export const recentPostsParsed = async (
 
 export const random = async () => {
   const slugs = (await db.get<string[]>(["slugs"])).value;
-  console.log("slugs", slugs);
   const slug = slugs?.length && slugs[Math.floor(Math.random() * slugs.length)];
   if (!slug) {
     throw new Error("post not found");

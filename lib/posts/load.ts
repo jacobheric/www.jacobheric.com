@@ -1,4 +1,5 @@
-import { db, parsePost } from "@/lib/posts/posts.ts";
+import { parsePost } from "@/lib/posts/posts.ts";
+import { db } from "@/lib/db.ts";
 
 const POSTS_DIR = "./posts";
 

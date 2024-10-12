@@ -5,14 +5,15 @@
     "cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
     "manifest": "deno task cli manifest $(pwd)",
     "start": "deno run -A --watch=static/,routes/ --unstable-kv dev.ts",
-    "deletePosts": "deno run -A --watch=static/,routes/ --unstable-kv ./lib/posts/delete.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update .",
-    "picture": "deno run -A ./lib/picture.ts",
-    "resizePictures": "deno run -A ./lib/pictures/resize.ts",
+    "deletePosts": "deno run -A --unstable-kv ./lib/posts/delete.ts",
     "loadPosts": "deno run -A --unstable-kv ./lib/posts/load.ts",
-    "makePosts": "deno run -A --unstable-kv ./lib/posts/make.ts"
+    "makePosts": "deno run -A --unstable-kv ./lib/posts/make.ts",
+    "loadPictures": "deno run -A --unstable-kv ./lib/pictures/load.ts",
+    "deletePictures": "deno run -A --unstable-kv ./lib/pictures/delete.ts",
+    "resizePictures": "deno run -A --unstable-kv ./lib/pictures/resize.ts"
   },
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
   "exclude": ["**/_fresh/*"],
@@ -35,7 +36,7 @@
     "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js"
   },
   "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
-  "nodeModulesDir": true,
+  "nodeModulesDir": "auto",
   "deploy": {
     "project": "70d7d543-7da6-418b-a3bf-58f9c49c669b",
     "exclude": [

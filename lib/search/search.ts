@@ -1,5 +1,6 @@
 import fuzzysort from "npm:fuzzysort";
-import { db, PostType } from "../posts/posts.ts";
+import { PostType } from "../posts/posts.ts";
+import { db } from "@/lib/db.ts";
 
 export const o = {
   threshold: .3,
@@ -13,7 +14,6 @@ export const search = async (term: string) => {
   for await (const p of iter) {
     posts.push(p.value);
   }
-  console.log("shit posts");
   const results = fuzzysort.go(term, posts, o);
   return results.map(({ obj }) => obj);
 };

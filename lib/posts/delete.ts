@@ -1,4 +1,5 @@
-import { db, PostType } from "@/lib/posts/posts.ts";
+import { PostType } from "@/lib/posts/posts.ts";
+import { db } from "@/lib/db.ts";
 
 const deletePosts = async () => {
   const iter = db.list<PostType>({ prefix: ["posts"] }, { limit: 1000 });

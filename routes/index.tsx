@@ -1,7 +1,7 @@
 import { Posts, PostType, recentPostsParsed } from "../lib/posts/posts.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { PageLink } from "@/components/Link.tsx";
-import { Picture } from "@/components/Picture.tsx";
+import { Picture } from "../components/Picture.tsx";
 import { Nav } from "@/components/Nav.tsx";
 
 export const humanDate = {
