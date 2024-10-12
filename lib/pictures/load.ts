@@ -15,4 +15,3 @@ const load = () => {
 
 console.log("loading picture info to kv...");
 load();
-console.log("done");

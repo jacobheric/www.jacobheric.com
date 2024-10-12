@@ -15,7 +15,7 @@ export const handler: Handlers<PostType> = {
     const { value } = await db.get<PictureType>([
       "pictures",
       src.toLowerCase(),
-    ]);
+    ], { consistency: "eventual" });
 
     if (!value) {
       return ctx.renderNotFound();

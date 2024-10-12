@@ -21,4 +21,3 @@ const load = async () => {
 
 console.log("loading posts to kv...");
 load();
-console.log("done");

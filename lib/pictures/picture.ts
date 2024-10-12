@@ -28,7 +28,9 @@ export const IMG_SMALL = 640;
 export const IMG_LARGE = 1300;
 
 export const getShardIndex = async (name: string) => {
-  const { value } = await db.get<PictureType>(["pictures", name]);
+  const { value } = await db.get<PictureType>(["pictures", name], {
+    consistency: "eventual",
+  });
 
   if (!value) {
     throw new Error(`Image not found in shard kv: ${name}`);

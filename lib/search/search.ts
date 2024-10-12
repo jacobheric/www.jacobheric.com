@@ -8,7 +8,10 @@ export const o = {
 };
 
 export const search = async (term: string) => {
-  const iter = db.list<PostType>({ prefix: ["posts"] }, { limit: 1000 });
+  const iter = db.list<PostType>({ prefix: ["posts"] }, {
+    limit: 1000,
+    consistency: "eventual",
+  });
 
   const posts = [];
   for await (const p of iter) {

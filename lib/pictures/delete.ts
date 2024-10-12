@@ -4,6 +4,7 @@ import type { PictureType } from "@/lib/pictures/picture.ts";
 const deletePictures = async () => {
   const iter = db.list<PictureType>({ prefix: ["pictures"] }, {
     limit: 2000,
+    consistency: "eventual",
   });
 
   for await (const p of iter) {
@@ -12,5 +13,5 @@ const deletePictures = async () => {
 };
 
 console.log("clearing pictures from kv...");
-deletePictures();
-console.log("done");
+await deletePictures();
+console.log("shit done");

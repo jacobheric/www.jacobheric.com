@@ -62,7 +62,7 @@ export const getPrev = async (slug: string) => {
       "posts",
       slug,
     ],
-  }, { limit: 2, reverse: false });
+  }, { limit: 2, reverse: false, consistency: "eventual" });
 
   const posts = [];
   for await (const p of iter) {
@@ -79,7 +79,7 @@ export const getNext = async (slug: string) => {
       "posts",
       slug,
     ],
-  }, { limit: 1, reverse: true });
+  }, { limit: 1, reverse: true, consistency: "eventual" });
 
   for await (const p of iter) {
     return p.value;
@@ -87,7 +87,9 @@ export const getNext = async (slug: string) => {
 };
 
 export const getPost = async (slug: string) => {
-  const { value } = await db.get<PostType>(["posts", slug]);
+  const { value } = await db.get<PostType>(["posts", slug], {
+    consistency: "eventual",
+  });
   if (!value) {
     throw new Error("Post not found");
   }
@@ -145,6 +147,7 @@ export const recentPostsParsed = async (
           "posts",
           start,
         ],
+        consistency: "eventual",
       },
   }, {
     //
@@ -173,7 +176,8 @@ export const recentPostsParsed = async (
 };
 
 export const random = async () => {
-  const slugs = (await db.get<string[]>(["slugs"])).value;
+  const slugs =
+    (await db.get<string[]>(["slugs"], { consistency: "eventual" })).value;
   const slug = slugs?.length && slugs[Math.floor(Math.random() * slugs.length)];
   if (!slug) {
     throw new Error("post not found");

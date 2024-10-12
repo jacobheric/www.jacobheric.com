@@ -83,7 +83,9 @@ export const resizeAll = async (overwrite: boolean = false) => {
     }
 
     const name = p.name.toLowerCase();
-    const { value } = await db.get<PictureType>(["pictures", name]);
+    const { value } = await db.get<PictureType>(["pictures", name], {
+      consistency: "eventual",
+    });
     const existingShard = value?.shard;
 
     if (!overwrite && existingShard) {
@@ -114,7 +116,10 @@ export const resizeAll = async (overwrite: boolean = false) => {
 };
 
 const writeIndex = async () => {
-  const iter = db.list<PictureType>({ prefix: ["pictures"] }, { limit: 2000 });
+  const iter = db.list<PictureType>({ prefix: ["pictures"] }, {
+    limit: 2000,
+    consistency: "eventual",
+  });
   const pictures: { [key: string]: PictureType } = {};
 
   for await (const { key, value } of iter) {

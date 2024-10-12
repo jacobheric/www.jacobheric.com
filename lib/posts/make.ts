@@ -45,6 +45,7 @@ export const getLastPost = async () => {
   const iter = db.list<PostType>({ prefix: ["posts"] }, {
     limit: 1,
     reverse: true,
+    consistency: "eventual",
   });
 
   for await (const p of iter) {
