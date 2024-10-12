@@ -1,5 +1,4 @@
 import { ComponentChildren } from "preact";
-import type { ReactNode } from "preact";
 
 export const Nav = (
   { leftChildren, rightChildren, className }: {

@@ -14,13 +14,17 @@ export const handler: Handlers<Posts> = {
   async GET(_req, ctx) {
     const last = ctx.url.searchParams.get("last") ?? undefined;
     const start = ctx.url.searchParams.get("start") ?? undefined;
-    const direction: any = ctx.url.searchParams.get("direction") ?? undefined;
+    const direction = ctx.url.searchParams.get("direction") ?? undefined;
     const limit = Number(ctx.url.searchParams.get("limit") || 10);
+
+    if (direction && direction !== "forward" && direction !== "backward") {
+      throw new Error('direction must be "forward" or "backward"');
+    }
 
     return ctx.render(
       await recentPostsParsed({
         start,
-        direction,
+        direction: direction as (undefined | "forward" | "backward"),
         limit,
         last: last === "true",
       }),

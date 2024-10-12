@@ -2,7 +2,8 @@ import {
   marked,
   Token,
   TokenizerAndRendererExtension,
-} from "https://esm.sh/marked@7.0.2";
+  type Tokens,
+} from "marked";
 import { renderToString } from "preact-render-to-string";
 import { h } from "preact";
 import { Picture } from "@/components/Picture.tsx";
@@ -27,7 +28,7 @@ const pictureExtension: TokenizerAndRendererExtension = {
       };
     }
   },
-  renderer(token: any) {
+  renderer(token: Tokens.Generic) {
     return token.html;
   },
 };
