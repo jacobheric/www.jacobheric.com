@@ -51,6 +51,8 @@ export const getImageUrl = (
 ) => {
   const path = getPath(src, size);
 
+  console.log("RESIZING PROD", PROD);
+
   return PROD
     ? new URL(path, `https://${shard}.jacobheric.com`).toString()
     : join(ASSET_PATH, shard, path);

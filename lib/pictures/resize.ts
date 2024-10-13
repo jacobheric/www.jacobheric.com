@@ -14,7 +14,7 @@ import { join } from "@std/path";
 import { PICTURES_INDEX } from "@/lib/db/db.ts";
 import sharp from "npm:/sharp";
 
-export const postPics = () => Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
+const postPics = () => Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
 
 const copy = async (src: string, dest: string) =>
   await Deno.copyFile(
@@ -73,7 +73,7 @@ const resizeRaw = async (
   return result;
 };
 
-export const resizeAll = async (overwrite: boolean = false) => {
+const resizeAll = async (overwrite: boolean = false) => {
   const pics = postPics();
 
   await Promise.all(pics.map(async (p: Deno.DirEntry) => {
