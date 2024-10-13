@@ -16,6 +16,8 @@ jobs:
 
     steps:
       - name: Clone repository
+        env:
+          PRODUCTION: true
         uses: actions/checkout@v4
 
       - name: Install Deno
