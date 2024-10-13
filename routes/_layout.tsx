@@ -43,7 +43,7 @@ export default function Layout(ctx: FreshContext) {
         </div>
       </div>
       <footer class="bg-gray-50 border-t fat text-center text-lg py-10">
-        &copy; Jacob Heric {new Date().getFullYear()}
+        Made with <span class="text-2xl">&#9829;</span> in Portland, Maine
       </footer>
     </div>
   );
