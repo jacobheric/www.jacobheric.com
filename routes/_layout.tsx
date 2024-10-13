@@ -42,8 +42,24 @@ export default function Layout(ctx: FreshContext) {
           </Partial>
         </div>
       </div>
-      <footer class="bg-gray-50 border-t fat text-center text-lg py-10">
-        Made with <span class="text-2xl">&#9829;</span> in Portland, Maine
+      <footer class="bg-gray-50 border-t flex flex-row items-center tracking-wide justify-center text-lg py-10 ">
+        <div className="w-full inline text-right">
+          <a
+            href="https://github.com/jacobheric/www.jacobheric.com"
+            class="inline"
+          >
+            Made
+          </a>{"  "}
+          with
+        </div>
+
+        <div className="text-2xl mx-2">
+          &#9829;
+        </div>
+
+        <div className="flex flex-row justify-start w-full">
+          in Portland Maine
+        </div>
       </footer>
     </div>
   );
