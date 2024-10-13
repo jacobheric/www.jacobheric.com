@@ -3,7 +3,7 @@ import { renderMarkdown } from "@/lib/posts/render.ts";
 import { extractYaml } from "@std/front-matter";
 import { join } from "@std/path";
 
-const RECENT = 10;
+const LIMIT = 10;
 const EXCERPT_MARK = "<!--more-->";
 
 export const POSTS_DIR = "./posts";
@@ -25,8 +25,8 @@ export interface PostType {
 export interface Posts {
   posts: PostType[];
   limit: number;
-  start?: string;
-  last?: boolean;
+  hasNext: boolean;
+  hasPrev: boolean;
 }
 
 type PostIndex = {
@@ -95,7 +95,7 @@ export const parsePost = async (name: string): Promise<PostType> => {
 };
 
 export const page = (
-  { start, limit = RECENT, last = false, direction = "forward" }: {
+  { start, limit = LIMIT, last = false, direction = "forward" }: {
     start?: string;
     limit: number;
     last?: boolean;
@@ -103,7 +103,12 @@ export const page = (
   },
 ): Posts => {
   if (last) {
-    return { posts: POSTS.slice(-limit), limit, start, last };
+    return {
+      posts: POSTS.slice(-limit),
+      limit,
+      hasNext: false,
+      hasPrev: true,
+    };
   }
 
   const forward = direction === "forward";
@@ -112,8 +117,10 @@ export const page = (
 
   return {
     limit,
-    start,
-    last,
+    hasNext: forward
+      ? directionalIndex + limit < POSTS.length
+      : directionalIndex < POSTS.length,
+    hasPrev: forward ? directionalIndex > 0 : directionalIndex - limit > 0,
     posts: forward
       ? POSTS.slice(directionalIndex, directionalIndex + limit)
       : POSTS.slice(directionalIndex - limit, directionalIndex),

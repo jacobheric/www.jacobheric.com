@@ -33,7 +33,7 @@ export const handler: Handlers<Posts> = {
 };
 
 export default function Home(
-  { data: { posts, start, last } }: PageProps<Posts>,
+  { data: { posts, hasPrev, hasNext } }: PageProps<Posts>,
 ) {
   return (
     <div class="w-11/12 mx-auto flex flex-col items-center justify-center">
@@ -74,12 +74,12 @@ export default function Home(
       <Nav
         leftChildren={
           <>
-            <PageLink href={last || start ? `/` : undefined}>
+            <PageLink href={hasPrev ? `/` : undefined}>
               <span>&laquo;</span>First
             </PageLink>
 
             <PageLink
-              href={last || start
+              href={hasPrev
                 ? `/?start=${posts[0].slug}&direction=backward`
                 : undefined}
             >
@@ -90,14 +90,14 @@ export default function Home(
         rightChildren={
           <>
             <PageLink
-              href={!last
+              href={hasNext
                 ? `/?start=${posts.at(-1)!.slug}&direction=forward`
                 : undefined}
             >
               Next<span>&rsaquo;</span>
             </PageLink>
 
-            <PageLink href={!last ? `/?last=true` : undefined}>
+            <PageLink href={hasNext ? `/?last=true` : undefined}>
               Last<span>&raquo;</span>
             </PageLink>
           </>
