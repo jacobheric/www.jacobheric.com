@@ -1,8 +1,7 @@
 import {
   IMG_LARGE,
   IMG_SMALL,
-  INDEX_FILE,
-  type PictureType,
+  PICTURES,
   QUALITY,
   RAW_POST_PICS_DIR,
   setShardedName,
@@ -12,7 +11,7 @@ import {
 import { parseArgs } from "@std/cli";
 import { join } from "@std/path";
 
-import { db } from "@/lib/db.ts";
+import { PICTURES_INDEX } from "@/lib/db/db.ts";
 import sharp from "npm:/sharp";
 
 export const postPics = () => Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
@@ -83,10 +82,7 @@ export const resizeAll = async (overwrite: boolean = false) => {
     }
 
     const name = p.name.toLowerCase();
-    const { value } = await db.get<PictureType>(["pictures", name], {
-      consistency: "eventual",
-    });
-    const existingShard = value?.shard;
+    const { shard: existingShard } = PICTURES[name];
 
     if (!overwrite && existingShard) {
       return;
@@ -98,9 +94,9 @@ export const resizeAll = async (overwrite: boolean = false) => {
 
     console.log("resizing image", name);
 
-    if (p.name.endsWith(".gif") || p.name.endsWith("png")) {
-      await copy(join(RAW_POST_PICS_DIR, p.name), setShardedName(name, shard));
-      db.set(["pictures", name], { shard });
+    if (p.name.endsWith(".gif") || name.endsWith("png")) {
+      await copy(join(RAW_POST_PICS_DIR, name), setShardedName(name, shard));
+      PICTURES[name] = { shard };
       return;
     }
 
@@ -109,28 +105,17 @@ export const resizeAll = async (overwrite: boolean = false) => {
     );
 
     const sizes = await resizeRaw(raw, name, shard);
-    db.set(["pictures", name], { shard, sizes });
+    PICTURES[name] = { shard, sizes };
   }));
 
   void writeIndex();
 };
 
-const writeIndex = async () => {
-  const iter = db.list<PictureType>({ prefix: ["pictures"] }, {
-    limit: 2000,
-    consistency: "eventual",
-  });
-  const pictures: { [key: string]: PictureType } = {};
-
-  for await (const { key, value } of iter) {
-    pictures[String(key.at(-1))] = value;
-  }
-
+const writeIndex = () =>
   Deno.writeTextFileSync(
-    INDEX_FILE,
-    JSON.stringify(pictures),
+    PICTURES_INDEX,
+    JSON.stringify(PICTURES),
   );
-};
 
 const flags = parseArgs(Deno.args, {
   boolean: ["overwrite"],

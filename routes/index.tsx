@@ -1,4 +1,4 @@
-import { Posts, PostType, recentPostsParsed } from "../lib/posts/posts.ts";
+import { page, Posts, PostType } from "../lib/posts/posts.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { PageLink } from "@/components/Link.tsx";
 import { Picture } from "../components/Picture.tsx";
@@ -11,7 +11,7 @@ export const humanDate = {
 };
 
 export const handler: Handlers<Posts> = {
-  async GET(_req, ctx) {
+  GET(_req, ctx) {
     const last = ctx.url.searchParams.get("last") ?? undefined;
     const start = ctx.url.searchParams.get("start") ?? undefined;
     const direction = ctx.url.searchParams.get("direction") ?? undefined;
@@ -22,7 +22,7 @@ export const handler: Handlers<Posts> = {
     }
 
     return ctx.render(
-      await recentPostsParsed({
+      page({
         start,
         direction: direction as (undefined | "forward" | "backward"),
         limit,

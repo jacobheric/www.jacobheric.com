@@ -1,8 +1,7 @@
 import { RAW_POST_PICS_DIR } from "@/lib/pictures/picture.ts";
-import { parseFilename, POSTS_DIR, PostType } from "@/lib/posts/posts.ts";
+import { parseFilename, POSTS, POSTS_DIR } from "@/lib/posts/posts.ts";
 import { titleCase } from "@/lib/utils.ts";
 import { join } from "@std/path";
-import { db } from "@/lib/db.ts";
 
 const unposted = (name: string, latestDate: Date) => {
   const { date } = parseFilename(name);
@@ -41,21 +40,9 @@ export const generate = (name: string, newPosts: Record<string, string>) => {
   }
 };
 
-export const getLastPost = async () => {
-  const iter = db.list<PostType>({ prefix: ["posts"] }, {
-    limit: 1,
-    reverse: true,
-    consistency: "eventual",
-  });
-
-  for await (const p of iter) {
-    return p.value;
-  }
-};
-
-export const make = async () => {
+export const make = () => {
   const pics = Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
-  const date = (await getLastPost())?.date;
+  const date = (POSTS.at(-1))?.date;
 
   if (!date) {
     throw new Error("Last post not found");

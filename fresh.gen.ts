@@ -8,7 +8,6 @@ import * as $_layout from "./routes/_layout.tsx";
 import * as $about from "./routes/about.tsx";
 import * as $books from "./routes/books.tsx";
 import * as $index from "./routes/index.tsx";
-import * as $pictures_src_index from "./routes/pictures/[src]/index.tsx";
 import * as $posts_slug_index from "./routes/posts/[slug]/index.tsx";
 import * as $posts_slug_next from "./routes/posts/[slug]/next.tsx";
 import * as $posts_slug_prev from "./routes/posts/[slug]/prev.tsx";
@@ -25,7 +24,6 @@ const manifest = {
     "./routes/about.tsx": $about,
     "./routes/books.tsx": $books,
     "./routes/index.tsx": $index,
-    "./routes/pictures/[src]/index.tsx": $pictures_src_index,
     "./routes/posts/[slug]/index.tsx": $posts_slug_index,
     "./routes/posts/[slug]/next.tsx": $posts_slug_next,
     "./routes/posts/[slug]/prev.tsx": $posts_slug_prev,

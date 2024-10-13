@@ -1,23 +1,18 @@
-import { parsePost } from "@/lib/posts/posts.ts";
-import { db } from "@/lib/db.ts";
+import { POSTS_INDEX } from "@/lib/db/db.ts";
+import { parsePosts, sort } from "@/lib/posts/posts.ts";
 
 const POSTS_DIR = "./posts";
+const rawPosts = () => Array.from(Deno.readDirSync(POSTS_DIR));
 
-export const rawPosts = () => Array.from(Deno.readDirSync(POSTS_DIR));
-
-export const loadPosts = async () => {
+const loadPosts = async () => {
   const posts = rawPosts();
-  const slugs: string[] = [];
+  const parsed = await parsePosts(posts.sort(sort));
 
-  await Promise.all(posts.map(async (p: Deno.DirEntry) => {
-    const post = await parsePost(p.name);
-    const slug = p.name.split(".")[0];
-    db.set(["posts", slug], post);
-    slugs.push(slug);
-  }));
-
-  db.set(["slugs"], slugs);
+  Deno.writeTextFileSync(
+    POSTS_INDEX,
+    JSON.stringify(parsed),
+  );
 };
 
-console.log("loading posts to kv...");
+console.log(`loading posts to index file...`);
 loadPosts();

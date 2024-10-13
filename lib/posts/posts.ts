@@ -1,12 +1,16 @@
+import { postsIndex } from "@/lib/db/db.ts";
 import { renderMarkdown } from "@/lib/posts/render.ts";
 import { extractYaml } from "@std/front-matter";
 import { join } from "@std/path";
-import { db } from "@/lib/db.ts";
 
 const RECENT = 10;
 const EXCERPT_MARK = "<!--more-->";
 
 export const POSTS_DIR = "./posts";
+export const POSTS: PostType[] = postsIndex().map((p: PostType) => ({
+  ...p,
+  date: new Date(p.date),
+}));
 
 export interface PostType {
   slug: string;
@@ -53,47 +57,13 @@ export const sort = (
   return dateB.getTime() - dateA.getTime();
 };
 
-//
-// a bit tortured, start is inclusive so get 2
-export const getPrev = async (slug: string) => {
-  const iter = db.list<PostType>({
-    prefix: ["posts"],
-    start: [
-      "posts",
-      slug,
-    ],
-  }, { limit: 2, reverse: false, consistency: "eventual" });
-
-  const posts = [];
-  for await (const p of iter) {
-    posts.push(p.value);
-  }
-
-  return posts.at(-1);
-};
-
-export const getNext = async (slug: string) => {
-  const iter = db.list<PostType>({
-    prefix: ["posts"],
-    end: [
-      "posts",
-      slug,
-    ],
-  }, { limit: 1, reverse: true, consistency: "eventual" });
-
-  for await (const p of iter) {
-    return p.value;
-  }
-};
-
-export const getPost = async (slug: string) => {
-  const { value } = await db.get<PostType>(["posts", slug], {
-    consistency: "eventual",
-  });
-  if (!value) {
+export const getPost = (slug: string, offset: number = 0) => {
+  const index = POSTS.findIndex((p) => p.slug === slug) + offset;
+  const post: PostType = POSTS[index];
+  if (!post) {
     throw new Error("Post not found");
   }
-  return value;
+  return { post, hasPrev: index > 0, hasNext: index < POSTS.length };
 };
 
 export const parsePosts = async (posts: Deno.DirEntry[]) =>
@@ -124,63 +94,31 @@ export const parsePost = async (name: string): Promise<PostType> => {
   };
 };
 
-//
-// posts are stored in chronological order from oldest to newest
-// but displayed newest to oldest so "forward" from the UI's perspective
-// is actually moving from a non-inclusive "end" towards the beginning
-// from a deno kv perspective
-export const recentPostsParsed = async (
+export const page = (
   { start, limit = RECENT, last = false, direction = "forward" }: {
     start?: string;
     limit: number;
     last?: boolean;
     direction?: "forward" | "backward";
   },
-): Promise<Posts> => {
-  const forward = direction === "forward";
-
-  const iter = db.list<PostType>({
-    prefix: ["posts"],
-    ...start &&
-      {
-        [forward ? "end" : "start"]: [
-          "posts",
-          start,
-        ],
-        consistency: "eventual",
-      },
-  }, {
-    //
-    // start is inclusive in deno kv so don't show that one when
-    // moving backwards in the UI
-    limit: forward ? 10 : 11,
-    reverse: !last && forward ? true : false,
-  });
-
-  const posts = [];
-
-  for await (const p of iter) {
-    posts.push(p.value);
+): Posts => {
+  if (last) {
+    return { posts: POSTS.slice(-limit), limit, start, last };
   }
+
+  const forward = direction === "forward";
+  const index = start ? POSTS.findIndex(({ slug }) => slug === start) : 0;
+  const directionalIndex = index ? forward ? index + 1 : index : index;
 
   return {
     limit,
     start,
     last,
-    posts: last
-      ? posts.toReversed()
-      : forward
-      ? posts
-      : posts.slice(1).toReversed(),
+    posts: forward
+      ? POSTS.slice(directionalIndex, directionalIndex + limit)
+      : POSTS.slice(directionalIndex - limit, directionalIndex),
   };
 };
 
-export const random = async () => {
-  const slugs =
-    (await db.get<string[]>(["slugs"], { consistency: "eventual" })).value;
-  const slug = slugs?.length && slugs[Math.floor(Math.random() * slugs.length)];
-  if (!slug) {
-    throw new Error("post not found");
-  }
-  return slug;
-};
+export const random = () =>
+  POSTS[Math.floor(Math.random() * POSTS.length)].slug;

@@ -11,10 +11,4 @@ import { start } from "$fresh/server.ts";
 import manifest from "./fresh.gen.ts";
 import config from "./fresh.config.ts";
 
-import { loadPosts } from "@/lib/posts/load.ts";
-import { loadPictures } from "@/lib/pictures/load.ts";
-
-await loadPosts();
-await loadPictures();
-
 await start(manifest, config);

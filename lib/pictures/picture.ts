@@ -1,4 +1,4 @@
-import { db } from "@/lib/db.ts";
+import { pictureIndex } from "@/lib/db/db.ts";
 
 import { join } from "@std/path";
 
@@ -12,7 +12,6 @@ export interface PictureType {
 
 export const PROD = Deno.env.get("PRODUCTION") === "true";
 
-export const INDEX_FILE = "./lib/pictures/pictures.json";
 export const SHARDS: ShardName[] = ["birch", "maple", "pine", "oak"];
 export const QUALITY = 85;
 
@@ -27,16 +26,7 @@ const ASSET_PATH = "/image/resized";
 export const IMG_SMALL = 640;
 export const IMG_LARGE = 1300;
 
-export const getShardIndex = async (name: string) => {
-  const { value } = await db.get<PictureType>(["pictures", name], {
-    consistency: "eventual",
-  });
-
-  if (!value) {
-    throw new Error(`Image not found in shard kv: ${name}`);
-  }
-  return value;
-};
+export const PICTURES: { [key: string]: PictureType } = pictureIndex();
 
 export const setShardedName = (
   name: string,
@@ -56,20 +46,9 @@ const getPath = (src: string, size?: SizeName) => {
 
 export const getImageUrl = (
   src: string,
-  { shard, sizes }: PictureType,
-  requestedSize?: SizeName,
+  shard: string,
+  size?: "small" | "large",
 ) => {
-  //
-  // resizer doesn't upsize and there are lots of old/small
-  // images...so we need to check it small and large versions exist
-  const size = !requestedSize || src.endsWith(".jpg")
-    ? undefined
-    : requestedSize === "large" && sizes?.large
-    ? "large"
-    : requestedSize === "small" && sizes?.small
-    ? "small"
-    : undefined;
-
   const path = getPath(src, size);
 
   return PROD

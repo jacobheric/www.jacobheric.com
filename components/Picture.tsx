@@ -1,3 +1,5 @@
+import { getImageUrl, PICTURES } from "@/lib/pictures/picture.ts";
+
 export const Picture = (
   { src, alt, className }: { src?: string; alt: string; className?: string },
 ) => {
@@ -6,23 +8,28 @@ export const Picture = (
     return null;
   }
 
+  const { shard, sizes } = PICTURES[src.toLowerCase()];
+
   return (
     <picture>
-      <source
-        srcset={`/pictures/${src}?size=large`}
-        media={`(min-width: 769px)`}
-        type="image/jpeg"
-      />
+      {sizes?.large &&
+        (
+          <source
+            srcset={getImageUrl(src, shard, "large")}
+            media={`(min-width: 769px)`}
+            type="image/jpeg"
+          />
+        )}
 
       <source
-        srcset={`/pictures/${src}?size=small`}
+        srcset={getImageUrl(src, shard, "small")}
         media={`(max-width: 768px)`}
         type="image/jpeg"
       />
 
       <img
         alt={alt}
-        src={`/pictures/${src}`}
+        srcset={getImageUrl(src, shard)}
         title={alt}
         className={`max-h-screen max-w-screen rounded-md my-6 ${className}`}
       />

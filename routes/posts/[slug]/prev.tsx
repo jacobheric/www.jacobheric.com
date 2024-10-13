@@ -1,12 +1,13 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 
 import Post from "@/components/Post.tsx";
-import { getPrev, PostType } from "@/lib/posts/posts.ts";
+import { getPost } from "@/lib/posts/posts.ts";
+import type { PostPage } from "@/routes/posts/[slug]/index.tsx";
 
-export const handler: Handlers<PostType> = {
-  async GET(_req, ctx) {
+export const handler: Handlers<PostPage> = {
+  GET(_req, ctx) {
     try {
-      const post = await getPrev(ctx.params.slug);
+      const post = getPost(ctx.params.slug, -1);
       return ctx.render(post);
     } catch (e: unknown) {
       console.error("previous post not found", e);
@@ -15,7 +16,8 @@ export const handler: Handlers<PostType> = {
   },
 };
 
-export default function PrevPostPage(props: PageProps<PostType>) {
-  const post = props.data;
-  return <Post post={post} />;
+export default function PrevPage(
+  { data: { post, hasNext, hasPrev } }: PageProps<PostPage>,
+) {
+  return <Post post={post} hasNext={hasNext} hasPrev={hasPrev} />;
 }

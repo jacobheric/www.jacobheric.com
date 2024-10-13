@@ -1,10 +1,10 @@
-import { PostType } from "@/lib/posts/posts.ts";
-import { humanDate } from "@/routes/index.tsx";
 import { PageLink } from "@/components/Link.tsx";
-import { Picture } from "@/components/Picture.tsx";
 import { Nav } from "@/components/Nav.tsx";
+import { Picture } from "@/components/Picture.tsx";
+import { humanDate } from "@/routes/index.tsx";
+import type { PostPage } from "@/routes/posts/[slug]/index.tsx";
 
-export default function Post({ post }: { post: PostType }) {
+export default function Post({ post, hasNext, hasPrev }: PostPage) {
   return (
     <div class="2xl:max-w-[80%] max-w-[90%] flex flex-col mt-12 ">
       <Picture src={post.image} alt={post.title} className="mx-auto" />
@@ -25,7 +25,7 @@ export default function Post({ post }: { post: PostType }) {
       <Nav
         leftChildren={
           <>
-            <PageLink href={`/posts/${post.slug}/prev`}>
+            <PageLink href={hasPrev ? `/posts/${post.slug}/prev` : undefined}>
               <span>&lsaquo;</span>Prev
             </PageLink>
             <PageLink href="/search">
@@ -38,7 +38,7 @@ export default function Post({ post }: { post: PostType }) {
             <PageLink href="/posts/random">
               Random
             </PageLink>
-            <PageLink href={`/posts/${post.slug}/next`}>
+            <PageLink href={hasNext ? `/posts/${post.slug}/next` : undefined}>
               Next<span>&rsaquo;</span>
             </PageLink>
           </>
