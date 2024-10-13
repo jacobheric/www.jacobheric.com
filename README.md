@@ -2,6 +2,8 @@
 
 [![Made with Fresh](https://fresh.deno.dev/fresh-badge.svg)](https://fresh.deno.dev)
 
+![](./screenshot.png)
+
 ### overview
 
 This is my personal site, built with Deno fresh and deployed to Deno deploy.
