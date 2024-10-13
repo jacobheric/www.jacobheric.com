@@ -10,7 +10,5 @@ Possibly the perfect meal: Cobb Salad!
 
 And, we'll throw in some chicken soup while we are at it...so much food!
 
-{% picture "2021-01-24-herbs.jpg", "Herbs" %}
-{% picture "2021-01-24-chicken-soup.jpg", "Chicken Soup" %}
-
-
+{% picture "2021-01-24-herbs.jpg", "Herbs" %} {% picture
+"2021-01-24-chicken-soup.jpg", "Chicken Soup" %}

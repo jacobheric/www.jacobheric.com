@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  Tree Climbing 
+title:  Tree Climbing
 image: 2019-10-05-lounging.jpg
 ---
-   
-Lounging and tree climbing in Evergreen cemetery.   
+
+Lounging and tree climbing in Evergreen cemetery.

@@ -35,8 +35,8 @@
   "fmt": {
     "exclude": [
       "**/node_modules",
-      "./lib/pictures/pictures.json",
-      "./posts",
+      "./lib/db/pictures.json",
+      "./lib/db/posts.json",
       "./static/styles.css"
     ]
   },

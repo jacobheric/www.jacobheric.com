@@ -8,20 +8,20 @@ A typical red-blooded american male birthday ritual...
 
 <!--more-->
 
-{% picture "2017-05-04-books.jpg", "Yes books, Portland Maine"  %}
+{% picture "2017-05-04-books.jpg", "Yes books, Portland Maine" %}
 
-Haunted the used bookstore, bought *Do Androids Dream of Electric Sheep*...  
+Haunted the used bookstore, bought _Do Androids Dream of Electric Sheep_...
 
-{% picture "2017-05-04-beer.jpg", "A beer at the Thirsty Pig"  %}
+{% picture "2017-05-04-beer.jpg", "A beer at the Thirsty Pig" %}
 
-Sipped a beer under the ivy at the Thristy Pig...  
+Sipped a beer under the ivy at the Thristy Pig...
 
-{% picture "2017-05-04-beef.jpg", "Red Meat"  %}
+{% picture "2017-05-04-beef.jpg", "Red Meat" %}
 
-{% picture "2017-05-04-DJ.jpg", "Kids DJ"  %}
+{% picture "2017-05-04-DJ.jpg", "Kids DJ" %}
 
- Kids DJ. I pick the music. I choose the volume (*loud*)...
+Kids DJ. I pick the music. I choose the volume (_loud_)...
 
-{% picture "2017-05-04-rocking.jpg", "What I want, as loud as I want it"  %}
+{% picture "2017-05-04-rocking.jpg", "What I want, as loud as I want it" %}
 
-Everyone rocks out.  
+Everyone rocks out.

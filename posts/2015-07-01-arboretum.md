@@ -6,8 +6,8 @@ image: arboretum.jpg
 
 <!--more-->
 
-{% picture "cork.jpg", "cork"  %}
+{% picture "cork.jpg", "cork" %}
 
-{% picture "tree.jpg", "tree"  %}
+{% picture "tree.jpg", "tree" %}
 
-{% picture "shade.gif", "shade"  %} 
+{% picture "shade.gif", "shade" %}

@@ -8,7 +8,7 @@ It's true...I like to monkey around on the course.
 
 <!--more-->
 
-Wrapping up a round as the sun sets. 
+Wrapping up a round as the sun sets.
 
-{% picture "2021-05-13-sunset-at-spring-meadows.jpg", "Sunset at Spring Meadows" %}
-
+{% picture "2021-05-13-sunset-at-spring-meadows.jpg", "Sunset at Spring Meadows"
+%}

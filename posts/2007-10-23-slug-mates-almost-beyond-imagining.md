@@ -26,6 +26,6 @@ stinging scorpions.
 
 I'm not sure how the BBC feels about its content being on you tube. The video
 and info on their
-<a 
+<a
 href="http://www.bbc.co.uk/sn/tvradio/programmes/lifeintheundergrowth/video.shtml">site</a>
 is much better. I just can't embed their videos in my posts.

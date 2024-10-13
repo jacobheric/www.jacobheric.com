@@ -4,7 +4,4 @@ title: Nutmobile!
 image: 2021-03-16-nutmobile.jpg
 ---
 
-A rare sighting. 
-
-
-
+A rare sighting.

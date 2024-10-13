@@ -3,6 +3,7 @@ layout: post
 title: the best thing that ever happened to Maine
 image: mall-train.jpg
 ---
+
 video inside
 
 <!--more-->

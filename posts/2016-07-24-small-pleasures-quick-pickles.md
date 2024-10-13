@@ -5,4 +5,5 @@ image: quick-pickles-jars.jpg
 ---
 
 <!--more-->
-{% picture "quick-pickles-hot.jpg", "quick hot pickles"  %} 
+
+{% picture "quick-pickles-hot.jpg", "quick hot pickles" %}

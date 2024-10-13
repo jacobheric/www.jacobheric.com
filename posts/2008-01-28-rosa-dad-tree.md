@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rosa & Dad & Tree
-image: big-tree-small-car.jpg 
+image: big-tree-small-car.jpg
 ---
 
 This year was especially accommodating for the annual tree gathering adventure

@@ -2,10 +2,9 @@
 layout: post
 title: high wire act
 image: high-wire-act.png
-
 ---
-And I thought my job was stressful.
 
+And I thought my job was stressful.
 
 <!--more-->
 <br/>

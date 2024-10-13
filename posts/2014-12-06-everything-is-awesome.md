@@ -5,12 +5,13 @@ image: mom.jpg
 ---
 
 <!--more-->
-{% picture "may.jpg", "may"  %} 
 
-{% picture "mom.jpg", "mom"  %} 
+{% picture "may.jpg", "may" %}
 
-{% picture "rosa.jpg", "rosa"  %} 
+{% picture "mom.jpg", "mom" %}
 
-{% picture "dad.jpg", "dad"  %} 
+{% picture "rosa.jpg", "rosa" %}
 
-{% picture "may-at-work.gif", "may builder"  %}
+{% picture "dad.jpg", "dad" %}
+
+{% picture "may-at-work.gif", "may builder" %}

@@ -3,8 +3,9 @@ layout: post
 title: flatbreads, bissel
 image: flatbreads-bissel.jpg
 ---
-As the weather warms, there is not better place to cool out than the side deck of Flatbread's.
 
+As the weather warms, there is not better place to cool out than the side deck
+of Flatbread's.
 
 <!--more-->
 
