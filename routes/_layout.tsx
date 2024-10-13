@@ -49,7 +49,7 @@ export default function Layout(ctx: FreshContext) {
             class="inline"
           >
             Made
-          </a>{"  "}
+          </a>{" "}
           with
         </div>
 
@@ -58,7 +58,7 @@ export default function Layout(ctx: FreshContext) {
         </div>
 
         <div className="flex flex-row justify-start w-full">
-          in Portland Maine
+          in Maine
         </div>
       </footer>
     </div>

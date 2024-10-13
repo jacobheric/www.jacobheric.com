@@ -82,14 +82,14 @@ const resizeAll = async (overwrite: boolean = false) => {
     }
 
     const name = p.name.toLowerCase();
-    const { shard: existingShard } = PICTURES[name];
+    const existingShard = PICTURES[name];
 
     if (!overwrite && existingShard) {
       return;
     }
 
     const shard = overwrite && existingShard
-      ? existingShard
+      ? existingShard.shard
       : SHARDS[Math.floor(Math.random() * SHARDS.length)];
 
     console.log("resizing image", name);
