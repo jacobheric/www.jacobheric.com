@@ -42,7 +42,7 @@ export const generate = (name: string, newPosts: Record<string, string>) => {
 
 export const make = () => {
   const pics = Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
-  const date = (POSTS.value.at(-1))?.date;
+  const date = (POSTS.value.at(0))?.date;
 
   if (!date) {
     throw new Error("Last post not found");
