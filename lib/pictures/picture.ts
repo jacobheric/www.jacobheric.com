@@ -1,6 +1,8 @@
 import { pictureIndex } from "@/lib/db/db.ts";
+import { signal } from "@preact/signals";
 
 import { join } from "@std/path";
+import { PROD } from "@/lib/utils.ts";
 
 export interface PictureType {
   shard: ShardName;
@@ -9,8 +11,6 @@ export interface PictureType {
     small: boolean;
   };
 }
-
-export const PROD = Deno.env.get("PRODUCTION") === "true";
 
 export const SHARDS: ShardName[] = ["birch", "maple", "pine", "oak"];
 export const QUALITY = 85;
@@ -26,7 +26,9 @@ const ASSET_PATH = "/image/resized";
 export const IMG_SMALL = 640;
 export const IMG_LARGE = 1300;
 
-export const PICTURES: { [key: string]: PictureType } = pictureIndex();
+export const PICTURES = signal<{ [key: string]: PictureType }>(
+  pictureIndex(),
+);
 
 export const setShardedName = (
   name: string,

@@ -8,7 +8,7 @@ import {
   ShardName,
   SHARDS,
 } from "@/lib/pictures/picture.ts";
-import { parseArgs } from "@std/cli";
+
 import { join } from "@std/path";
 
 import { PICTURES_INDEX } from "@/lib/db/db.ts";
@@ -73,7 +73,7 @@ const resizeRaw = async (
   return result;
 };
 
-const resizeAll = async (overwrite: boolean = false) => {
+export const resizePictures = async (overwrite: boolean = false) => {
   const pics = postPics();
 
   await Promise.all(pics.map(async (p: Deno.DirEntry) => {
@@ -82,7 +82,7 @@ const resizeAll = async (overwrite: boolean = false) => {
     }
 
     const name = p.name.toLowerCase();
-    const existingShard = PICTURES[name];
+    const existingShard = PICTURES.value[name];
 
     if (!overwrite && existingShard) {
       return;
@@ -96,7 +96,7 @@ const resizeAll = async (overwrite: boolean = false) => {
 
     if (p.name.endsWith(".gif") || name.endsWith("png")) {
       await copy(join(RAW_POST_PICS_DIR, name), setShardedName(name, shard));
-      PICTURES[name] = { shard };
+      PICTURES.value[name] = { shard };
       return;
     }
 
@@ -105,7 +105,7 @@ const resizeAll = async (overwrite: boolean = false) => {
     );
 
     const sizes = await resizeRaw(raw, name, shard);
-    PICTURES[name] = { shard, sizes };
+    PICTURES.value[name] = { shard, sizes };
   }));
 
   void writeIndex();
@@ -114,14 +114,5 @@ const resizeAll = async (overwrite: boolean = false) => {
 const writeIndex = () =>
   Deno.writeTextFileSync(
     PICTURES_INDEX,
-    JSON.stringify(PICTURES),
+    JSON.stringify(PICTURES.value),
   );
-
-const flags = parseArgs(Deno.args, {
-  boolean: ["overwrite"],
-  default: { overwrite: false },
-});
-
-console.log("resizing pictures...");
-await resizeAll(flags.overwrite);
-console.log("done");

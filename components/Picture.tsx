@@ -8,7 +8,7 @@ export const Picture = (
     return null;
   }
 
-  const { shard, sizes } = PICTURES[src.toLowerCase()];
+  const { shard, sizes } = PICTURES.value[src.toLowerCase()];
 
   return (
     <picture>
