@@ -8,25 +8,29 @@ export const Picture = (
     return null;
   }
 
-  const picInfo = PICTURES[src.toLowerCase()];
+  const { shard, sizes } = PICTURES[src.toLowerCase()];
 
   return (
     <picture>
-      <source
-        srcset={getImageUrl(src, picInfo, "large")}
-        media={`(min-width: 769px)`}
-        type="image/jpeg"
-      />
+      {sizes?.large && (
+        <source
+          srcset={getImageUrl(src, shard, "large")}
+          media={`(min-width: 769px)`}
+          type="image/jpeg"
+        />
+      )}
 
-      <source
-        srcset={getImageUrl(src, picInfo, "small")}
-        media={`(max-width: 768px)`}
-        type="image/jpeg"
-      />
+      {sizes?.small && (
+        <source
+          srcset={getImageUrl(src, shard, "small")}
+          media={`(max-width: 768px)`}
+          type="image/jpeg"
+        />
+      )}
 
       <img
         alt={alt}
-        srcset={getImageUrl(src, picInfo)}
+        srcset={getImageUrl(src, shard)}
         title={alt}
         className={`max-h-screen max-w-screen rounded-md my-6 ${className}`}
       />

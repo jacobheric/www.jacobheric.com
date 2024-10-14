@@ -46,19 +46,9 @@ const getPath = (src: string, size?: SizeName) => {
 
 export const getImageUrl = (
   src: string,
-  { shard, sizes }: PictureType,
-  requestedSize?: "small" | "large",
+  shard: string,
+  size?: "small" | "large",
 ) => {
-  //
-  // resizer doesn't upsize and there are lots of old/small
-  // images...so we need to check it small and large versions exist
-  const size = !requestedSize || src.endsWith(".jpg")
-    ? undefined
-    : requestedSize === "large" && sizes?.large
-    ? "large"
-    : requestedSize === "small" && sizes?.small
-    ? "small"
-    : undefined;
   const path = getPath(src, size);
 
   return PROD
