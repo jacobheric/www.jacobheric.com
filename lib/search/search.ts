@@ -7,6 +7,6 @@ export const o = {
 };
 
 export const search = (term: string) => {
-  const results = fuzzysort.go(term, POSTS, o);
+  const results = fuzzysort.go(term, POSTS.value, o);
   return results.map(({ obj }) => obj);
 };
