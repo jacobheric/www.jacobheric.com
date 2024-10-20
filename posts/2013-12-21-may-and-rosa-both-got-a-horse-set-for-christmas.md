@@ -9,4 +9,4 @@ pronunciation is not always spot on. Video in the post.
 
 <!--more-->
 
-<iframe src="https://drive.google.com/file/d/0B0Xq-UY2zrWGNjQtR0tyM3VzZjA/preview" width="90%" height="480"></iframe>
+<iframe src="https://drive.google.com/file/d/0B0Xq-UY2zrWGNjQtR0tyM3VzZjA/preview" class="w-full mx-auto"></iframe>

@@ -19,5 +19,5 @@ The smile was big and the pride was priceless and she has not stopped pedaling
 since. Later that night she asked me, "what do you think about me riding on two
 wheels?" I think it's about perfect.
 
-<iframe src="https://player.vimeo.com/video/11029850" width="90%" height="360" frameborder="0" allow="autoplay;
+<iframe src="https://player.vimeo.com/video/11029850" class="w-full mx-auto" frameborder="0" allow="autoplay;
 fullscreen" allowfullscreen></iframe>

@@ -51,7 +51,7 @@ each from the mash and hot liquor.
 
 The pristine and well-appointed brewery.
 
-<iframe src="https://player.vimeo.com/video/19595636"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe class="w-full mx-auto" src="https://player.vimeo.com/video/19595636"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 Doughing-in. A good stir to avoid those dreaded "dough balls." There is a lot of
 science in the mash. A lot of things to fiddle with, especially temperature. The
@@ -67,7 +67,7 @@ This is not just hot water in a bucket, it's hot liquor...180 degrees fahrenheit
 or so. Technically, I'd advise twice the volume of the water used in the mash.
 In practice, I just fill up the cooler, more or less.
 
-<iframe src="https://player.vimeo.com/video/19597658"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe class="w-full mx-auto" src="https://player.vimeo.com/video/19597658"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 The revolving stainless steel sparge arm. This is a handy, but by no means
 necessary, brew day tool. For a couple years at the outset of all-grain brewing,
@@ -78,7 +78,7 @@ from the sparge and play with the kids, get another beer, etc. The idea of the
 sparge is to gently sprinkle water over the grains so that the water runs evenly
 through, pulling as much sugar out as possible.
 
-<iframe src="https://player.vimeo.com/video/19596620"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe class="w-full mx-auto" src="https://player.vimeo.com/video/19596620"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 At the beginning of the sparge I capture the first, grainy runnings in a small
 vessel and add them back on top of the grains. Sparging is a big source of
@@ -95,7 +95,7 @@ set.
 The unattended sparge. Notice the sophisticated insulation equipment (a beach
 towel) minimizing heat loss.
 
-<iframe src="https://player.vimeo.com/video/19597587"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe class="w-full mx-auto" src="https://player.vimeo.com/video/19597587"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 Sparge over, the wort goes on the heat for the boil. I keep the lid on until the
 boil gets going. Then it's off with the lid for a long, vigorous boil. One
@@ -151,7 +151,7 @@ homebrewing for me in a nutshell right there. You can make whatever the hell you
 want. You can be original. If things go awry? Who cares. I've never made a
 mistake that I didn't enjoy.
 
-<iframe src="https://player.vimeo.com/video/19595692"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe class="w-full mx-auto" src="https://player.vimeo.com/video/19595692"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 Outside of drinking the beer, this is the big payoff. Fermentation is beautiful.
 Yeast life is teeming in there. Alcohol is in the offing. The smells in the

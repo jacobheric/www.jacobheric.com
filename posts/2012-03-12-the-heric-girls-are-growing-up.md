@@ -13,6 +13,6 @@ Videos below the fold.
 
 <!--more-->
 
-<iframe src="https://drive.google.com/file/d/0B0Xq-UY2zrWGd3dRSjlyYXFLNGM/preview" width="90%" height="480"></iframe>
+<iframe src="https://drive.google.com/file/d/0B0Xq-UY2zrWGd3dRSjlyYXFLNGM/preview" class="w-full mx-auto"></iframe>
 
-<iframe src="https://drive.google.com/file/d/0B0Xq-UY2zrWGYXVFUEFhb2VIcWs/preview" width="90%" height="480"></iframe>
+<iframe src="https://drive.google.com/file/d/0B0Xq-UY2zrWGYXVFUEFhb2VIcWs/preview" class="w-full mx-auto"></iframe>

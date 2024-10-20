@@ -3,7 +3,7 @@ layout: post
 title: 'Slug mates: "almost beyond imagining." '
 ---
 
-<iframe width="90%" height="600" src="https://www.youtube.com/embed/wG9qpZ89qzc"
+<iframe class="w-full mx-auto" src="https://www.youtube.com/embed/wG9qpZ89qzc"
     frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 

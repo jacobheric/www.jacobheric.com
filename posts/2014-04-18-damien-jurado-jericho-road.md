@@ -9,4 +9,4 @@ image: jurado.jpg
 That a man is capable of executing such a simple and beautiful thing is
 convincing encouragement for the cause of human consciousness.
 
-<iframe width="90%" height="510" src="//www.youtube.com/embed/PNHTmqAny3U" frameborder="0" allowfullscreen></iframe>
+<iframe class="w-full mx-auto" src="//www.youtube.com/embed/PNHTmqAny3U" frameborder="0" allowfullscreen></iframe>

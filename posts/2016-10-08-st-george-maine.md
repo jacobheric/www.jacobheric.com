@@ -9,8 +9,7 @@ made quite a game out of it. Video inside.
 
 <!--more-->
 
-<iframe src="https://drive.google.com/file/d/19M3_TQKcizKHN3oaHSSW8oWp6e4Qhg4nkQ/preview" width="90%"
-    height="480"></iframe>
+<iframe src="https://drive.google.com/file/d/19M3_TQKcizKHN3oaHSSW8oWp6e4Qhg4nkQ/preview" class="w-full mx-auto"></iframe>
 
 {% picture "st-george-may-atlas.jpg", "May holds up the world" %}
 

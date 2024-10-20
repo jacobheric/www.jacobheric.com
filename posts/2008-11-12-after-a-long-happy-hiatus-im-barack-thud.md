@@ -3,7 +3,7 @@ layout: post
 title: After a long, happy hiatus, I'm barack (thud)!
 ---
 
-<iframe width="90%" height="678" src="https://www.youtube.com/embed/45s7MSDrkbg"
+<iframe class="w-full mx-auto" src="https://www.youtube.com/embed/45s7MSDrkbg"
         frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 
