@@ -1,8 +1,9 @@
-import { page, Posts, PostType } from "../lib/posts/posts.ts";
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { postPage, Posts, PostType } from "../lib/posts/posts.ts";
+import { page, PageProps } from "fresh";
 import { PageLink } from "@/components/Link.tsx";
 import { Picture } from "../components/Picture.tsx";
 import { Nav } from "@/components/Nav.tsx";
+import { define } from "@/lib/state.ts";
 
 export const humanDate = {
   year: "numeric" as const,
@@ -10,8 +11,8 @@ export const humanDate = {
   day: "numeric" as const,
 };
 
-export const handler: Handlers<Posts> = {
-  GET(_req, ctx) {
+export const handler = define.handlers({
+  GET(ctx) {
     const last = ctx.url.searchParams.get("last") ?? undefined;
     const start = ctx.url.searchParams.get("start") ?? undefined;
     const direction = ctx.url.searchParams.get("direction") ?? undefined;
@@ -21,8 +22,8 @@ export const handler: Handlers<Posts> = {
       throw new Error('direction must be "forward" or "backward"');
     }
 
-    return ctx.render(
-      page({
+    return page(
+      postPage({
         start,
         direction: direction as (undefined | "forward" | "backward"),
         limit,
@@ -30,7 +31,7 @@ export const handler: Handlers<Posts> = {
       }),
     );
   },
-};
+});
 
 export default function Home(
   { data: { posts, hasPrev, hasNext } }: PageProps<Posts>,

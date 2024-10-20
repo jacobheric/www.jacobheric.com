@@ -1,12 +1,11 @@
-import { Handlers } from "$fresh/server.ts";
+import { define } from "@/lib/state.ts";
+import { random } from "../../lib/posts/posts.ts";
 
-import { PostType, random } from "../../lib/posts/posts.ts";
-
-export const handler: Handlers<PostType> = {
-  async GET(_req) {
+export const handler = define.handlers({
+  GET(_req) {
     return new Response("", {
       status: 307,
-      headers: { Location: `/posts/${await random()}` },
+      headers: { Location: `/posts/${random()}` },
     });
   },
-};
+});

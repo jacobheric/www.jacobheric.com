@@ -1,13 +1,14 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { page, PageProps } from "fresh";
 import { PageLink } from "@/components/Link.tsx";
 import { Posts } from "../lib/posts/posts.ts";
 import { search } from "@/lib/search/search.ts";
 import { humanDate } from "@/routes/index.tsx";
+import { define } from "@/lib/state.ts";
 
 export type SearchPosts = Posts & { term?: string };
 
-export const handler: Handlers<SearchPosts> = {
-  GET(_req, ctx) {
+export const handler = define.handlers({
+  GET(ctx) {
     const term = ctx.url.searchParams.get("term") || "";
     const limit = 50;
     const result = {
@@ -19,16 +20,16 @@ export const handler: Handlers<SearchPosts> = {
     };
 
     if (!term) {
-      return ctx.render(result);
+      return page(result);
     }
 
     const results = search(term);
-    return ctx.render({
+    return page({
       ...result,
       posts: results.slice(0, limit),
     });
   },
-};
+});
 
 export default function Search(
   { data: { term, posts } }: PageProps<SearchPosts>,

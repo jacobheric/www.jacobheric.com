@@ -1,7 +1,7 @@
-import { Partial } from "$fresh/runtime.ts";
-import { FreshContext } from "$fresh/server.ts";
+import { type PageProps } from "fresh";
+import { Partial } from "fresh/runtime";
 
-export default function Layout(ctx: FreshContext) {
+export default function Layout({ Component }: PageProps) {
   return (
     <div className="flex flex-col min-h-screen justify-between">
       <div className="flex flex-col justify-start">
@@ -38,7 +38,7 @@ export default function Layout(ctx: FreshContext) {
         </div>
         <div class="flex justify-center">
           <Partial name="overlay-content">
-            <ctx.Component />
+            <Component />
           </Partial>
         </div>
       </div>

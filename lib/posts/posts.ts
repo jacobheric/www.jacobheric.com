@@ -19,6 +19,7 @@ export const POSTS = signal<PostType[]>(
 export interface PostType {
   slug: string;
   title: string;
+  description?: string;
   image: string;
   date: Date;
   excerpt: string;
@@ -89,20 +90,21 @@ export const parsePost = async (name: string): Promise<PostType> => {
   const afterExcerpt =
     body.substring(excerptIndex + EXCERPT_MARK.length).trim().length;
 
+  const rawExcerpt = excerptIndex >= 0 ? body.slice(0, excerptIndex) : "";
+
   return {
     slug,
     title: attrs.title as string,
+    description: rawExcerpt,
     image: attrs.image as string,
     date,
     content: renderMarkdown(body),
     showMore: afterExcerpt > 0,
-    excerpt: excerptIndex >= 0
-      ? renderMarkdown(body.slice(0, excerptIndex))
-      : "",
+    excerpt: renderMarkdown(rawExcerpt),
   };
 };
 
-export const page = (
+export const postPage = (
   { start, limit = LIMIT, last = false, direction = "forward" }: {
     start?: string;
     limit: number;
