@@ -1,9 +1,10 @@
 // main.ts
-import { App, fsRoutes, staticFiles } from "fresh";
+import { App, fsRoutes, staticFiles, trailingSlashes } from "fresh";
 
 export const app = new App()
   // Add static file serving middleware
-  .use(staticFiles());
+  .use(staticFiles())
+  .use(trailingSlashes("never"));
 
 // Enable file-system based routing
 await fsRoutes(app, {
