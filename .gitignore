@@ -13,3 +13,5 @@ node_modules/
 #
 # ignore raw images, I resize and shard them to different repos
 static/image/raw
+
+.idea
