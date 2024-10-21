@@ -4,12 +4,23 @@ import Post from "@/components/Post.tsx";
 import { getPost, PostType } from "@/lib/posts/posts.ts";
 import { define } from "@/lib/state.ts";
 
-export type PostPage = { post: PostType; hasPrev: boolean; hasNext: boolean };
+export type PostPage = {
+  post: PostType;
+  hasPrev: boolean;
+  hasNext: boolean;
+  random: string;
+};
 
 export const handler = define.handlers({
   GET(ctx) {
     try {
-      const data = getPost(ctx.params.slug);
+      const path = ctx.url.pathname;
+      const offset = path.includes("/prev")
+        ? -1
+        : path.includes("/next")
+        ? 1
+        : 0;
+      const data = getPost(ctx.params.slug, offset);
       ctx.state.title = data.post.title;
       ctx.state.description = data.post.description;
 
@@ -22,7 +33,9 @@ export const handler = define.handlers({
 });
 
 export default function PostPage(
-  { data: { post, hasNext, hasPrev } }: PageProps<PostPage>,
+  { data: { post, hasNext, hasPrev, random } }: PageProps<PostPage>,
 ) {
-  return <Post post={post} hasNext={hasNext} hasPrev={hasPrev} />;
+  return (
+    <Post post={post} hasNext={hasNext} hasPrev={hasPrev} random={random} />
+  );
 }

@@ -32,6 +32,7 @@ export interface Posts {
   limit: number;
   hasNext: boolean;
   hasPrev: boolean;
+  random: string;
 }
 
 type PostIndex = {
@@ -68,10 +69,12 @@ export const getPost = (slug: string, offset: number = 0) => {
   if (!post) {
     throw new Error("Post not found");
   }
+  const random = getRandom();
   return {
     post,
     hasPrev: index > 0,
     hasNext: index < POSTS.value.length,
+    random,
   };
 };
 
@@ -112,12 +115,14 @@ export const postPage = (
     direction?: "forward" | "backward";
   },
 ): Posts => {
+  const random = getRandom();
   if (last) {
     return {
       posts: POSTS.value.slice(-limit),
       limit,
       hasNext: false,
       hasPrev: true,
+      random,
     };
   }
 
@@ -134,8 +139,9 @@ export const postPage = (
     posts: forward
       ? POSTS.value.slice(directionalIndex, directionalIndex + limit)
       : POSTS.value.slice(directionalIndex - limit, directionalIndex),
+    random,
   };
 };
 
-export const random = () =>
+export const getRandom = () =>
   POSTS.value[Math.floor(Math.random() * POSTS.value.length)].slug;
