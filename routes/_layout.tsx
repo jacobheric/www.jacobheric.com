@@ -22,7 +22,7 @@ export default function Layout({ Component }: PageProps) {
             </div>
           </div>
           <div class="italic text-lg font-medium tracking-wide ">
-            <a href="/about/" alt="About Jacob Heric" title="About Jacob Heric">
+            <a href="/about/" title="About Jacob Heric">
               About
             </a>
             <span className="font-sans mx-2 not-italic">|</span>
