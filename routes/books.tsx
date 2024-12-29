@@ -67,7 +67,6 @@ export default function Books() {
         Out now on
         <a
           href="https://www.truejokercompany.com"
-          alt="True Joker Company Publications"
           rel="nofollow"
           className="ml-2"
         >

@@ -10,7 +10,6 @@ export default function Layout({ Component }: PageProps) {
             <h3 class=" uppercase font-bold text-7xl tracking-widest pb-4">
               <a
                 class="no-underline"
-                id="site-title"
                 href="/"
                 title="Home"
               >
@@ -29,7 +28,6 @@ export default function Layout({ Component }: PageProps) {
             <span className="font-sans mx-2 not-italic">|</span>
             <a
               href="/books/"
-              alt="Jacob Heric's Books"
               title="Jacob Heric's Books"
             >
               Books
