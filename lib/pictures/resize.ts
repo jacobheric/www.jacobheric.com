@@ -88,7 +88,7 @@ export const resizePictures = async (overwrite: boolean = false) => {
       return;
     }
 
-    const shard = overwrite && existingShard
+    const shard = existingShard
       ? existingShard.shard
       : SHARDS[Math.floor(Math.random() * SHARDS.length)];
 
