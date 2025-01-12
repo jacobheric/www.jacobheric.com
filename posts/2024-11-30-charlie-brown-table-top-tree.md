@@ -1,5 +1,5 @@
 ---
-title: Charle Brown Tree
+title: Charlie Brown Tree
 image: 2024-11-30-charlie-brown-table-top-tree.jpg
 ---
 
