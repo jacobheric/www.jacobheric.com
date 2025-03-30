@@ -17,6 +17,7 @@ export default function Post({ post, hasNext, hasPrev, random }: PostPage) {
       </div>
       <div
         class="text-base text-justify mb-6"
+        // deno-lint-ignore react-no-danger
         dangerouslySetInnerHTML={{ __html: post.content }}
       >
       </div>

@@ -59,6 +59,7 @@ export default function Home(
             </div>
             <div
               class="text-base mb-4 text-center"
+              // deno-lint-ignore react-no-danger
               dangerouslySetInnerHTML={{ __html: p.excerpt }}
             />
 
