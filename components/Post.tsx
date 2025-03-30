@@ -6,22 +6,22 @@ import type { PostPage } from "@/routes/posts/[slug]/index.tsx";
 
 export default function Post({ post, hasNext, hasPrev, random }: PostPage) {
   return (
-    <div class="2xl:max-w-[80%] max-w-[90%] flex flex-col mt-12 ">
+    <div class="2xl:max-w-[80%] max-w-[90%] flex flex-col mt-12">
       <Picture src={post.image} alt={post.title} className="mx-auto" />
 
-      <div class="title text-3xl italic my-6 mx-auto ">
+      <div class="title text-3xl italic my-6 mx-auto dark:text-white">
         {post.title}
       </div>
-      <div class="italic text-base mb-4 mx-auto">
+      <div class="italic text-base mb-4 mx-auto dark:text-white">
         {post.date.toLocaleDateString("en-us", humanDate)}
       </div>
       <div
-        class="text-base text-justify mb-6"
+        class="text-base text-justify mb-6 dark:text-white"
         // deno-lint-ignore react-no-danger
         dangerouslySetInnerHTML={{ __html: post.content }}
       >
       </div>
-      <hr class="w-10/12 border-gray-300 mx-auto" />
+      <hr class="w-10/12 border-gray-300 mx-auto dark:border-gray-700" />
 
       <Nav
         leftChildren={

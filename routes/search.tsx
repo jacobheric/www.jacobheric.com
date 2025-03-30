@@ -35,11 +35,11 @@ export default function Search(
   { data: { term, posts } }: PageProps<SearchPosts>,
 ) {
   return (
-    <div class="w-full text-lg mt-12 max-w-prose">
+    <div class="w-full text-lg mt-12 max-w-prose dark:text-white">
       <form className="flex flex-row justify-center mx-4">
         <input
           name="term"
-          class="w-72 mr-4 p-2 border rounded-md"
+          class="w-72 mr-4 p-2 border rounded-md dark:bg-gray-800 dark:text-white"
           type="search"
           placeholder="something to search..."
           defaultValue={term}

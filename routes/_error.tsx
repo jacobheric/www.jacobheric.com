@@ -8,7 +8,7 @@ export default function ErrorPage(props: PageProps) {
     // Render a 404 not found page
     if (status === 404) {
       return (
-        <div class="px-4 py-8 mx-auto my-10 text-2xl">
+        <div class="px-4 py-8 mx-auto my-10 text-2xl dark:text-white">
           nope
         </div>
       );

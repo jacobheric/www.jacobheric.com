@@ -49,16 +49,16 @@ export default function Home(
                 className="mx-auto"
               />
             </a>
-            <div class="text-3xl italic my-6 text-center">
+            <div class="text-3xl italic my-6 text-center dark:text-white">
               <a href={`/posts/${p.slug}`}>
                 {p.title}
               </a>
             </div>
-            <div class="italic text-base mb-4 text-center w-full">
+            <div class="italic text-base mb-4 text-center w-full dark:text-white">
               {p.date.toLocaleDateString("en-us", humanDate)}
             </div>
             <div
-              class="text-base mb-4 text-center"
+              class="text-base mb-4 text-center dark:text-white"
               // deno-lint-ignore react-no-danger
               dangerouslySetInnerHTML={{ __html: p.excerpt }}
             />
@@ -68,7 +68,7 @@ export default function Home(
                 <a href={`/posts/${p.slug}`} class="next">More</a>
               </div>
             )}
-            <hr class="w-10/12 border-gray-300 mt-12 mx-auto" />
+            <hr class="w-10/12 border-gray-300 mt-12 mx-auto dark:border-gray-700" />
           </div>
         );
       })}

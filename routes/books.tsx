@@ -2,7 +2,7 @@ import { Picture } from "@/components/Picture.tsx";
 
 export default function Books() {
   return (
-    <div class="w-11/12 mx-auto flex flex-col items-center">
+    <div class="w-11/12 mx-auto flex flex-col items-center dark:text-white">
       <div class="title text-6xl my-12 text-center">Books</div>
       <div>
         <span class="title text-2xl font-bold italic inline mr-2 text-center">
