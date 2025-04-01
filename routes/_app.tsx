@@ -14,6 +14,7 @@ function App({ Component, state }: PageProps<never, State>) {
         />
         <link rel="icon" type="image/png" href="/image/avatar.png" />
         <link rel="shortcut icon" type="image/png" href="/image/avatar.png" />
+        <link rel="manifest" href="/manifest.json" />
 
         <link rel="stylesheet" href="/styles.css" />
       </head>

@@ -1,0 +1,17 @@
+{
+  "short_name": "Jacob",
+  "name": "Jacob Heric",
+  "icons": [
+    {
+      "src": "/image/avatar.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/image/avatar.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/"
+}
