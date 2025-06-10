@@ -7,7 +7,7 @@ export default function Layout({ Component }: PageProps) {
       <div className="flex flex-col justify-start">
         <div class="bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-700 text-center pt-7 pb-3">
           <div>
-            <h3 class="uppercase font-bold text-7xl tracking-widest pb-4 dark:text-white">
+            <h3 class="uppercase font-bold text-6xl tracking-widest pb-4 dark:text-white">
               <a
                 class="no-underline"
                 href="/"
@@ -40,7 +40,7 @@ export default function Layout({ Component }: PageProps) {
           </Partial>
         </div>
       </div>
-      <footer class="bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-white border-t flex flex-row items-center tracking-wide justify-center text-lg py-10 ">
+      <footer class="bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-white border-t flex flex-row items-center tracking-wide justify-center text-lg py-6">
         <div className="w-full inline text-right">
           <a
             href="https://github.com/jacobheric/www.jacobheric.com"
