@@ -12,11 +12,11 @@ function App({ Component, state }: PageProps<never, State>) {
           name="description"
           content={state.description || "The life and times of Jacob Heric"}
         />
-        <link rel="icon" type="image/png" href="/image/me-bw-small.png" />
+        <link rel="icon" type="image/png" href="/image/me-bw.png" />
         <link
           rel="shortcut icon"
           type="image/png"
-          href="/image/me-bw-small.png"
+          href="/image/me-bw.png"
         />
         <link rel="manifest" href="/manifest.json" />
 
