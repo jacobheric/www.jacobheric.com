@@ -1,23 +1,30 @@
 {
-  "lock": false,
+  "nodeModulesDir": "auto",
   "tasks": {
-    "ok": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
-    "manifest": "deno task cli manifest $(pwd)",
-    "start": "deno run -A --watch=static/,routes/,posts/ dev.ts --loadPosts true --resizePictures true",
-    "build": "PRODUCTION=true deno task loadPosts && deno run -A dev.ts build",
-    "preview": "deno run -A main.ts",
-    "update": "deno run -A -r https://fresh.deno.dev/update .",
-    "loadPosts": "deno run -A ./lib/cli/loadPosts.ts",
-    "makePosts": "deno run -A ./lib/cli/makePosts.ts",
-    "resizePictures": "deno run -A ./lib/cli/resizePictures.ts"
+    "check": "deno fmt --check . && deno lint . && deno check",
+    "dev": "vite",
+    "load": "deno run -A lib/load.ts",
+    "loadAndDev": "deno run -A lib/load.ts && vite",
+    "build": "vite build",
+    "start": "deno serve -A _fresh/server.js",
+    "update": "deno run -A -r jsr:@fresh/update ."
   },
-  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
-  "exclude": ["**/_fresh/*"],
+  "lint": {
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ]
+    }
+  },
+  "exclude": [
+    "**/_fresh/*"
+  ],
   "imports": {
-    "fresh": "jsr:@fresh/core@^2.0.0-alpha.20",
     "@/": "./",
-    "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
-    "@preact/signals": "npm:@preact/signals@^1.3.0",
+    "fresh": "jsr:@fresh/core@^2.1.4",
+    "preact": "npm:preact@^10.27.2",
+    "@preact/signals": "npm:@preact/signals@^2.3.2",
     "@std/dotenv": "jsr:@std/dotenv",
     "@std/encoding": "jsr:@std/encoding",
     "@std/front-matter": "jsr:@std/front-matter",
@@ -25,30 +32,39 @@
     "@std/fs": "jsr:@std/fs",
     "@std/cli": "jsr:@std/cli",
     "marked": "npm:marked@7.0.2",
-    "preact": "npm:preact@^10.24.1",
+    "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.7",
     "preact-render-to-string": "npm:preact-render-to-string@^6.5.11",
-    "tailwindcss": "npm:tailwindcss@3.4.1",
-    "tailwindcss/": "npm:/tailwindcss@3.4.1/",
-    "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js"
+    "vite": "npm:vite@^7.1.3",
+    "tailwindcss": "npm:tailwindcss@^4.1.10",
+    "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.12"
   },
-  "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
-  "nodeModulesDir": "auto",
-  "fmt": {
-    "exclude": [
-      "**/node_modules",
-      "./lib/db/pictures.json",
-      "./lib/db/posts.json",
-      "./static/styles.css"
-    ]
-  },
-  "deploy": {
-    "project": "70d7d543-7da6-418b-a3bf-58f9c49c669b",
-    "exclude": [
-      "./static/image/posts",
-      "./lib/pictures/resize.ts",
-      "**/node_modules"
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.asynciterable",
+      "dom.iterable",
+      "deno.ns"
     ],
-    "include": [],
-    "entrypoint": "main.ts"
+    "jsx": "precompile",
+    "jsxImportSource": "preact",
+    "jsxPrecompileSkipElements": [
+      "a",
+      "img",
+      "source",
+      "body",
+      "html",
+      "head",
+      "title",
+      "meta",
+      "script",
+      "link",
+      "style",
+      "base",
+      "noscript",
+      "template"
+    ],
+    "types": [
+      "vite/client"
+    ]
   }
 }
