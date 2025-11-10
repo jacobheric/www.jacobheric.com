@@ -1,18 +1,8 @@
-// main.ts
-import { App, fsRoutes, staticFiles, trailingSlashes } from "fresh";
+import { App, staticFiles, trailingSlashes } from "fresh";
+import { State } from "./lib/state.ts";
 
-export const app = new App()
-  // Add static file serving middleware
+export const app = new App<State>()
   .use(staticFiles())
-  .use(trailingSlashes("never"));
+  .use(trailingSlashes("never")).fsRoutes();
 
-// Enable file-system based routing
-await fsRoutes(app, {
-  loadIsland: (path) => import(`./islands/${path}`),
-  loadRoute: (path) => import(`./routes/${path}`),
-});
-
-// If this module is called directly, start the server
-if (import.meta.main) {
-  await app.listen();
-}
+app.fsRoutes();

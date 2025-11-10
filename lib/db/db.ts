@@ -1,7 +1,8 @@
 import { existsSync } from "@std/fs";
+import { join } from "@std/path/join";
 
-export const PICTURES_INDEX = "./lib/db/pictures.json";
-export const POSTS_INDEX = "./lib/db/posts.json";
+export const PICTURES_INDEX = join(Deno.cwd(), "lib/db/pictures.json");
+export const POSTS_INDEX = join(Deno.cwd(), "lib/db/posts.json");
 
 export const pictureIndex = () =>
   existsSync(PICTURES_INDEX)

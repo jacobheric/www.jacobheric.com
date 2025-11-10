@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'turkey day; a panorama'
+title: "turkey day; a panorama"
 image: turkey_day_panorama_short.jpg
 ---
 

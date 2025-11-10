@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Multiplying Holidays
+title: Multiplying Holidays
 image: 2020-12-13-multiplying-holidays.jpg
 ---
 

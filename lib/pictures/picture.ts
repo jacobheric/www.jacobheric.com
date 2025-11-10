@@ -2,7 +2,7 @@ import { pictureIndex } from "@/lib/db/db.ts";
 import { signal } from "@preact/signals";
 
 import { join } from "@std/path";
-import { PROD } from "@/lib/utils.ts";
+import { PROD } from "../config.ts";
 
 export interface PictureType {
   shard: ShardName;

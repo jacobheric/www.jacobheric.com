@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Tinfoil Prank
+title: Tinfoil Prank
 image: 2018-11-04-foil-prank.jpg
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  'small pleasures; quick pickles'
+title: "small pleasures; quick pickles"
 image: quick-pickles-jars.jpg
 ---
 

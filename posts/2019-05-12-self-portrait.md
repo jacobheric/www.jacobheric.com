@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Self-portrait
+title: Self-portrait
 image: 2019-05-12-self-portrait.jpg
 ---
 

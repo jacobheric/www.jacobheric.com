@@ -37,10 +37,10 @@ export default function Home(
   { data: { posts, hasPrev, hasNext, random } }: PageProps<Posts>,
 ) {
   return (
-    <div class="w-11/12 mx-auto flex flex-col items-center justify-center">
+    <div class="w-11/12 mx-auto flex flex-col items-center justify-center py-6">
       {posts.map((p: PostType) => {
         return (
-          <div className="mt-6">
+          <div>
             <link rel="prefetch" href={`/posts/${p.slug}`} />
             <a href={`/posts/${p.slug}`}>
               <Picture
@@ -110,7 +110,6 @@ export default function Home(
       <Nav
         leftChildren={<PageLink href="/search">Search</PageLink>}
         rightChildren={<PageLink href={`/posts/${random}`}>Random</PageLink>}
-        className="mb-8"
       />
     </div>
   );

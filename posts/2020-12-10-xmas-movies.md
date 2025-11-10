@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Xmas Movies
+title: Xmas Movies
 image: 2020-12-10-xmas-movies.jpg
 ---
 

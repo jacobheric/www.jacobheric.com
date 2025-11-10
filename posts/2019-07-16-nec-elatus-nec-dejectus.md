@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  An Even Keel Life
+title: An Even Keel Life
 image: 2019-07-16-nec-elatus-nec-dejectus.jpg
 ---
 

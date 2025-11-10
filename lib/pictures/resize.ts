@@ -12,7 +12,7 @@ import {
 import { join } from "@std/path";
 
 import { PICTURES_INDEX } from "@/lib/db/db.ts";
-import sharp from "npm:/sharp";
+import sharp from "npm:sharp@^0.34.5";
 
 const postPics = () => Array.from(Deno.readDirSync(RAW_POST_PICS_DIR));
 

@@ -1,5 +1,5 @@
 ---
-title:  Freddy Mercury
+title: Freddy Mercury
 image: 2020-11-27-freddy-mercury-mask.jpg
 ---
 

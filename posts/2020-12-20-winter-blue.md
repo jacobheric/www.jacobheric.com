@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Winter Blues
+title: Winter Blues
 image: 2020-12-20-winter-blues.jpg
 ---
 

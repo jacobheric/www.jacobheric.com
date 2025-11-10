@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Halloween
+title: Halloween
 image: 2019-10-31-halloween.jpg
 ---
 

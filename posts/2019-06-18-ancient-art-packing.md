@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Ancient Art of Packing
+title: Ancient Art of Packing
 image: 2019-06-18-ancient-art-packing.jpg
 ---
 

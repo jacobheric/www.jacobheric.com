@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Father's Day
+title: Father's Day
 image: 2019-06-16-fathers-day-haul.jpg
 ---
 

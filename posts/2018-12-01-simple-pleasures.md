@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Simple Pleasures
+title: Simple Pleasures
 image: 2018-12-01-simple-pleasures.jpg
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Quebec, Montreal & Beyond
+title: Quebec, Montreal & Beyond
 image: 2019-06-19-baie-st-paul-deck.jpg
 ---
 

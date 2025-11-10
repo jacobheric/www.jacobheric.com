@@ -1,8 +1,7 @@
 import { POSTS_INDEX } from "@/lib/db/db.ts";
-import { parsePosts, POSTS, sort } from "@/lib/posts/posts.ts";
-import { PROD } from "@/lib/utils.ts";
+import { parsePosts, POSTS, POSTS_DIR, sort } from "@/lib/posts/posts.ts";
+import { PROD } from "../config.ts";
 
-const POSTS_DIR = "./posts";
 const rawPosts = () => Array.from(Deno.readDirSync(POSTS_DIR));
 
 export const loadPosts = async () => {

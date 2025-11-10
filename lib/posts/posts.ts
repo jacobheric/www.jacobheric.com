@@ -7,7 +7,7 @@ import { signal } from "@preact/signals";
 const LIMIT = 10;
 const EXCERPT_MARK = "<!--more-->";
 
-export const POSTS_DIR = "./posts";
+export const POSTS_DIR = join(Deno.cwd(), "posts");
 
 export const POSTS = signal<PostType[]>(
   postsIndex().map((p: PostType) => ({

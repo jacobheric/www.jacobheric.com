@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Tenants Harbor
+title: Tenants Harbor
 image: 2019-06-29-tenants-harbor.jpg
 ---
 

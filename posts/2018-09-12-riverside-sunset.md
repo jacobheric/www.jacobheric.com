@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Riverside Sunset
+title: Riverside Sunset
 image: 2018-09-12-riverside-sunset.jpg
 ---
 

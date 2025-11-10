@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Memory Garden
+title: Memory Garden
 image: 2019-05-08-memory-garden.jpg
 ---
 
