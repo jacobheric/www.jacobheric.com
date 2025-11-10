@@ -5,9 +5,12 @@
     "dev": "vite",
     "load": "deno run -A lib/load.ts",
     "loadAndDev": "deno run -A lib/load.ts && vite",
-    "build": "vite build",
+    "build": "PRODUCTION=true deno task loadPosts && vite build",
     "start": "deno serve -A _fresh/server.js",
-    "update": "deno run -A -r jsr:@fresh/update ."
+    "update": "deno run -A -r jsr:@fresh/update .",
+    "loadPosts": "deno run -A ./lib/cli/loadPosts.ts",
+    "makePosts": "deno run -A ./lib/cli/makePosts.ts",
+    "resizePictures": "deno run -A ./lib/cli/resizePictures.ts"
   },
   "lint": {
     "rules": {
