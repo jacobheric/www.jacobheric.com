@@ -1,12 +1,8 @@
-import { App, staticFiles } from "fresh";
+import { App, staticFiles, trailingSlashes } from "fresh";
 import { State } from "./lib/state.ts";
 
-export const app = new App<State>();
-
-app.use(staticFiles());
-
-app.use(async (ctx) => {
-  return await ctx.next();
-});
+export const app = new App<State>()
+  .use(staticFiles())
+  .use(trailingSlashes("never")).fsRoutes();
 
 app.fsRoutes();
