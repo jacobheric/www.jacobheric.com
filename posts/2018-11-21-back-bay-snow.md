@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  It's Here
+title: It's Here
 image: 2018-11-21-back-bay-snow.jpg
 ---
 

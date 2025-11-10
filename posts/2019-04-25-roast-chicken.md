@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Roast Chicken
+title: Roast Chicken
 image: 2019-04-25-roast-chicken.jpg
 ---
 

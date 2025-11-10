@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Bard
+title: Bard
 image: 2018-12-15-bard-coffee.jpg
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Horsing Around
+title: Horsing Around
 image: 2019-09-20-flatbreads.jpg
 ---
 

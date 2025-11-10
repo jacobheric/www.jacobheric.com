@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Turkey Grill
+title: Turkey Grill
 image: 2018-11-22-turkey-grill.jpg
 ---
 

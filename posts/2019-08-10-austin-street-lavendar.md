@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Austin Street Lavendar
+title: Austin Street Lavendar
 image: 2019-08-10-austin-street-lavendar.jpg
 ---
 

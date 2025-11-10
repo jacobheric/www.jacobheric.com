@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  A Western Maine Trip
+title: A Western Maine Trip
 image: 2018-08-24-bissel.jpg
 ---
 

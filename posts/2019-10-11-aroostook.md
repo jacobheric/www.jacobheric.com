@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Autumn in Aroostook County
+title: Autumn in Aroostook County
 image: 2019-10-11-aroostook-valley.jpg
 ---
 

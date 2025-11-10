@@ -1,5 +1,5 @@
 ---
-title:  Turkey Day 2020
+title: Turkey Day 2020
 image: 2020-11-26-minding-the-grill.jpg
 ---
 

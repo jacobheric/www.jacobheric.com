@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'pasta; life reclaimed'
+title: "pasta; life reclaimed"
 image: IMG_20110126_151206.jpg
 ---
 

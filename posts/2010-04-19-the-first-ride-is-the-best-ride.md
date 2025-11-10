@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The first ride is the best ride.
-excerpt: 'video capture inside'
+excerpt: "video capture inside"
 image: first-ride.png
 ---
 

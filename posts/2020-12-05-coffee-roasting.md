@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Roasting Coffee Beans
+title: Roasting Coffee Beans
 image: 2020-12-05-roasted-beans.jpg
 ---
 

@@ -66,5 +66,12 @@
     "types": [
       "vite/client"
     ]
+  },
+  "fmt": {
+    "exclude": [
+      "**/node_modules",
+      "./lib/db/pictures.json",
+      "./lib/db/posts.json"
+    ]
   }
 }
