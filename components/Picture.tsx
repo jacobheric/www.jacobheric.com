@@ -4,7 +4,7 @@ export const Picture = (
   { src, alt, className }: { src?: string; alt: string; className?: string },
 ) => {
   if (!src) {
-    console.info("image src not provided for the following post", alt);
+    console.debug("image src not provided for the following post", alt);
     return null;
   }
 

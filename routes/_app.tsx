@@ -19,8 +19,6 @@ function App({ Component, state }: PageProps<never, State>) {
           href="/image/me-bw.png"
         />
         <link rel="manifest" href="/manifest.json" />
-
-        <link rel="stylesheet" href="/styles.css" />
       </head>
       <body className="font-serif">
         <Component />
