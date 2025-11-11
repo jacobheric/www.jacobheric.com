@@ -2,9 +2,8 @@
   "nodeModulesDir": "auto",
   "tasks": {
     "check": "deno fmt --check . && deno lint . && deno check",
-    "dev": "vite",
+    "dev": "deno run -A lib/load.ts && vite",
     "load": "deno run -A lib/load.ts",
-    "loadAndDev": "deno run -A lib/load.ts && vite",
     "build": "PRODUCTION=true deno task loadPosts && vite build",
     "start": "deno serve -A _fresh/server.js",
     "update": "deno run -A -r jsr:@fresh/update .",

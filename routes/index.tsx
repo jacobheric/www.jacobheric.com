@@ -40,7 +40,7 @@ export default function Home(
     <div class="w-11/12 mx-auto flex flex-col items-center justify-center py-6">
       {posts.map((p: PostType) => {
         return (
-          <div>
+          <div className="mx-2">
             <link rel="prefetch" href={`/posts/${p.slug}`} />
             <a href={`/posts/${p.slug}`}>
               <Picture

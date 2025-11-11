@@ -32,7 +32,7 @@ export const Picture = (
         alt={alt}
         srcset={getImageUrl(src, shard)}
         title={alt}
-        className={`max-h-screen max-w-screen rounded-md my-6 ${className}`}
+        className={`max-h-screen rounded-md my-6 ${className}`}
       />
     </picture>
   );
