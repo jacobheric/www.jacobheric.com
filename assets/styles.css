@@ -1,8 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Helvetica", sans-serif;
-  --font-serif: "Times", serif;
+  --color-primary-50: #ccfbff;
+  --color-primary-100: #99f7ff;
+  --color-primary-200: #66f3ff;
+  --color-primary-300: #33eaff;
+  --color-primary-400: #00dcff;
+  --color-primary-500: #00c2ff;
+  --color-primary-600: #0099cc;
+  --color-primary-700: #007399;
+  --color-primary-800: #004d66;
+  --color-primary-900: #002633;
+  --color-flair: #ff1493;
+  --color-text: #ffd700;
+  --color-accent: #39ff14;
+  --font-serif: "Rubik 80s Fade", sans-serif;
+  --font-sans: "Orbitron", sans-serif;
+  --font-prose: "Space Grotesk", sans-serif;
 }
 
 @layer base {
@@ -12,36 +26,61 @@
   *, ::after, ::before, ::backdrop, ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+  :root {
+    color: var(--color-text);
+    background-color: #0a0a0a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-primary-50: #e6e6fa;
+      --color-primary-100: #c8c8f5;
+      --color-primary-200: #a0a0eb;
+      --color-primary-300: #7878e0;
+      --color-primary-400: #5050d6;
+      --color-primary-500: #6a0dad;
+      --color-primary-600: #55008b;
+      --color-primary-700: #44006b;
+      --color-primary-800: #33004d;
+      --color-primary-900: #22002e;
+      --color-flair: #ff69b4;
+      --color-text: #ffff00;
+      --color-accent: #32cd32;
+      background-color: #121212;
+    }
+  }
 }
 
-input {
-  @apply border border-gray-200 dark:bg-gray-900 p-3 rounded w-full;
+@layer utilities {
+  .border-flair-gradient {
+    @apply border-t-0;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-flair) 30%,
+      var(--color-flair) 70%,
+      transparent
+    );
+    background-size: 100% 4px;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 4px;
+  }
+  .divider-ascii {
+    @apply overflow-hidden text-center font-mono;
+    position: relative;
+  }
+  .divider-ascii::before {
+    content: attr(data-symbol) attr(data-symbol);
+    display: inline-block;
+    animation: scroll-left 12s linear infinite;
+  }
 }
 
-textarea {
-  @apply border border-gray-200 dark:bg-gray-900 p-3 rounded w-full;
-}
-
-select {
-  @apply border border-gray-200 dark:bg-gray-900 bg-white p-3 rounded w-full
-    appearance-none pr-10 text-gray-900 dark:text-white;
-  background-image: url("/chevron.svg");
-  background-repeat: no-repeat;
-  background-position: right 0.5rem center;
-  background-size: 1em;
-}
-
-button {
-  @apply border text-white dark:text-black bg-black dark:bg-white p-3 rounded
-    disabled:cursor-not-allowed cursor-pointer;
-}
-
-button[type="button"] {
-  @apply border text-white dark:text-black bg-black dark:bg-white p-3 rounded
-    disabled:cursor-not-allowed cursor-pointer;
-}
-
-button[type="submit"] {
-  @apply border text-white dark:text-black bg-black dark:bg-white p-3 rounded
-    disabled:cursor-not-allowed cursor-pointer;
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

@@ -2,15 +2,15 @@ import { Picture } from "@/components/Picture.tsx";
 
 export default function Books() {
   return (
-    <div class="w-11/12 mx-auto flex flex-col items-center dark:text-white">
-      <div class="title text-6xl my-12 text-center">Books</div>
+    <div class="w-11/12 mx-auto flex flex-col items-center">
+      <div class="text-6xl my-12 text-center">Books</div>
       <div>
         <span class="title text-2xl font-bold italic inline mr-2 text-center">
           Autobiography of Joker So Far
         </span>
         <span class="inline">by Jacob Heric</span>
       </div>
-      <div class="flex flex-row justify-center font-bold text-2xl my-8 space-x-2">
+      <div class="flex flex-row justify-center tracking-wide text-2xl my-8 space-x-2">
         <div class="w-full">
           <a
             href="https://www.amazon.com/Autobiography-Joker-Far-Jacob-Heric-ebook/dp/B018B79GEY/"

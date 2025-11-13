@@ -14,7 +14,7 @@ export const Nav = (
       {leftChildren}
     </div>
 
-    <div className="flex flex-row justify-center items-center font-sans not-italic w-2 dark:text-white">
+    <div className="flex flex-row justify-center items-center font-sans not-italic w-2">
       |
     </div>
     <div className="flex flex-row justify-start w-full gap-4">

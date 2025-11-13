@@ -13,19 +13,19 @@ export default function Post({ post, hasNext, hasPrev, random }: PostPage) {
         className="mx-auto"
       />
 
-      <div class="title text-3xl italic mt-4 mx-auto dark:text-white">
+      <div class="title text-3xl italic mt-4 mx-auto">
         {post.title}
       </div>
-      <div class="italic text-base mb-4 mx-auto dark:text-white">
+      <div class="italic text-base mb-4 mx-auto">
         {post.date.toLocaleDateString("en-us", humanDate)}
       </div>
       <div
-        class="text-base text-justify mb-6 dark:text-white mx-auto"
+        class="text-base text-justify mb-6 mx-auto font-prose"
         // deno-lint-ignore react-no-danger
         dangerouslySetInnerHTML={{ __html: post.content }}
       >
       </div>
-      <hr class="w-10/12 border-gray-300 mx-auto dark:border-gray-700" />
+      <hr class="w-10/12 border-flair mx-auto" />
 
       <Nav
         leftChildren={

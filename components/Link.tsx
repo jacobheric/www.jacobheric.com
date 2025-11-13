@@ -10,5 +10,5 @@ export const PageLink = (
         <link rel="prefetch" href={href} />
       </>
     )
-    : <div className="cursor-not-allowed text-slate-400">{children}</div>;
+    : <div className="cursor-not-allowed">{children}</div>;
 };
