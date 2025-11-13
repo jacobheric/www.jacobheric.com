@@ -23,9 +23,7 @@
   a {
     @apply hover:no-underline underline underline-offset-4 decoration-1;
   }
-  *, ::after, ::before, ::backdrop, ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+
   :root {
     color: var(--color-text);
     background-color: #0a0a0a;
@@ -67,12 +65,28 @@
   }
   .divider-ascii {
     @apply overflow-hidden text-center font-mono;
-    position: relative;
   }
   .divider-ascii::before {
     content: attr(data-symbol) attr(data-symbol);
     display: inline-block;
     animation: scroll-left 12s linear infinite;
+  }
+  .hero-frame {
+    @apply transition-transform duration-200;
+    filter: drop-shadow(0 8px var(--color-flair));
+    transform: perspective(520px) rotateX(5deg) skewX(-3deg);
+  }
+  .hero-frame:hover {
+    transform: perspective(560px) rotateX(9deg) skewX(-3deg) translateY(-4px);
+  }
+  @media (min-width: 768px) {
+    .hero-frame {
+      transform: perspective(600px) rotateX(6deg) skewX(-5deg);
+    }
+    .hero-frame:hover {
+      transform: perspective(640px) rotateX(10deg) skewX(-5deg)
+        translateY(-6px);
+    }
   }
 }
 

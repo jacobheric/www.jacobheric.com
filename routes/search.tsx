@@ -44,7 +44,7 @@ export default function Search(
           placeholder="something to search..."
           defaultValue={term}
         />
-        <button type="submit" className="w-40 border rounded-md">
+        <button type="submit" className="w-40 border rounded-md cursor-pointer">
           search
         </button>
       </form>

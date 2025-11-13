@@ -16,3 +16,14 @@ export const titleCase = (str: string) =>
       return t.charAt(0).toUpperCase() + t.substring(1).toLowerCase();
     })
     : str;
+
+export const SYMBOLS = [
+  "⚡",
+  "★",
+  "◆",
+  "✦",
+  "☢",
+  "♫",
+  "⇝",
+  "⏻",
+];

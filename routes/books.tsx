@@ -1,46 +1,45 @@
 import { Picture } from "@/components/Picture.tsx";
+import { Nav } from "../components/Nav.tsx";
 
 export default function Books() {
   return (
-    <div class="w-11/12 mx-auto flex flex-col items-center">
-      <div class="text-6xl my-12 text-center">Books</div>
+    <div class="w-11/12 mx-auto flex flex-col items-center gap-8">
+      <div class="text-6xl text-center">Books</div>
       <div>
         <span class="title text-2xl font-bold italic inline mr-2 text-center">
           Autobiography of Joker So Far
         </span>
         <span class="inline">by Jacob Heric</span>
       </div>
-      <div class="flex flex-row justify-center tracking-wide text-2xl my-8 space-x-2">
-        <div class="w-full">
-          <a
-            href="https://www.amazon.com/Autobiography-Joker-Far-Jacob-Heric-ebook/dp/B018B79GEY/"
-            rel="nofollow"
-          >
-            kindle
-          </a>
-        </div>
-        <div class="w-full">
-          &#124;
-        </div>
-        <div class="w-full">
+
+      <Nav
+        leftChildren={
           <a
             href="https://www.amazon.com/Autobiography-Joker-Far-Jacob-Heric/dp/0692539506/"
             rel="nofollow"
           >
             paperback
           </a>
-        </div>
-      </div>
+        }
+        rightChildren={
+          <a
+            href="https://www.amazon.com/Autobiography-Joker-Far-Jacob-Heric-ebook/dp/B018B79GEY/"
+            rel="nofollow"
+          >
+            kindle
+          </a>
+        }
+      />
 
-      <div class="flex flex-row flex-wrap md:flex-nowrap justify-center align-top space-x-2">
+      <div class="flex flex-row flex-wrap md:flex-nowrap justify-center align-top space-x-4 space-y-4">
         <div className="w-full flex justify-center lg:justify-end">
           <Picture
-            className="max-w-xl mr-4  mt-0"
+            className="max-w-xl"
             src="auto-bio-cover.jpg"
             alt="Autobiograph of Joker so Far Cover Image"
           />
         </div>
-        <div class="flex-col w-full flex items-center">
+        <div class="flex-col w-full flex items-center font-prose">
           <div class="font-bold pb-3 max-w-prose">
             Out of the ordinary folds of middle America, comes a teenage obscura
             with a penchant for pain. Joseph Kare, aka{" "}
@@ -63,7 +62,7 @@ export default function Books() {
           </div>
         </div>
       </div>
-      <div class="my-10 text-2xl italic">
+      <div class=" text-2xl italic">
         Out now on
         <a
           href="https://www.truejokercompany.com"

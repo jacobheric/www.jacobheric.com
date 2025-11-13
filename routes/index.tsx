@@ -4,6 +4,8 @@ import { PageLink } from "@/components/Link.tsx";
 import { Picture } from "../components/Picture.tsx";
 import { Nav } from "@/components/Nav.tsx";
 import { define } from "@/lib/state.ts";
+import { Divider } from "../components/Divider.tsx";
+import { SYMBOLS } from "../lib/utils.ts";
 
 export const humanDate = {
   year: "numeric" as const,
@@ -37,10 +39,10 @@ export default function Home(
   { data: { posts, hasPrev, hasNext, random } }: PageProps<Posts>,
 ) {
   return (
-    <div class="w-11/12 mx-auto flex flex-col items-center justify-center py-6">
+    <div class="w-11/12 mx-auto flex flex-col items-center justify-center gap-6">
       {posts.map((p: PostType) => {
         return (
-          <div className="mx-2">
+          <div className="flex flex-col items-center justify-center gap-4">
             <link rel="prefetch" href={`/posts/${p.slug}`} />
             <a href={`/posts/${p.slug}`}>
               <Picture
@@ -49,16 +51,16 @@ export default function Home(
                 className="mx-auto"
               />
             </a>
-            <div class="text-3xl italic my-6 text-center">
+            <div class="text-3xl italic text-center">
               <a href={`/posts/${p.slug}`}>
                 {p.title}
               </a>
             </div>
-            <div class="italic text-base mb-4 text-center w-full">
+            <div class="italic text-base text-center w-full">
               {p.date.toLocaleDateString("en-us", humanDate)}
             </div>
             <div
-              class="text-base mb-4 text-center"
+              class="text-base text-center font-prose"
               // deno-lint-ignore react-no-danger
               dangerouslySetInnerHTML={{ __html: p.excerpt }}
             />
@@ -68,7 +70,14 @@ export default function Home(
                 <a href={`/posts/${p.slug}`} class="next">More</a>
               </div>
             )}
-            <hr class="w-10/12 border-flair mt-12 mx-auto" />
+            <Divider
+              symbol={SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)]}
+              className={[
+                "text-flair",
+                "text-accent",
+                "text-text",
+              ][Math.floor(Math.random() * 3)]}
+            />
           </div>
         );
       })}
@@ -104,7 +113,6 @@ export default function Home(
             </PageLink>
           </>
         }
-        className="mt-8 mb-4"
       />
 
       <Nav
