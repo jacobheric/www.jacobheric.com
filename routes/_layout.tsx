@@ -21,11 +21,11 @@ export default function Layout({ Component }: PageProps) {
               I PREFER NOT TO
             </div>
           </div>
-          <div class="italic text-lg font-medium tracking-wide ">
+          <div class="italic text-lg font-medium tracking-wide dark:text-white">
             <a href="/about/" title="About Jacob Heric">
               About
             </a>
-            <span className="font-sans mx-2 not-italic dark:text-white">|</span>
+            <span className="font-sans mx-2 not-italic">|</span>
             <a
               href="/books/"
               title="Jacob Heric's Books"
