@@ -50,6 +50,14 @@ const resolveMessage = () => {
 
 const message = resolveMessage();
 
+console.log("aligning shard submodules to origin/main...");
+await run("git", [
+  "submodule",
+  "foreach",
+  "--quiet",
+  "git fetch origin && (git show-ref --verify --quiet refs/heads/main && git switch main || git switch -c main --track origin/main) && git pull --ff-only origin main",
+]);
+
 if (!args["no-sync"]) {
   console.log("syncing content before publish...");
   const summary = await syncContent({ persistPostsIndex: false });
