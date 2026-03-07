@@ -75,8 +75,16 @@ console.log("committing main repo + shard submodules...");
 await run("bash", ["./supercommit.sh", message]);
 
 if (!args["no-push"]) {
-  console.log("pushing main repo + changed shard submodules...");
-  await run("git", ["push", "--recurse-submodules=on-demand"]);
+  console.log("pushing shard submodules...");
+  await run("git", [
+    "submodule",
+    "foreach",
+    "--quiet",
+    "git push origin HEAD:main",
+  ]);
+
+  console.log("pushing main repo...");
+  await run("git", ["push", "--recurse-submodules=check"]);
 }
 
 console.log("publish complete");
