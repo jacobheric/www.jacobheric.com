@@ -65,7 +65,6 @@ const renderPosts = (
       pageLink({
         href: hasPrev ? "/" : undefined,
         text: "<span>&laquo;</span>First",
-        prerender: true,
       })
     }
           ${
@@ -74,7 +73,6 @@ const renderPosts = (
           ? `/?start=${first}&direction=backward`
           : undefined,
         text: "<span>&lsaquo;</span>Prev",
-        prerender: true,
       })
     }
         `,
@@ -85,14 +83,12 @@ const renderPosts = (
           ? `/?start=${latest}&direction=forward`
           : undefined,
         text: "Next<span>&rsaquo;</span>",
-        prerender: true,
       })
     }
           ${
       pageLink({
         href: hasNext ? "/?last=true" : undefined,
         text: "Last<span>&raquo;</span>",
-        prerender: true,
       })
     }
         `,
