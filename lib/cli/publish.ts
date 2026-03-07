@@ -1,9 +1,18 @@
 import { parseArgs } from "@std/cli";
 import { syncContent } from "@/lib/content/sync.ts";
 
-const run = async (cmd: string, args: string[]) => {
+type RunOptions = {
+  env?: Record<string, string>;
+};
+
+const run = async (
+  cmd: string,
+  args: string[],
+  { env }: RunOptions = {},
+) => {
   const result = await new Deno.Command(cmd, {
     args,
+    env,
     stdin: "inherit",
     stdout: "inherit",
     stderr: "inherit",
@@ -43,11 +52,24 @@ const message = resolveMessage();
 
 if (!args["no-sync"]) {
   console.log("syncing content before publish...");
-  const summary = await syncContent();
+  const summary = await syncContent({ persistPostsIndex: false });
   console.log(
     `content sync complete: posts(created=${summary.createdPosts}, appended=${summary.appendedPosts}, skipped=${summary.skippedPostImages}), pictures(processed=${summary.processedPictures}, resized=${summary.resizedPictures}, copied=${summary.copiedPictures}, skipped=${summary.skippedPictures})`,
   );
 }
+
+console.log("building production posts index...");
+await run(
+  "deno",
+  ["task", "loadPosts"],
+  {
+    env: {
+      ...Deno.env.toObject(),
+      PRODUCTION: "true",
+    },
+  },
+);
+console.log("production posts index complete");
 
 console.log("committing main repo + shard submodules...");
 await run("bash", ["./supercommit.sh", message]);
