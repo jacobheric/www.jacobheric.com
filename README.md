@@ -1,24 +1,23 @@
 # Jacob's Website
 
-[![Made with Fresh](https://fresh.deno.dev/fresh-badge.svg)](https://fresh.deno.dev)
-
 ![](./screenshot.png)
 
 ### overview
 
-This is my personal site, built with Deno fresh and deployed to Deno deploy.
-It's mostly just pictures of daily life with some comments. Actually it's a lot
-of pictures. See below for more on the technical challenges that presents.
+This is my personal site, built with vanilla TypeScript on top of `Deno.serve`
+and deployed to Deno Deploy. It's mostly just pictures of daily life with some
+comments. Actually it's a lot of pictures. See below for more on the technical
+challenges that presents.
 
 **local dev:**
 
 ```
-deno task start
+deno task dev
 ```
 
 **adding content**
 
-To generate posts, add images to `static/images/raw` in the form of
+To generate posts, add images to `static/image/raw` in the form of
 yyyy-mm-dd-name and then run:
 
 ```
@@ -52,6 +51,7 @@ deploy like so:
 Commit and deploy:
 
 ```
+deno task build
 ./supercommit.sh "august 2024"
 ```
 
@@ -63,6 +63,8 @@ git push --recurse-submodules=on-demand
 
 **data**
 
-Data is stored in json files. I built a version that uses deno's kv store but I
-blew the read/write limits way too quickly. That version is here:
+Posts are authored as markdown files with YAML frontmatter in `posts/`.
+`deno task loadPosts` compiles them into `lib/db/posts.json` for fast runtime
+reads. I built a version that uses deno's kv store but I blew the read/write
+limits way too quickly. That version is here:
 https://github.com/jacobheric/www.jacobheric.com/tree/kv

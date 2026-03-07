@@ -1,6 +1,9 @@
 import {
   IMG_LARGE,
   IMG_SMALL,
+  isHeifImage,
+  isPassthroughImage,
+  isSupportedRawImage,
   PICTURES,
   QUALITY,
   RAW_POST_PICS_DIR,
@@ -53,14 +56,16 @@ const resizeRaw = async (
   if (w && w > IMG_LARGE) {
     const largeName = setShardedName(name, shard, "large");
     await resize(sharp(raw), largeName, IMG_LARGE);
-    copy(largeName, originalName);
+    await copy(largeName, originalName);
     result.large = true;
   }
 
   if (w && w > IMG_SMALL) {
     const smallName = setShardedName(name, shard, "small");
     await resize(sharp(raw), smallName, IMG_SMALL);
-    !result.large && copy(smallName, originalName);
+    if (!result.large) {
+      await copy(smallName, originalName);
+    }
     result.small = true;
   }
 
@@ -73,19 +78,70 @@ const resizeRaw = async (
   return result;
 };
 
-export const resizePictures = async (overwrite: boolean = false) => {
-  const pics = postPics();
+const readConvertedHeif = async (path: string) => {
+  const temp = await Deno.makeTempFile({ suffix: ".jpg" });
+  try {
+    const { code, stderr } = await new Deno.Command("sips", {
+      args: ["-s", "format", "jpeg", path, "--out", temp],
+      stdout: "null",
+      stderr: "piped",
+    }).output();
 
-  await Promise.all(pics.map(async (p: Deno.DirEntry) => {
+    if (code !== 0) {
+      const message = new TextDecoder().decode(stderr).trim();
+      throw new Error(message || "failed to convert HEIF image");
+    }
+
+    return await Deno.readFile(temp);
+  } catch (error) {
+    if (error instanceof Deno.errors.NotFound) {
+      throw new Error(
+        "HEIF conversion requires macOS `sips` when sharp cannot decode HEIF",
+      );
+    }
+
+    throw error;
+  } finally {
+    await Deno.remove(temp).catch(() => undefined);
+  }
+};
+
+export type ResizeSummary = {
+  processed: number;
+  skipped: number;
+  copiedOnly: number;
+  resized: number;
+};
+
+export const resizePictures = async (
+  overwrite: boolean = false,
+): Promise<ResizeSummary> => {
+  const pics = postPics();
+  let changed = false;
+  const summary: ResizeSummary = {
+    processed: 0,
+    skipped: 0,
+    copiedOnly: 0,
+    resized: 0,
+  };
+
+  for (const p of pics) {
     if (p.name.startsWith(".")) {
-      return;
+      summary.skipped++;
+      continue;
+    }
+
+    if (!isSupportedRawImage(p.name)) {
+      summary.skipped++;
+      continue;
     }
 
     const name = p.name.toLowerCase();
-    const existingShard = PICTURES.value[name];
+    const existingShard = PICTURES[name];
 
     if (!overwrite && existingShard) {
-      return;
+      summary.skipped++;
+      continue;
     }
 
     const shard = existingShard
@@ -94,25 +150,44 @@ export const resizePictures = async (overwrite: boolean = false) => {
 
     console.log("resizing image", name);
 
-    if (p.name.endsWith(".gif") || name.endsWith("png")) {
-      await copy(join(RAW_POST_PICS_DIR, name), setShardedName(name, shard));
-      PICTURES.value[name] = { shard };
-      return;
+    if (isPassthroughImage(name)) {
+      await copy(join(RAW_POST_PICS_DIR, p.name), setShardedName(name, shard));
+      PICTURES[name] = { shard };
+      changed = true;
+      summary.processed++;
+      summary.copiedOnly++;
+      continue;
     }
 
-    const raw: Uint8Array = Deno.readFileSync(
-      join(RAW_POST_PICS_DIR, p.name),
-    );
+    const sourcePath = join(RAW_POST_PICS_DIR, p.name);
+    const raw = await Deno.readFile(sourcePath);
 
-    const sizes = await resizeRaw(raw, name, shard);
-    PICTURES.value[name] = { shard, sizes };
-  }));
+    let sizes;
+    try {
+      sizes = await resizeRaw(raw, name, shard);
+    } catch (error) {
+      if (!isHeifImage(name)) {
+        throw error;
+      }
 
-  void writeIndex();
+      const converted = await readConvertedHeif(sourcePath);
+      sizes = await resizeRaw(converted, name, shard);
+    }
+
+    PICTURES[name] = { shard, sizes };
+    changed = true;
+    summary.processed++;
+    summary.resized++;
+  }
+
+  if (changed) {
+    void writeIndex();
+  }
+  return summary;
 };
 
 const writeIndex = () =>
   Deno.writeTextFileSync(
     PICTURES_INDEX,
-    JSON.stringify(PICTURES.value),
+    JSON.stringify(PICTURES),
   );

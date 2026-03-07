@@ -4,9 +4,13 @@ import {
   TokenizerAndRendererExtension,
   type Tokens,
 } from "marked";
-import { renderToString } from "preact-render-to-string";
-import { h } from "preact";
-import { Picture } from "@/components/Picture.tsx";
+import { renderPictureHtml } from "@/lib/pictures/render.ts";
+
+type PictureToken = Tokens.Generic & {
+  imageSrc?: string;
+  imageAlt?: string;
+  html: string;
+};
 
 const pictureExtension: TokenizerAndRendererExtension = {
   name: "picture",
@@ -29,15 +33,17 @@ const pictureExtension: TokenizerAndRendererExtension = {
     }
   },
   renderer(token: Tokens.Generic) {
-    return token.html;
+    return (token as PictureToken).html;
   },
 };
 
 const walkTokens = (token: Token) => {
   if (token.type === "picture") {
-    token.html = renderToString(
-      h(Picture, { src: token.imageSrc, alt: token.imageAlt }),
-    );
+    const pictureToken = token as PictureToken;
+    pictureToken.html = renderPictureHtml({
+      src: pictureToken.imageSrc,
+      alt: pictureToken.imageAlt,
+    });
   }
 };
 

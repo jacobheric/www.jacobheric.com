@@ -2,19 +2,20 @@ import { postsIndex } from "@/lib/db/db.ts";
 import { renderMarkdown } from "@/lib/posts/render.ts";
 import { extractYaml } from "@std/front-matter";
 import { join } from "@std/path";
-import { signal } from "@preact/signals";
 
 const LIMIT = 10;
 const EXCERPT_MARK = "<!--more-->";
 
 export const POSTS_DIR = join(Deno.cwd(), "posts");
 
-export const POSTS = signal<PostType[]>(
-  postsIndex().map((p: PostType) => ({
-    ...p,
-    date: new Date(p.date),
-  })),
-);
+export let POSTS: PostType[] = postsIndex().map((p: PostType) => ({
+  ...p,
+  date: new Date(p.date),
+}));
+
+export const setPosts = (posts: PostType[]) => {
+  POSTS = posts;
+};
 
 export interface PostType {
   slug: string;
@@ -64,8 +65,8 @@ export const sort = (
 };
 
 export const getPost = (slug: string, offset: number = 0) => {
-  const index = POSTS.value.findIndex((p) => p.slug === slug) + offset;
-  const post: PostType = POSTS.value[index];
+  const index = POSTS.findIndex((p) => p.slug === slug) + offset;
+  const post: PostType = POSTS[index];
   if (!post) {
     throw new Error("Post not found");
   }
@@ -73,7 +74,7 @@ export const getPost = (slug: string, offset: number = 0) => {
   return {
     post,
     hasPrev: index > 0,
-    hasNext: index < POSTS.value.length,
+    hasNext: index < POSTS.length,
     random,
   };
 };
@@ -118,7 +119,7 @@ export const postPage = (
   const random = getRandom();
   if (last) {
     return {
-      posts: POSTS.value.slice(-limit),
+      posts: POSTS.slice(-limit),
       limit,
       hasNext: false,
       hasPrev: true,
@@ -127,21 +128,21 @@ export const postPage = (
   }
 
   const forward = direction === "forward";
-  const index = start ? POSTS.value.findIndex(({ slug }) => slug === start) : 0;
+  const index = start ? POSTS.findIndex(({ slug }) => slug === start) : 0;
   const directionalIndex = index ? forward ? index + 1 : index : index;
 
   return {
     limit,
     hasNext: forward
-      ? directionalIndex + limit < POSTS.value.length
-      : directionalIndex < POSTS.value.length,
+      ? directionalIndex + limit < POSTS.length
+      : directionalIndex < POSTS.length,
     hasPrev: forward ? directionalIndex > 0 : directionalIndex - limit > 0,
     posts: forward
-      ? POSTS.value.slice(directionalIndex, directionalIndex + limit)
-      : POSTS.value.slice(directionalIndex - limit, directionalIndex),
+      ? POSTS.slice(directionalIndex, directionalIndex + limit)
+      : POSTS.slice(directionalIndex - limit, directionalIndex),
     random,
   };
 };
 
 export const getRandom = () =>
-  POSTS.value[Math.floor(Math.random() * POSTS.value.length)].slug;
+  POSTS[Math.floor(Math.random() * POSTS.length)].slug;
