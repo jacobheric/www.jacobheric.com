@@ -51,6 +51,7 @@ export const renderPost = (
                       ? `/posts/${data.post.slug}/prev`
                       : undefined,
                     text: "<span>&lsaquo;</span>Prev",
+                    prerender: true,
                   })
                 }
                   ${pageLink({ href: "/search", text: "Search" })}
@@ -68,6 +69,7 @@ export const renderPost = (
                       ? `/posts/${data.post.slug}/next`
                       : undefined,
                     text: "Next<span>&rsaquo;</span>",
+                    prerender: true,
                   })
                 }
                 `,

@@ -26,6 +26,37 @@ export const page = (
     <link rel="shortcut icon" type="image/png" href="/image/me-bw.png" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="/assets/styles.css" />
+    <script>
+      (() => {
+        if (!HTMLScriptElement.supports?.("speculationrules")) {
+          return;
+        }
+
+        const connection = navigator.connection;
+        if (connection?.saveData) {
+          return;
+        }
+
+        if (
+          connection?.effectiveType &&
+          (connection.effectiveType === "slow-2g" ||
+            connection.effectiveType === "2g")
+        ) {
+          return;
+        }
+
+        const script = document.createElement("script");
+        script.type = "speculationrules";
+        script.textContent = JSON.stringify({
+          prerender: [{
+            source: "document",
+            where: { selector: "a[data-prerender='true']" },
+            eagerness: "moderate",
+          }],
+        });
+        document.head.append(script);
+      })();
+    </script>
     <style>
       .post-content::after { content: ""; display: block; clear: both; }
     </style>
@@ -67,13 +98,17 @@ export const page = (
 </html>`;
 
 export const pageLink = (
-  { href, text }: {
+  { href, text, prefetch = true, prerender = false }: {
     href?: string;
     text: string;
+    prefetch?: boolean;
+    prerender?: boolean;
   },
 ) =>
   href
-    ? `<a href="${href}">${text}</a><link rel="prefetch" href="${href}" />`
+    ? `<a href="${href}"${
+      prerender ? ' data-prerender="true"' : ""
+    }>${text}</a>${prefetch ? `<link rel="prefetch" href="${href}" />` : ""}`
     : `<div class="cursor-not-allowed text-slate-400">${text}</div>`;
 
 export const nav = (
