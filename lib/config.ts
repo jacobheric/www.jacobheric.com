@@ -1,3 +1,5 @@
 import "@std/dotenv/load";
 
-export const PROD = Deno.env.get("PRODUCTION") === "true";
+const isDeployRuntime = Boolean(Deno.env.get("DENO_DEPLOYMENT_ID"));
+
+export const PROD = Deno.env.get("PRODUCTION") === "true" || isDeployRuntime;

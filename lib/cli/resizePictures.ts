@@ -7,5 +7,7 @@ const flags = parseArgs(Deno.args, {
 });
 
 console.log("resizing pictures...");
-await resizePictures(flags.overwrite);
-console.log("done resizing pictures");
+const summary = await resizePictures(flags.overwrite);
+console.log(
+  `done resizing pictures: processed=${summary.processed}, resized=${summary.resized}, copied=${summary.copiedOnly}, skipped=${summary.skipped}`,
+);

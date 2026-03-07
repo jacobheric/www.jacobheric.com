@@ -1,10 +1,7 @@
-import { resizePictures } from "./pictures/resize.ts";
-import { loadPosts } from "./posts/load.ts";
+import { syncContent } from "@/lib/content/sync.ts";
 
-console.log("resizing pictures...");
-await resizePictures();
-console.log("done resizing pictures");
-
-console.log("loading posts...");
-await loadPosts();
-console.log("done loading posts");
+console.log("syncing content...");
+const summary = await syncContent();
+console.log(
+  `done: posts(created=${summary.createdPosts}, appended=${summary.appendedPosts}, skipped=${summary.skippedPostImages}), pictures(processed=${summary.processedPictures}, resized=${summary.resizedPictures}, copied=${summary.copiedPictures}, skipped=${summary.skippedPictures})`,
+);
