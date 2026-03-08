@@ -1,4 +1,4 @@
 ---
-title: Anniversay Oysters
+title: Anniversary Oysters
 image: 2024-06-26-anniversay-oysters.jpg
 ---
