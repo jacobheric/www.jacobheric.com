@@ -39,7 +39,7 @@ const renderPosts = (
   posts.map((post) => {
     const image = renderPictureHtml({ src: post.image, alt: post.title });
     const more = post.showMore
-      ? `<div class="italic text-lg font-medium tracking-wide text-center"><a href="/posts/${post.slug}" class="next">More</a></div>`
+      ? `<div class="italic text-lg font-medium tracking-wide text-center dark:text-white"><a href="/posts/${post.slug}" class="next">More</a></div>`
       : "";
 
     return `<div class="mx-2">
