@@ -79,6 +79,10 @@ await run(
 );
 console.log("production posts index complete");
 
+console.log("formatting and linting...");
+await run("deno", ["fmt", "."]);
+await run("deno", ["lint", "."]);
+
 console.log("committing main repo + shard submodules...");
 await run("bash", ["./supercommit.sh", message]);
 
