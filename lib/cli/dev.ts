@@ -27,7 +27,7 @@ const startContentWatcher = () => {
   const watcher = Deno.watchFs(SYNC_PATHS);
   let pending = false;
   let running = false;
-  let timer: number | undefined;
+  let timer: ReturnType<typeof setTimeout> | undefined;
 
   const runSync = async () => {
     if (running) {
