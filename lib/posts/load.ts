@@ -36,7 +36,7 @@ export const loadPosts = async (
   { persistIndex = true }: { persistIndex?: boolean } = {},
 ) => {
   const posts = rawPosts().sort(sort);
-  if (!needsRebuild(posts)) {
+  if (persistIndex && !needsRebuild(posts)) {
     if (!PROD) {
       setPosts(
         postsIndex().map((post: PostType) => ({

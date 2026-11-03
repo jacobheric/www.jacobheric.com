@@ -1,11 +1,16 @@
 import { syncContent } from "@/lib/content/sync.ts";
 import { clearHtmlCache, handler, PORT } from "@/server.ts";
+import { createDevPreview } from "@/lib/server/dev.ts";
+import { basename, dirname, resolve } from "@std/path";
 
 const SYNC_PATHS = ["posts", "static/image/raw"];
 const SYNC_DEBOUNCE_MS = 250;
 
+const preview = createDevPreview(handler);
+
 const isContentPath = (path: string) =>
-  path.includes("/posts/") || path.includes("/static/image/raw/");
+  !basename(path).startsWith(".") &&
+  SYNC_PATHS.some((root) => dirname(resolve(path)) === resolve(root));
 
 type ContentSummary = Awaited<ReturnType<typeof syncContent>>;
 
@@ -36,13 +41,21 @@ const startContentWatcher = () => {
     }
 
     running = true;
-    do {
-      pending = false;
-      const summary = await syncContent({ persistPostsIndex: false });
-      clearHtmlCache();
-      console.log(formatContentSummary("content update:", summary));
-    } while (pending);
-    running = false;
+    try {
+      do {
+        pending = false;
+        try {
+          const summary = await syncContent({ persistPostsIndex: false });
+          clearHtmlCache();
+          preview.reload();
+          console.log(formatContentSummary("content update:", summary));
+        } catch (error) {
+          console.error("content update failed:", error);
+        }
+      } while (pending);
+    } finally {
+      running = false;
+    }
   };
 
   const scheduleSync = () => {
@@ -70,4 +83,4 @@ console.log(formatContentSummary("content sync complete:", summary));
 startContentWatcher();
 
 console.log(`Blog server running on http://localhost:${PORT}`);
-Deno.serve({ port: PORT }, handler);
+Deno.serve({ port: PORT }, preview.handler);

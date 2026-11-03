@@ -5,6 +5,7 @@ import {
   isPassthroughImage,
   isSupportedRawImage,
   PICTURES,
+  PictureType,
   QUALITY,
   RAW_POST_PICS_DIR,
   setShardedName,
@@ -113,6 +114,30 @@ export type ResizeSummary = {
   resized: number;
 };
 
+export const needsResize = async (
+  source: string,
+  name: string,
+  picture: PictureType,
+) => {
+  const raw = await Deno.stat(source);
+  const updated = raw.mtime?.getTime() ?? 0;
+  const sizes = [
+    undefined,
+    ...(picture.sizes?.large ? ["large" as const] : []),
+    ...(picture.sizes?.small ? ["small" as const] : []),
+  ];
+  for (const size of sizes) {
+    try {
+      const output = await Deno.stat(setShardedName(name, picture.shard, size));
+      if (updated > (output.mtime?.getTime() ?? 0)) return true;
+    } catch (error) {
+      if (error instanceof Deno.errors.NotFound) return true;
+      throw error;
+    }
+  }
+  return false;
+};
+
 export const resizePictures = async (
   overwrite: boolean = false,
 ): Promise<ResizeSummary> => {
@@ -139,7 +164,11 @@ export const resizePictures = async (
     const name = p.name.toLowerCase();
     const existingShard = PICTURES[name];
 
-    if (!overwrite && existingShard) {
+    const sourcePath = join(RAW_POST_PICS_DIR, p.name);
+    if (
+      !overwrite && existingShard &&
+      !await needsResize(sourcePath, name, existingShard)
+    ) {
       summary.skipped++;
       continue;
     }
@@ -159,7 +188,6 @@ export const resizePictures = async (
       continue;
     }
 
-    const sourcePath = join(RAW_POST_PICS_DIR, p.name);
     const raw = await Deno.readFile(sourcePath);
 
     let sizes;
