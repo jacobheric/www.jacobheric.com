@@ -4,7 +4,7 @@ image: 2025-07-27-burgers-and-kittens-01.jpg
 ---
 
 we had a wall charger installed for the new tesla...which promptly blew half of
-our circuit breaker for the weekend. no problem, we'er equipped for that!
+our circuit breaker for the weekend. no problem, we're equipped for that!
 
 <!--more-->
 
